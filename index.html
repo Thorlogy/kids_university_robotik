@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Robotik — Kids Universität</title>
+<title>Robotik — Kids Universität · Cyber-Lab Variante</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@500&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
@@ -13,7 +13,7 @@
   --teal:#1D9E75;--coral:#D85A30;--purple:#534AB7;
 }
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:#111;min-height:100vh}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:#111;min-height:100vh;padding-top:112px}
 
 /* NAV */
 nav{background:var(--navy);padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;gap:.8rem}
@@ -229,6 +229,730 @@ nav{background:var(--navy);padding:.9rem 1.5rem;display:flex;align-items:center;
 .row-gap-1{display:flex;align-items:center;gap:1rem}
 .row-tight{display:flex;align-items:center;gap:8px}
 .col-tight{display:flex;flex-direction:column;gap:8px}
+
+
+/* ============================================================
+   SCHLAUFUX-INSPIRIERTER EDITORIAL-LOOK
+   Ziel: näher an die Buch-Doppelseiten-Ästhetik: dunkle Infografik-Flächen,
+   starke Titel, kleine Wissens-Kacheln, helle Linien, warme Akzente.
+   Keine 1:1-Kopie des Buchlayouts, sondern eine vorsichtige Web-Adaption.
+   ============================================================ */
+:root{
+  --book-ink:#082331;
+  --book-ink2:#0d3b49;
+  --book-ink3:#123f5a;
+  --book-paper:#f3ecd8;
+  --book-paper2:#fff8df;
+  --book-cyan:#36d2c4;
+  --book-sky:#56a9dd;
+  --book-yellow:#f2c84b;
+  --book-orange:#f08b3e;
+  --book-red:#e45745;
+  --book-lime:#8cc84b;
+  --book-line:rgba(255,255,255,.18);
+  --book-shadow:0 20px 44px rgba(7,25,37,.18);
+  --page-max:1120px;
+}
+html{background:var(--book-paper)}
+body{
+  background:
+    radial-gradient(circle at 12% 8%,rgba(54,210,196,.14),transparent 24rem),
+    radial-gradient(circle at 88% 16%,rgba(242,200,75,.18),transparent 22rem),
+    linear-gradient(180deg,#fbf3dc 0%,#f1ead7 42%,#e7dfcd 100%);
+  color:#10222a;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.34;
+  background-image:
+    linear-gradient(rgba(8,35,49,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(8,35,49,.04) 1px,transparent 1px);
+  background-size:28px 28px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.12));
+}
+nav,.page{position:relative;z-index:1}
+nav{
+  background:linear-gradient(90deg,var(--book-ink),#0b3041 55%,#102f49);
+  border-bottom:4px solid var(--book-yellow);
+  box-shadow:0 10px 30px rgba(6,28,42,.2);
+}
+.nav-brand{font-weight:800;letter-spacing:.015em;text-transform:uppercase}
+.nav-dot{background:var(--book-yellow);box-shadow:0 0 0 4px rgba(242,200,75,.18)}
+.nav-ch{border-radius:999px;border:1px solid rgba(255,255,255,.2);color:#b8d6df;background:rgba(255,255,255,.03)}
+.nav-ch.active{background:var(--book-yellow);color:#082331;border-color:var(--book-yellow);font-weight:800}
+.nav-lang{border-radius:999px;background:rgba(54,210,196,.16);border-color:rgba(54,210,196,.45);color:#eafffb}
+.start-hero,.hero{
+  background:
+    radial-gradient(circle at 82% 25%,rgba(54,210,196,.2),transparent 14rem),
+    radial-gradient(circle at 18% 88%,rgba(242,200,75,.14),transparent 18rem),
+    linear-gradient(135deg,#082331 0%,#0d3b49 48%,#123f5a 100%);
+  border-bottom:8px solid var(--book-yellow);
+}
+.start-hero::before,.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.25;
+  background-image:
+    linear-gradient(90deg,rgba(255,255,255,.16) 1px,transparent 1px),
+    linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),
+    radial-gradient(circle,rgba(255,255,255,.32) 1px,transparent 1.5px);
+  background-size:42px 42px,42px 42px,18px 18px;
+}
+.start-hero::after,.hero::after{
+  content:"ROBOTER · KI · FORSCHEN";
+  position:absolute;right:1.2rem;bottom:1rem;
+  color:rgba(255,255,255,.12);font:800 13px 'DM Mono',monospace;letter-spacing:.18em;
+  border:1px dashed rgba(255,255,255,.2);border-radius:999px;padding:.35rem .7rem;
+}
+.start-hero-inner,.hero-inner{min-height:210px;display:flex;flex-direction:column;justify-content:center}
+.start-title,.hero h1{
+  font-weight:900;letter-spacing:-.035em;line-height:.98;text-transform:uppercase;
+  color:#fff;text-shadow:0 4px 0 rgba(0,0,0,.16);
+  max-width:720px;
+}
+.start-title{font-size:clamp(2.4rem,7vw,5.7rem)}
+.hero h1{font-size:clamp(2.1rem,5.5vw,4.7rem)}
+.start-title::after,.hero h1::after{
+  content:"";display:block;width:min(220px,42vw);height:8px;margin-top:.7rem;
+  background:linear-gradient(90deg,var(--book-yellow),var(--book-orange));border-radius:999px;
+  box-shadow:8px 8px 0 rgba(54,210,196,.3);
+}
+.start-sub,.hero-sub{font-size:18px;color:#d6edf1;background:rgba(8,35,49,.42);border-left:5px solid var(--book-cyan);padding:1rem 1.1rem;border-radius:0 18px 18px 0;max-width:620px}
+.start-btn,.ch-nav-btn,.btn-primary{
+  background:linear-gradient(135deg,var(--book-yellow),var(--book-orange));color:#10222a;border:2px solid rgba(0,0,0,.12);
+  font-weight:900;box-shadow:0 8px 0 rgba(0,0,0,.18);transform:translateY(0);transition:transform .12s,box-shadow .12s;
+}
+.start-btn:hover,.ch-nav-btn:hover,.btn-primary:hover{transform:translateY(2px);box-shadow:0 5px 0 rgba(0,0,0,.18)}
+.hero-badge,.hero-float,.sec-label{
+  background:var(--book-yellow);color:#10222a;border-radius:999px;padding:.32rem .72rem;font-weight:900;display:inline-block;width:max-content;
+  box-shadow:4px 4px 0 rgba(0,0,0,.16);
+}
+.hero-float{background:var(--book-cyan);margin-top:.2rem}
+.ch-list{padding-top:2rem}
+.ch-list>div:first-child{color:#0d3b49!important;font-weight:900!important;background:rgba(255,255,255,.45);display:inline-block;padding:.35rem .7rem;border-radius:999px;border:1px solid rgba(8,35,49,.12)}
+.ch-item{
+  background:linear-gradient(135deg,#fffdf3,#f7edcf);border:2px solid rgba(8,35,49,.16);border-radius:22px;
+  box-shadow:var(--book-shadow);position:relative;overflow:hidden;align-items:flex-start;
+}
+.ch-item::before{content:"";position:absolute;left:0;top:0;bottom:0;width:10px;background:linear-gradient(180deg,var(--book-cyan),var(--book-yellow),var(--book-orange))}
+.ch-item::after{content:"";position:absolute;right:-28px;top:-28px;width:86px;height:86px;border-radius:50%;border:16px solid rgba(54,210,196,.12)}
+.ch-icon{border:3px solid #fff;box-shadow:0 8px 22px rgba(8,35,49,.16);font-size:26px}
+.ch-item-num{font-weight:900;color:#147082;text-transform:uppercase}
+.ch-item-title{font-size:18px;font-weight:900;color:#082331}
+.ch-item-desc{font-size:15px;color:#36525b;line-height:1.45}
+.ch-tag{font-family:'DM Mono',monospace;font-weight:900;border:1px solid rgba(0,0,0,.08)}
+.sec{padding-top:2.3rem;padding-bottom:2.3rem}
+.sec-title{font-size:clamp(1.5rem,3vw,2.35rem);font-weight:900;color:#082331;letter-spacing:-.025em}
+.sec-sub{color:#405b64;font-size:17px}
+.dark-card,.white-card,.fact-box,.ch-nav{
+  border-radius:24px;border:2px solid rgba(8,35,49,.14);box-shadow:var(--book-shadow);position:relative;overflow:hidden;
+}
+.dark-card,.fact-box,.ch-nav{
+  background:
+    radial-gradient(circle at 100% 0%,rgba(54,210,196,.14),transparent 12rem),
+    linear-gradient(135deg,var(--book-ink),var(--book-ink2));
+  border-color:rgba(255,255,255,.12);
+}
+.white-card{background:linear-gradient(180deg,#fffdf5,#f7eed6)}
+.card-header{background:linear-gradient(90deg,#0b3041,#123f5a);border-bottom:3px solid var(--book-yellow)}
+.card-title{font-weight:900;color:#eafffb;text-transform:uppercase;letter-spacing:.04em}
+.fact-box{border-left:10px solid var(--book-yellow)}
+.fact-label{color:var(--book-yellow);font-weight:900}
+.fact-text{color:#d8eef0}
+.tabs{gap:10px}
+.tab,.btn-small,.btn-outline-mini,.btn-outline-sm{
+  border-radius:999px;border:2px solid rgba(8,35,49,.12);font-weight:800;box-shadow:0 3px 0 rgba(8,35,49,.1);
+}
+.tab.active{background:var(--book-ink);border-color:var(--book-ink);color:#fff}
+.sensor-card{
+  border-radius:20px;background:linear-gradient(135deg,#0b3041,#123f5a);border:2px solid rgba(255,255,255,.1);box-shadow:0 10px 24px rgba(8,35,49,.18)
+}
+.sensor-card.sel{border-color:var(--book-yellow);box-shadow:0 0 0 5px rgba(242,200,75,.18),0 14px 28px rgba(8,35,49,.2)}
+.sensor-name{font-weight:900;color:#fff}.sensor-role{color:#a7dfe5}
+.q-opt{border-radius:16px;border:2px solid rgba(8,35,49,.12);background:#fffaf0;font-weight:700}
+.q-opt:hover{border-color:var(--book-cyan);background:#ecfffb}
+.q-opt.correct{background:#e9f8d9;border-color:var(--book-lime);color:#35570d}.q-opt.wrong{background:#ffe7dc;border-color:var(--book-red)}
+.sim-canvas,.sim-canvas-sm,.sim-canvas-tall,.sim-canvas-square,#k2driveC{background:#061d2a!important;border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.divider{background:linear-gradient(90deg,transparent,rgba(8,35,49,.18),transparent);height:2px}
+.stat-box{background:#fff5db;border:1px solid rgba(8,35,49,.12);border-radius:16px}.stat-num{font-weight:900;color:#082331}
+@media (min-width:900px){
+  .ch-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.ch-item{margin-bottom:0}
+  .grid-3{gap:14px}.grid-2{gap:14px}
+}
+@media (max-width:640px){
+  .start-sub,.hero-sub{border-left-width:4px;border-radius:14px;padding:.85rem}
+  .start-hero::after,.hero::after{display:none}
+  .ch-list{padding-left:1rem;padding-right:1rem}
+}
+
+
+
+/* ============================================================
+   PROGRESSIVE VARIANTE — ROBOTIK-ZINE / FUTURE LAB
+   Richtung: mutiger, grafischer, digitaler. Stärkeres Magazin-/Poster-Gefühl,
+   mehr Tiefe, diagonale Flächen, Glow-Elemente, Comic-Sticker.
+   Bewusst nur CSS-Override: App-Logik und Interaktionen bleiben unverändert.
+   ============================================================ */
+:root{
+  --page-max:1180px;
+  --navy:#081a24;
+  --navy2:#102d38;
+  --navy3:#041118;
+  --cream:#f4e9c8;
+  --accent:#00d7c0;
+  --amber:#ffd84a;
+  --teal:#00b894;
+  --coral:#ff5d3d;
+  --purple:#7c5cff;
+  --prog-ink:#07151d;
+  --prog-panel:#0b2330;
+  --prog-panel2:#123746;
+  --prog-paper:#f6e9c8;
+  --prog-yellow:#ffdc43;
+  --prog-cyan:#00e0cb;
+  --prog-pink:#ff4d7d;
+  --prog-orange:#ff8b2f;
+  --prog-blue:#3f8cff;
+  --prog-green:#8be65b;
+}
+html{background:#07151d}
+body{
+  background:
+    radial-gradient(circle at 8% 10%,rgba(0,224,203,.28),transparent 18rem),
+    radial-gradient(circle at 88% 8%,rgba(255,77,125,.18),transparent 21rem),
+    radial-gradient(circle at 70% 72%,rgba(255,220,67,.18),transparent 22rem),
+    linear-gradient(180deg,#07151d 0%,#102631 42%,#f3e7c4 42.2%,#f3e7c4 100%);
+  color:#091820;
+}
+body::before{
+  opacity:.42;mix-blend-mode:normal;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px),
+    radial-gradient(circle,rgba(0,224,203,.16) 1px,transparent 1.5px);
+  background-size:24px 24px,24px 24px,14px 14px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),rgba(0,0,0,.2));
+}
+body::after{
+  content:"";position:fixed;inset:auto -8vw 0 -8vw;height:42vh;pointer-events:none;z-index:0;
+  background:linear-gradient(176deg,transparent 0 13%,rgba(246,233,200,.95) 13.2% 100%);
+}
+nav{
+  background:rgba(7,21,29,.86);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(0,224,203,.32);
+  box-shadow:0 12px 40px rgba(0,0,0,.32);
+}
+.nav-brand{font-weight:900;letter-spacing:.07em;color:#fff;text-transform:uppercase}
+.nav-brand span::before{content:"LAB//";color:var(--prog-yellow);margin-right:.35rem;font-family:'DM Mono',monospace}
+.nav-dot{background:var(--prog-cyan);box-shadow:0 0 18px var(--prog-cyan),0 0 0 6px rgba(0,224,203,.16)}
+.nav-ch{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.11);color:#bad6dd;border-radius:3px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.02em}
+.nav-ch:hover{background:rgba(0,224,203,.12);border-color:rgba(0,224,203,.38)}
+.nav-ch.active{background:var(--prog-cyan);color:#041118;border-color:var(--prog-cyan);box-shadow:0 0 18px rgba(0,224,203,.38)}
+.nav-lang{background:#fff;color:#07151d;border-radius:3px;font-weight:900}
+.start-hero,.hero{
+  background:
+    linear-gradient(110deg,rgba(7,21,29,.92) 0 48%,rgba(12,54,64,.78) 48.4% 70%,rgba(255,220,67,.9) 70.2% 100%),
+    radial-gradient(circle at 30% 20%,rgba(0,224,203,.36),transparent 22rem),
+    #07151d;
+  border-bottom:none;
+  min-height:390px;
+  clip-path:polygon(0 0,100% 0,100% 88%,72% 100%,0 91%);
+}
+.start-hero::before,.hero::before{
+  opacity:.32;
+  background-image:
+    linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px),
+    linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),
+    repeating-linear-gradient(135deg,transparent 0 15px,rgba(255,255,255,.07) 16px 17px);
+  background-size:46px 46px,46px 46px,auto;
+}
+.start-hero::after,.hero::after{
+  content:"MISSION: ROBOTER VERSTEHEN";
+  right:2rem;bottom:3.2rem;color:#07151d;background:var(--prog-yellow);
+  border:3px solid #07151d;border-radius:2px;box-shadow:8px 8px 0 rgba(0,0,0,.28);
+  transform:rotate(-3deg);font-size:12px;font-weight:900;
+}
+.start-hero-inner,.hero-inner{min-height:310px;position:relative;z-index:1}
+.start-hero-inner::before,.hero-inner::before{
+  content:"01";position:absolute;right:0;top:8%;font:900 clamp(5rem,16vw,13rem)/.8 'DM Mono',monospace;
+  color:rgba(7,21,29,.22);-webkit-text-stroke:1px rgba(255,255,255,.35);z-index:-1;
+}
+.start-title,.hero h1{
+  font-weight:900;letter-spacing:-.055em;line-height:.88;text-transform:uppercase;
+  max-width:780px;color:#fff;text-shadow:7px 7px 0 rgba(255,77,125,.28),13px 13px 0 rgba(0,224,203,.12);
+}
+.start-title{font-size:clamp(3rem,8.5vw,7.8rem)}
+.hero h1{font-size:clamp(2.5rem,6.8vw,6.2rem)}
+.start-title::after,.hero h1::after{display:none}
+.start-sub,.hero-sub{
+  position:relative;max-width:630px;margin-top:1.3rem;padding:1rem 1.2rem 1rem 1.35rem;
+  background:#f6e9c8;color:#07151d;border-left:0;border-radius:2px;border:3px solid #07151d;
+  box-shadow:10px 10px 0 rgba(0,224,203,.75);font-weight:700;
+}
+.start-sub::before,.hero-sub::before{
+  content:"WISSEN";position:absolute;right:.6rem;top:-.9rem;background:var(--prog-pink);color:#fff;
+  font:900 11px 'DM Mono',monospace;padding:.2rem .45rem;letter-spacing:.08em;transform:rotate(2deg);
+}
+.hero-canvas,.start-hero canvas{filter:drop-shadow(0 0 18px rgba(0,224,203,.45));opacity:.92}
+.start-btn,.ch-nav-btn,.btn-primary{
+  border-radius:2px;background:var(--prog-yellow);color:#07151d;border:3px solid #07151d;
+  box-shadow:8px 8px 0 var(--prog-pink);font-weight:900;text-transform:uppercase;letter-spacing:.03em;
+}
+.start-btn:hover,.ch-nav-btn:hover,.btn-primary:hover{transform:translate(3px,3px);box-shadow:5px 5px 0 var(--prog-pink)}
+.hero-badge,.hero-float,.sec-label{
+  border-radius:2px;background:var(--prog-cyan);color:#07151d;border:2px solid #07151d;
+  box-shadow:5px 5px 0 rgba(7,21,29,.25);font-weight:900;text-transform:uppercase;letter-spacing:.07em;
+}
+.hero-float{background:var(--prog-yellow);transform:rotate(-1.5deg)}
+.sec{padding-top:2.6rem;padding-bottom:2.4rem;position:relative}
+.sec-title{font-size:clamp(1.65rem,3vw,2.65rem);font-weight:900;letter-spacing:-.035em;text-transform:uppercase;color:#07151d;line-height:.95;margin-top:.6rem}
+.sec-sub{font-size:17px;color:#39474d;font-weight:650;max-width:820px}
+.divider{height:0;border-top:3px dashed rgba(7,21,29,.18);background:transparent}
+.ch-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;padding-top:2.6rem}
+.ch-list>div:first-child{grid-column:1/-1;background:#07151d!important;color:#f6e9c8!important;border:0!important;border-radius:2px!important;padding:.55rem .8rem!important;box-shadow:8px 8px 0 rgba(0,224,203,.28)}
+.ch-item{
+  position:relative;overflow:hidden;background:#fff8df;border:3px solid #07151d;border-radius:3px;
+  padding:1.15rem 1.2rem;box-shadow:9px 9px 0 rgba(7,21,29,.18);transition:transform .14s,box-shadow .14s,background .14s;
+}
+.ch-item::after{
+  content:"";position:absolute;right:-2.8rem;top:-2.8rem;width:8rem;height:8rem;background:var(--prog-cyan);border:3px solid #07151d;border-radius:50%;opacity:.8;
+}
+.ch-item:nth-child(3n)::after{background:var(--prog-yellow)}
+.ch-item:nth-child(3n+1)::after{background:var(--prog-pink)}
+.ch-item:hover{transform:translate(-2px,-2px) rotate(-.4deg);box-shadow:13px 13px 0 rgba(7,21,29,.22);background:#fff3c4}
+.ch-icon{border:3px solid #07151d;border-radius:2px;box-shadow:4px 4px 0 rgba(7,21,29,.18);z-index:1}
+.ch-item-info{z-index:1}.ch-item-num{font-weight:900;color:#e0486d}.ch-item-title{font-size:19px;font-weight:900;letter-spacing:-.015em}.ch-item-desc{color:#39474d;font-weight:650}
+.ch-tag{border-radius:2px;border:1px solid rgba(7,21,29,.25);font-family:'DM Mono',monospace;font-weight:900}
+.dark-card,.white-card,.fact-box,.ch-nav{
+  border-radius:3px;border:3px solid #07151d;box-shadow:10px 10px 0 rgba(7,21,29,.18);overflow:visible;
+}
+.dark-card{background:linear-gradient(135deg,#07151d,#123746);color:#fff}
+.white-card{background:#fff8df}
+.dark-card::before,.white-card::before,.fact-box::before{
+  content:"";display:block;position:absolute;width:38px;height:38px;right:-12px;top:-12px;
+  background:linear-gradient(135deg,var(--prog-yellow) 0 50%,var(--prog-orange) 50%);border:3px solid #07151d;transform:rotate(8deg);
+}
+.dark-card,.white-card,.fact-box{position:relative}
+.card-header{background:#07151d;border-bottom:3px solid #07151d;border-radius:0;color:#fff}
+.card-title{font-weight:900;color:#eafffb;text-transform:uppercase;letter-spacing:.05em}
+.card-body{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,248,223,.96))}
+.sensor-card,.tab,.q-opt,.btn-small,.btn-outline-mini,.btn-outline-sm,.slam-btn{
+  border-radius:2px!important;border:2px solid #07151d!important;box-shadow:4px 4px 0 rgba(7,21,29,.14);font-weight:900;
+}
+.sensor-card{background:#0b2330}.sensor-card.sel{border-color:var(--prog-yellow)!important;box-shadow:6px 6px 0 rgba(255,220,67,.35)}
+.tab.active,.btn-small.btn-active,.slam-btn.active{background:var(--prog-pink)!important;color:#fff!important;border-color:#07151d!important}
+.q-opt{background:#fff8df;color:#07151d}.q-opt:hover{background:#ffeeb0}.q-opt.correct{background:#d9ffd0!important}.q-opt.wrong{background:#ffd8cf!important}
+.q-fb{border-radius:2px;border:2px solid #07151d;box-shadow:6px 6px 0 rgba(0,224,203,.2);font-weight:700}
+.fact-box{background:#07151d;transform:rotate(-.25deg)}
+.fact-label{color:#07151d;background:var(--prog-yellow);display:inline-block;padding:.25rem .55rem;border:2px solid #07151d;box-shadow:4px 4px 0 rgba(255,77,125,.65)}
+.fact-text{color:#eafffb;font-weight:650}.fact-text strong{color:var(--prog-yellow)}
+.ch-nav{background:linear-gradient(100deg,#07151d 0 70%,var(--prog-cyan) 70.2% 100%);color:#fff}
+.ch-nav-title{font-weight:900}.ch-nav-label{background:var(--prog-pink);color:#fff!important;display:inline-block;padding:.15rem .4rem;border-radius:2px}
+.sim-canvas,.sim-canvas-sm,.sim-canvas-tall,.sim-canvas-square,canvas[style*="background:#060e1f"]{
+  border-radius:2px!important;border:2px solid rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(0,224,203,.14),0 0 24px rgba(0,224,203,.11);
+}
+.stat-box,.stat-dark,.stat-inset{border-radius:2px!important;border:2px solid rgba(7,21,29,.1)}
+.dpad-btn,.dpad-center{border-radius:2px!important;border:2px solid #07151d!important;box-shadow:3px 3px 0 rgba(7,21,29,.18);font-weight:900}.dpad-btn:active,.dpad-btn.pressed{background:var(--prog-cyan);color:#07151d}
+.progress-fill{background:linear-gradient(90deg,var(--prog-cyan),var(--prog-yellow),var(--prog-pink))}
+.pill-mono{border-radius:2px;border:1px solid rgba(7,21,29,.22);font-weight:900}
+.explainer-box{border-radius:2px;border:2px solid rgba(0,224,203,.6);border-left:10px solid var(--prog-cyan);box-shadow:6px 6px 0 rgba(0,224,203,.18)}
+@media (max-width:760px){
+  .start-hero,.hero{clip-path:polygon(0 0,100% 0,100% 94%,0 100%);min-height:auto}
+  .ch-list{grid-template-columns:1fr}
+  .start-title{font-size:clamp(2.45rem,14vw,4rem)}
+  .hero h1{font-size:clamp(2.1rem,12vw,3.6rem)}
+  .start-sub,.hero-sub{box-shadow:6px 6px 0 rgba(0,224,203,.75)}
+  .dark-card,.white-card,.fact-box,.ch-nav{box-shadow:6px 6px 0 rgba(7,21,29,.18)}
+}
+@media (prefers-reduced-motion:no-preference){
+  .hero-badge,.sec-label{animation:prog-pop 6s ease-in-out infinite}
+  @keyframes prog-pop{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(-.6deg)}}
+}
+
+
+
+/* ============================================================
+   CYBER-LAB FULL SITE OVERRIDE
+   inspired by the approved mockup
+   ============================================================ */
+:root{
+  --bg-deep:#030816;
+  --bg-panel:#071225;
+  --bg-panel-2:#0a1830;
+  --line:#0fd6ff;
+  --line-soft:rgba(15,214,255,.22);
+  --text-main:#f4f8ff;
+  --text-dim:#9ab0c8;
+  --pink:#ff56d8;
+  --lime:#d4ff46;
+  --cyan:#09d8ff;
+  --accent:var(--cyan);
+  --navy:var(--bg-deep);
+  --navy2:var(--bg-panel);
+  --navy3:#020611;
+  --cream:#050b18;
+}
+html,body{background:var(--bg-deep)!important;color:var(--text-main)}
+body{position:relative;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    linear-gradient(rgba(10,22,42,.92), rgba(5,11,24,.98)),
+    repeating-linear-gradient(0deg, rgba(18,60,90,.14) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, rgba(18,60,90,.14) 0 1px, transparent 1px 56px);
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.15;
+  background:repeating-linear-gradient(180deg, rgba(255,255,255,.08) 0 1px, transparent 1px 4px);
+  mix-blend-mode:screen;
+}
+nav,.page,.start-hero,.hero,.sec,.white-card,.dark-card,.fact-box,.ch-nav,.ch-list{position:relative;z-index:1}
+nav{
+  background:rgba(2,8,22,.96)!important;
+  border-bottom:1px solid var(--line);
+  box-shadow:0 0 0 1px rgba(9,216,255,.08) inset, 0 10px 35px rgba(0,0,0,.45);
+  padding:.7rem 1rem!important;
+  position:fixed!important;top:0;left:0;right:0;width:100%;
+  z-index:2147483000!important;
+  pointer-events:auto!important;
+  flex-wrap:wrap;
+  align-items:center;
+}
+.nav-brand{
+  font-family:'DM Mono',monospace;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  gap:12px;
+}
+.nav-brand span{
+  position:relative;
+  color:var(--text-main)!important;
+  text-shadow:2px 0 0 rgba(255,86,216,.35), -2px 0 0 rgba(9,216,255,.25);
+}
+.nav-dot{
+  width:38px!important;height:38px!important;border-radius:0!important;
+  border:1px solid var(--line);background:transparent!important;position:relative;
+  box-shadow:0 0 16px rgba(9,216,255,.16), inset 0 0 14px rgba(9,216,255,.06);
+}
+.nav-dot::before{content:'RK';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 16px 'DM Mono',monospace;color:var(--line)}
+.nav-chapters{gap:6px!important;display:flex;flex-wrap:wrap;overflow:visible!important;justify-content:center;align-items:center;flex:1 1 640px;min-width:0}
+.nav-ch,.nav-lang,.tab,.btn-small,.btn-outline-mini,.btn-outline-sm,.slam-btn,.ch-nav-btn,.start-btn,.btn-primary{
+  font-family:'DM Mono',monospace!important;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  border-radius:0!important;
+}
+.nav-ch{
+  color:var(--line)!important;
+  border:1px solid var(--line-soft)!important;
+  background:rgba(7,18,37,.75)!important;
+  padding:7px 10px!important;
+  font-size:12px!important;
+  min-height:34px;
+}
+.nav-ch:hover,.nav-lang:hover,.tab:hover,.btn-small:hover,.btn-outline-mini:hover,.btn-outline-sm:hover,.slam-btn:hover,.start-btn:hover,.btn-primary:hover,.ch-nav-btn:hover{
+  box-shadow:0 0 0 1px rgba(9,216,255,.35) inset, 0 0 18px rgba(9,216,255,.14);
+}
+.nav-ch.active,.nav-lang,.tab.active,.btn-primary,.start-btn,.ch-nav-btn{
+  background:rgba(9,216,255,.14)!important;
+  color:var(--line)!important;
+  border:1px solid var(--line)!important;
+  box-shadow:0 0 18px rgba(9,216,255,.10), inset 0 0 20px rgba(9,216,255,.04);
+}
+.page{background:transparent!important}
+.start-hero,.hero{
+  background:linear-gradient(180deg, rgba(4,12,28,.96), rgba(4,10,24,.78))!important;
+  border-bottom:1px solid rgba(9,216,255,.18);
+}
+.start-hero::before,.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 70% 30%, rgba(9,216,255,.08), transparent 22%),
+    radial-gradient(circle at 28% 18%, rgba(255,86,216,.08), transparent 14%),
+    repeating-linear-gradient(0deg, rgba(15,214,255,.07) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, rgba(15,214,255,.07) 0 1px, transparent 1px 56px);
+}
+.start-hero-inner,.hero-inner{max-width:1180px!important}
+.hero h1,.start-title{
+  max-width:820px!important;
+  font-family:'DM Mono',monospace;
+  text-transform:uppercase;
+  font-size:clamp(36px,5vw,74px)!important;
+  line-height:1.02!important;
+  letter-spacing:.01em;
+  color:var(--text-main)!important;
+  text-shadow:3px 0 0 rgba(255,86,216,.45), -3px 0 0 rgba(9,216,255,.25);
+}
+.hero-sub,.start-sub{
+  color:var(--text-dim)!important;
+  font-family:'DM Mono',monospace;
+  max-width:680px!important;
+  font-size:clamp(18px,2vw,20px)!important;
+}
+.hero-badge,.hero-float{
+  background:rgba(5,16,32,.7)!important;
+  border:1px solid rgba(212,255,70,.55)!important;
+  color:#eef6d0!important;
+  border-radius:0!important;
+  box-shadow:inset 0 0 0 1px rgba(212,255,70,.1);
+}
+.sec{max-width:1180px!important;padding-top:2.2rem!important;padding-bottom:2.2rem!important}
+.sec-label,.ch-item-num,.fact-label,.card-title,.canvas-header,.canvas-header-lg,.text-mono-mini,.stat-dark .lbl,.stat-inset .lbl,.hero-float,.hero-badge,.ch-nav-info .ch-nav-label{
+  color:var(--line)!important;
+  font-family:'DM Mono',monospace!important;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.sec-title,.ch-item-title,.ch-nav-info .ch-nav-title{color:var(--text-main)!important}
+.sec-title{
+  font-family:'DM Mono',monospace;
+  font-size:clamp(24px,2.7vw,34px)!important;
+  text-transform:uppercase;
+}
+.sec-sub,.ch-item-desc,.fact-text,.text-q,.stat-lbl,.sensor-role{color:var(--text-dim)!important}
+.divider{height:1px!important;background:linear-gradient(90deg, transparent, rgba(9,216,255,.45), transparent)!important}
+.white-card,.dark-card,.fact-box,.ch-nav,.sensor-card,.ch-item,.stat-box,.explainer-box,.stat-dark,.stat-inset,.q-opt,.q-fb{
+  background:linear-gradient(180deg, rgba(7,18,37,.88), rgba(4,10,24,.92))!important;
+  border:1px solid rgba(9,216,255,.18)!important;
+  border-radius:0!important;
+  box-shadow:0 0 0 1px rgba(9,216,255,.06) inset, 0 18px 40px rgba(0,0,0,.28);
+}
+.white-card::before,.dark-card::before,.fact-box::before,.ch-nav::before,.sensor-card::before,.ch-item::before{
+  content:'';position:absolute;top:-1px;left:-1px;width:18px;height:18px;border-top:2px solid var(--line);border-left:2px solid var(--line);pointer-events:none;
+}
+.white-card::after,.dark-card::after,.fact-box::after,.ch-nav::after,.sensor-card::after,.ch-item::after{
+  content:'';position:absolute;right:-1px;bottom:-1px;width:18px;height:18px;border-right:2px solid var(--line);border-bottom:2px solid var(--line);pointer-events:none;
+}
+.card-header{background:rgba(9,216,255,.06)!important;border-bottom:1px solid rgba(9,216,255,.14)}
+.dot{background:transparent!important;border:1px solid rgba(9,216,255,.45);border-radius:0!important;width:10px!important;height:10px!important}
+.card-body,.dark-card-pad{background:transparent!important}
+canvas{filter:saturate(1.08) brightness(.98)}
+.start-btn,.btn-primary,.ch-nav-btn{
+  color:var(--line)!important;background:rgba(9,216,255,.1)!important;padding:14px 26px!important;
+}
+.start-btn::after,.btn-primary::after,.ch-nav-btn::after{content:'  →';white-space:pre}
+.btn-small,.btn-outline-mini,.btn-outline-sm,.tab,.slam-btn,.nav-lang{
+  color:var(--line)!important;background:rgba(7,18,37,.75)!important;border:1px solid rgba(9,216,255,.22)!important
+}
+.q-opt{color:var(--text-main)!important}
+.q-opt:hover{background:rgba(9,216,255,.08)!important}
+.q-opt.correct,.q-fb.show{background:rgba(15,214,255,.12)!important;color:#dffbff!important;border-color:rgba(15,214,255,.5)!important}
+.q-opt.wrong{background:rgba(255,86,216,.12)!important;color:#ffe8fa!important;border-color:rgba(255,86,216,.4)!important}
+.fact-text strong,.text-card-title,.sensor-name,.stat-dark .num,.stat-inset .num,.mono-num-md,.mono-num-lg,.mono-num-xl,.stat-num,.card-title{color:var(--text-main)!important}
+.fact-label{color:var(--lime)!important}
+.pill-info{background:rgba(9,216,255,.16)!important;color:var(--line)!important}
+.pill-warn{background:rgba(212,255,70,.14)!important;color:var(--lime)!important}
+.pill-success{background:rgba(9,216,255,.12)!important;color:#9df2ff!important}
+.pill-danger{background:rgba(255,86,216,.14)!important;color:#ffb6f0!important}
+.pill-purple{background:rgba(255,86,216,.12)!important;color:#ffc9f6!important}
+.progress-bar{background:rgba(255,255,255,.08)!important}.progress-fill{background:linear-gradient(90deg, var(--line), var(--pink))!important}
+.sim-canvas,.sim-canvas-sm,.sim-canvas-tall,.sim-canvas-square,.sensor-ic{background:linear-gradient(180deg, #030815, #071225)!important;border:1px solid rgba(9,216,255,.15);border-radius:0!important}
+.start-hero canvas,.hero-canvas{opacity:.85;mix-blend-mode:screen}
+.ch-list{
+  max-width:1180px!important;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+  padding-top:1.8rem!important;
+  padding-bottom:2rem!important;
+}
+.ch-list > div:first-child{grid-column:1/-1;margin-bottom:.2rem!important}
+.ch-item{
+  min-height:220px;
+  display:flex!important;flex-direction:column;align-items:flex-start!important;justify-content:flex-start;
+  padding:1.15rem 1.2rem!important;margin-bottom:0!important;
+}
+.ch-item:hover{transform:translateY(-3px);border-color:rgba(9,216,255,.55)!important}
+.ch-icon{
+  background:transparent!important;border:1px solid rgba(9,216,255,.25);color:var(--line)!important;border-radius:0!important;
+  width:54px!important;height:54px!important;margin-bottom:.8rem;
+}
+.ch-item-info{display:flex;flex-direction:column;height:100%}
+.ch-item-tags{margin-top:auto;flex-wrap:wrap}
+.ch-tag{
+  background:rgba(9,216,255,.08)!important;color:var(--line)!important;border:1px solid rgba(9,216,255,.22);border-radius:0!important;
+  font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.04em;padding:4px 8px!important;
+}
+.grid-3,.grid-2,.sensor-grid{gap:14px!important}
+#page-start .start-hero-inner{padding-right:420px;min-height:440px}
+#page-start .start-hero::after{
+  content:'ROBOT_MODEL: EXPLORER_K1\A STATUS: READY';white-space:pre;position:absolute;right:80px;top:86px;
+  font:500 15px 'DM Mono',monospace;color:var(--text-dim);line-height:1.5;
+  border:1px solid rgba(9,216,255,.25);padding:14px 18px;background:rgba(5,16,32,.45)
+}
+#page-start .start-sub{padding-left:22px;border-left:4px solid var(--pink)}
+#page-start .ch-item:nth-of-type(2){border-color:rgba(255,86,216,.32)!important}
+#page-start .ch-item:nth-of-type(3){border-color:rgba(9,216,255,.32)!important}
+#page-start .ch-item:nth-of-type(4){border-color:rgba(212,255,70,.24)!important}
+#page-start .ch-item:nth-of-type(5){border-color:rgba(9,216,255,.24)!important}
+#page-start .ch-item:nth-of-type(6){border-color:rgba(255,86,216,.24)!important}
+#page-start .ch-item:nth-of-type(7){border-color:rgba(9,216,255,.24)!important}
+#page-start .ch-item:nth-of-type(8){border-color:rgba(212,255,70,.24)!important}
+#page-start .ch-item:nth-of-type(9){border-color:rgba(255,86,216,.24)!important}
+#page-start .ch-item::after{border-right-color:var(--line);border-bottom-color:var(--line)}
+#page-start .ch-item-title{font-family:'DM Mono',monospace;text-transform:uppercase;font-size:clamp(22px,2vw,30px)!important;line-height:1.06;margin:2px 0 10px 0!important}
+#page-start .ch-item-desc{font-family:'DM Mono',monospace;font-size:16px!important;line-height:1.5}
+#page-start .ch-item-num{font-size:14px!important;margin-bottom:10px!important}
+#page-start .start-btn{min-width:330px;text-align:left;display:inline-flex;align-items:center;justify-content:space-between}
+#page-start .start-btn::after{content:'→';margin-left:18px}
+#page-start .start-hero .hero-badge,#page-start .start-hero .hero-float{display:none}
+.sensor-card.sel,.tab.active,.slam-btn.active{box-shadow:0 0 0 1px rgba(9,216,255,.45) inset, 0 0 24px rgba(9,216,255,.12)!important}
+input,select,textarea{background:#061223;color:var(--text-main);border:1px solid rgba(9,216,255,.2);border-radius:0;padding:.5rem}
+@media (max-width:1100px){
+  .ch-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #page-start .start-hero-inner{padding-right:0;min-height:auto}
+  #page-start .start-hero::after{position:static;display:block;margin-top:1.2rem;width:max-content;max-width:100%}
+}
+@media (max-width:760px){
+  .hero h1,.start-title{font-size:clamp(30px,12vw,52px)!important}
+  .ch-list{grid-template-columns:1fr}
+  .ch-item{min-height:auto}
+  nav{padding:.9rem!important}
+  .nav-brand span{font-size:14px}
+  .nav-dot{width:30px!important;height:30px!important}
+}
+
+
+
+/* FINAL NAV FIX — always clickable, compact module menu */
+nav{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483000!important;isolation:isolate!important;pointer-events:auto!important;min-height:68px}
+nav *{pointer-events:auto!important}
+.page,.start-hero,.hero,.sec,.white-card,.dark-card,.fact-box,.ch-nav,.ch-list{z-index:0!important}
+.nav-brand{min-width:max-content}
+.nav-chapters{display:flex!important;flex:1 1 auto;min-width:0;gap:8px!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap;scrollbar-width:thin;scrollbar-color:rgba(9,216,255,.65) rgba(9,216,255,.08);padding:0 4px 4px 4px}
+.nav-chapters::-webkit-scrollbar{height:7px}.nav-chapters::-webkit-scrollbar-track{background:rgba(9,216,255,.08)}.nav-chapters::-webkit-scrollbar-thumb{background:rgba(9,216,255,.55);border-radius:99px}
+.nav-ch{flex:0 0 auto!important;min-width:max-content!important;padding:8px 12px!important;font-size:12px!important}
+.nav-lang{flex:0 0 auto!important}
+@media (max-width:760px){body{padding-top:122px}nav{flex-wrap:wrap!important;align-items:flex-start!important}.nav-chapters{order:3;width:100%;flex-basis:100%;padding-top:6px}.nav-brand{max-width:calc(100% - 64px)}}
+
+
+
+/* NAVIGATION PATCH v8 — always clickable + all modules directly reachable */
+body{padding-top:112px!important}
+nav{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:2147483000!important;pointer-events:auto!important;flex-wrap:wrap!important;padding:.65rem .9rem!important;background:rgba(2,8,22,.97)!important;isolation:isolate!important}
+nav *{pointer-events:auto!important}
+.nav-brand{flex:0 0 auto!important}
+.nav-chapters{display:flex!important;flex-wrap:wrap!important;overflow:visible!important;gap:6px!important;justify-content:center!important;align-items:center!important;flex:1 1 620px!important;min-width:0!important;padding:0!important}
+.nav-ch{font-size:11px!important;line-height:1!important;padding:7px 9px!important;min-height:32px!important;min-width:auto!important;white-space:nowrap!important;position:relative!important;z-index:2147483001!important}
+.nav-lang{position:relative!important;z-index:2147483001!important;padding:7px 10px!important}
+@media (max-width:900px){body{padding-top:150px!important}.nav-brand{font-size:12px!important}.nav-dot{width:28px!important;height:28px!important}.nav-chapters{order:3;flex-basis:100%!important;justify-content:flex-start!important}.nav-ch{font-size:10px!important;padding:7px 8px!important}}
+@media (max-width:520px){body{padding-top:188px!important}.nav-ch{font-size:9px!important;padding:6px 6px!important}.nav-brand span{max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+
+
+
+/* ============================================================
+   NAVIGATION FINAL — deutsche Kapitel, direkt klickbar, zweizeilige Marke
+   ============================================================ */
+body{padding-top:118px!important}
+nav{
+  display:grid!important;
+  grid-template-columns:180px minmax(0,1fr) 58px!important;
+  gap:12px!important;
+  align-items:center!important;
+  padding:.72rem 1.1rem .84rem!important;
+  z-index:2147483647!important;
+  pointer-events:auto!important;
+  isolation:isolate!important;
+}
+nav *{pointer-events:auto!important}
+.nav-brand{
+  display:flex!important;
+  align-items:center!important;
+  min-width:0!important;
+  line-height:1.08!important;
+  font-size:13px!important;
+}
+.nav-brand span{
+  display:block!important;
+  white-space:normal!important;
+}
+.nav-brand span::first-line{
+  color:var(--line)!important;
+  font-size:12px!important;
+  letter-spacing:.16em!important;
+}
+.nav-chapters{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  overflow:visible!important;
+  gap:7px!important;
+  justify-content:flex-start!important;
+  align-items:center!important;
+  padding:0!important;
+  min-width:0!important;
+  white-space:normal!important;
+}
+.nav-ch{
+  flex:0 1 auto!important;
+  min-width:0!important;
+  white-space:nowrap!important;
+  font-size:clamp(10px,.72vw,12px)!important;
+  line-height:1.08!important;
+  padding:7px 10px!important;
+  min-height:34px!important;
+  position:relative!important;
+  z-index:2147483647!important;
+}
+.nav-lang{justify-self:end!important;position:relative!important;z-index:2147483647!important}
+@media (max-width:1220px){
+  body{padding-top:150px!important}
+  nav{grid-template-columns:160px minmax(0,1fr) 54px!important;align-items:start!important}
+  .nav-ch{font-size:10.5px!important;padding:7px 8px!important}
+}
+@media (max-width:760px){
+  body{padding-top:188px!important}
+  nav{grid-template-columns:1fr 52px!important;gap:8px!important}
+  .nav-brand{grid-column:1/2!important;font-size:12px!important}
+  .nav-lang{grid-column:2/3!important;grid-row:1!important}
+  .nav-chapters{grid-column:1/-1!important;max-height:112px;overflow-y:auto!important;overflow-x:hidden!important;padding-top:6px!important}
+  .nav-ch{font-size:10px!important;padding:6px 7px!important}
+}
+
+
+/* Kapitel 7 — kompaktere Humanoiden-Übersicht */
+.k7-humanoid-layout{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.18fr);gap:12px;margin-top:.8rem}
+.k7-robot-stage{min-height:250px;display:flex;align-items:center;justify-content:center;padding:14px;background:rgba(9,216,255,.04);border:1px solid rgba(9,216,255,.12)}
+#k7robotStageC{width:100%;max-width:520px;height:auto;display:block}
+.k7-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.k7-pill{font:700 12px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.05em;padding:4px 9px;border:1px solid rgba(9,216,255,.22);background:rgba(9,216,255,.10);color:var(--line)}
+.k7-year{font:700 13px 'DM Mono',monospace;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:#dffbff}
+.k7-detail-title{font-size:24px;font-weight:800;color:#fff;line-height:1.15;margin:.2rem 0}
+.k7-detail-org{font-size:16px;color:#9ab0c8;margin-bottom:12px}
+.k7-info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 12px}
+.k7-info-box{background:rgba(255,255,255,.055);border:1px solid rgba(9,216,255,.10);padding:10px;min-height:78px}
+.k7-info-label{font:700 12px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:#9ab0c8;margin-bottom:6px}
+.k7-info-text{font-size:14px;color:#fff;line-height:1.45}
+.k7-desc{font-size:16px;color:#c8d8f0;line-height:1.65;margin:0 0 10px}
+.k7-card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.k7-robot-card{background:linear-gradient(180deg,rgba(7,18,37,.88),rgba(4,10,24,.92));border:1px solid rgba(9,216,255,.18);padding:14px;min-height:132px;cursor:pointer;position:relative;transition:transform .14s,border-color .14s,box-shadow .14s}
+.k7-robot-card:hover{transform:translateY(-2px);border-color:rgba(9,216,255,.5);box-shadow:0 0 24px rgba(9,216,255,.10)}
+.k7-robot-card.active{border-color:#4f8ef7;box-shadow:0 0 0 1px rgba(79,142,247,.45) inset,0 0 24px rgba(79,142,247,.14)}
+.k7-card-year{font:700 13px 'DM Mono',monospace;margin-bottom:6px}
+.k7-card-title{font-size:18px;font-weight:800;color:#fff;line-height:1.1;margin-bottom:5px}
+.k7-card-org{font-size:14px;color:#9ab0c8;margin-bottom:6px}
+.k7-card-desc{font-size:14px;color:#dffbff;line-height:1.45}
+.k7-card-badge{position:absolute;top:12px;right:12px;font-size:12px;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.08);color:#c8d8f0}
+#k7timelineC{width:100%;height:auto;max-height:300px;object-fit:contain}
+@media(max-width:980px){.k7-humanoid-layout{grid-template-columns:1fr}.k7-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.k7-info-grid,.k7-card-grid{grid-template-columns:1fr}.k7-detail-title{font-size:20px}}
+
+
+/* PATCH v4 — Kapitel 04 Navigation: sichtbare Ultraschall-Kegel + Button-Zustände */
+.nv-control-btn{transition:background .12s,border-color .12s,color .12s,box-shadow .12s,transform .08s!important}
+.nv-control-btn.nv-active-start{background:#1D9E75!important;color:#fff!important;border-color:#1D9E75!important;box-shadow:0 0 18px rgba(29,158,117,.35)!important}
+.nv-control-btn.nv-active-pause{background:#EF9F27!important;color:#07151d!important;border-color:#EF9F27!important;box-shadow:0 0 18px rgba(239,159,39,.35)!important}
+.nv-control-btn.nv-active-reset{background:#4f8ef7!important;color:#fff!important;border-color:#4f8ef7!important;box-shadow:0 0 18px rgba(79,142,247,.35)!important}
+.nv-control-btn:active{transform:translateY(1px)!important}
+
+
+/* FINAL PATCH v8 — korrekte Kapitelnummern im Hero-Wasserzeichen */
+#page-k1 .hero-inner::before{content:"01"!important}
+#page-k2 .hero-inner::before{content:"02"!important}
+#page-k3 .hero-inner::before{content:"03"!important}
+#page-k4 .hero-inner::before{content:"04"!important}
+#page-k5 .hero-inner::before{content:"05"!important}
+#page-k6 .hero-inner::before{content:"06"!important}
+#page-k7 .hero-inner::before{content:"07"!important}
+#page-k8 .hero-inner::before{content:"08"!important}
+#page-start .start-hero-inner::before{content:"00"!important}
+
 </style>
 <script>
 // Early stub — defers to real k3selSensor once the main script has loaded
@@ -298,17 +1022,17 @@ function toggleLang(){
 <body>
 
 <nav>
-  <div class="nav-brand"><div class="nav-dot"></div><span data-i18n="nav.brand">Kids Universität · Robotik</span></div>
+  <div class="nav-brand"><div class="nav-dot"></div><span data-i18n="nav.brand" data-i18n-html>LAB//<br>Robotik – Kids Universität</span></div>
   <div class="nav-chapters">
     <button class="nav-ch active" onclick="goTo('start')" data-i18n="nav.start">Start</button>
     <button class="nav-ch" onclick="goTo('k1')" data-i18n="nav.k1">01 · Was ist ein Roboter?</button>
     <button class="nav-ch" onclick="goTo('k2')" data-i18n="nav.k2">02 · Bewegung</button>
     <button class="nav-ch" onclick="goTo('k3')" data-i18n="nav.k3">03 · Sensoren</button>
-    <button class="nav-ch" onclick="goTo('k4')" data-i18n="nav.k4">04 · Navigation &amp; Karten</button>
+    <button class="nav-ch" onclick="goTo('k4')" data-i18n="nav.k4">04 · Navigation & Karten</button>
     <button class="nav-ch" onclick="goTo('k5')" data-i18n="nav.k5">05 · Entscheidungen</button>
     <button class="nav-ch" onclick="goTo('k6')" data-i18n="nav.k6">06 · KI im Roboter</button>
     <button class="nav-ch" onclick="goTo('k7')" data-i18n="nav.k7">07 · Echte Roboter</button>
-    <button class="nav-ch" onclick="goTo('k8')" data-i18n="nav.k8">08 · Mensch &amp; Ethik</button>
+    <button class="nav-ch" onclick="goTo('k8')" data-i18n="nav.k8">08 · Mensch & Ethik</button>
   </div>
   <button id="langToggle" class="nav-lang" onclick="toggleLang()" title="Switch language / Sprache wechseln">EN</button>
 </nav>
@@ -318,13 +1042,13 @@ function toggleLang(){
   <div class="start-hero">
     <div class="start-hero-inner">
       <canvas id="startHeroC" width="200" height="140"></canvas>
-      <div class="start-title" data-i18n="start.title">Roboter — wie sie sehen, denken und handeln</div>
-      <p class="start-sub" data-i18n="start.sub">Von den drei Grundbausteinen bis zu Künstlicher Intelligenz und Ethik — entdecke in 8 Kapiteln, wie Roboter funktionieren und unser Leben verändern.</p>
-      <button class="start-btn" onclick="goTo('k1')" data-i18n="start.cta">Jetzt entdecken →</button>
+      <div class="start-title" data-i18n="start.title">ROBOTIK: SEHEN_DENKEN_HANDELN</div>
+      <p class="start-sub" data-i18n="start.sub">Von den drei Grundbausteinen bis zur künstlichen Intelligenz. Entdecke interaktiv, wie Roboter wahrnehmen, entscheiden und handeln.</p>
+      <button class="start-btn" onclick="goTo('k1')" data-i18n="start.cta">Mission starten</button>
     </div>
   </div>
   <div class="ch-list">
-    <div style="font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#aaa;margin-bottom:1rem;font-family:'DM Mono',monospace" data-i18n="start.overview">8 Kapitel · 2 Level</div>
+    <div style="font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#aaa;margin-bottom:1rem;font-family:'DM Mono',monospace" data-i18n="start.overview">FILE_ACCESS: GRANTED // 8_MODULES_FOUND</div>
     <div class="ch-item" onclick="goTo('k1')">
       <div class="ch-icon" style="background:#E1F5EE">🤖</div>
       <div class="ch-item-info">
@@ -396,6 +1120,15 @@ function toggleLang(){
         <div class="ch-item-desc" data-i18n="card.k8.desc">Asimov, Trolley-Problem, Vertrauen, Verantwortung — und Roboter im Alltag</div>
         <div class="ch-item-tags"><span class="ch-tag" style="background:#FFE3D0;color:#7A3618" data-i18n="tag.ethics">Ethik</span><span class="ch-tag" style="background:#EEEDFE;color:#3C3489" data-i18n="tag.discussion">Diskussion</span><span class="ch-tag" style="background:#E1F5EE;color:#085041" data-i18n="tag.interactive">Interaktiv</span></div>
       </div>
+    </div>
+  </div>
+    <div style="max-width:1180px;margin:0 auto 2rem auto;padding:0 1.5rem;position:relative;z-index:1">
+    <div style="display:grid;grid-template-columns:1.2fr .8fr .8fr 2fr 2fr;gap:0;border:1px solid rgba(9,216,255,.16);background:linear-gradient(180deg, rgba(7,18,37,.82), rgba(4,10,24,.92));box-shadow:0 0 0 1px rgba(9,216,255,.05) inset">
+      <div style="padding:14px 18px;border-right:1px solid rgba(9,216,255,.14);font-family:'DM Mono',monospace;color:#9ab0c8;text-transform:uppercase;letter-spacing:.04em">Kids Universität Labor<br><span style="color:#f4f8ff">Ver 1.0.0</span></div>
+      <div style="padding:14px 18px;border-right:1px solid rgba(9,216,255,.14);font-family:'DM Mono',monospace;color:#9ab0c8;text-transform:uppercase;letter-spacing:.04em">Uptime<br><span style="color:#f4f8ff">07:24:15</span></div>
+      <div style="padding:14px 18px;border-right:1px solid rgba(9,216,255,.14);font-family:'DM Mono',monospace;color:#9ab0c8;text-transform:uppercase;letter-spacing:.04em">Users Online<br><span style="color:#f4f8ff">128</span></div>
+      <div style="padding:14px 18px;border-right:1px solid rgba(9,216,255,.14);font-family:'DM Mono',monospace;color:#9ab0c8;text-transform:uppercase;letter-spacing:.04em">Next Event<br><span style="color:#f4f8ff">Workshop: Sensorik // Sa 15:00</span></div>
+      <div style="padding:14px 18px;font-family:'DM Mono',monospace;color:#09d8ff;text-transform:uppercase;letter-spacing:.04em">&gt; Bereit für deine Mission?</div>
     </div>
   </div>
 </div>
@@ -855,9 +1588,9 @@ function toggleLang(){
     <div class="dark-card" style="margin-bottom:.8rem">
       <div style="padding:.5rem 1rem;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
         <div style="display:flex;gap:6px;align-items:center">
-          <button onclick="nvStart()" id="nv-startbtn" style="font-size:15px;padding:6px 18px;border-radius:8px;border:none;background:#1D9E75;color:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500" data-i18n="k4.nv.start">▶ Start</button>
-          <button onclick="nvStop()" id="nv-stopbtn" style="font-size:14px;padding:5px 12px;border-radius:8px;border:.5px solid #555;background:transparent;color:#888;cursor:pointer;font-family:'DM Sans',sans-serif" data-i18n="k4.nv.pause">⏸ Pause</button>
-          <button onclick="nvReset()" style="font-size:14px;padding:5px 12px;border-radius:8px;border:.5px solid #555;background:transparent;color:#888;cursor:pointer;font-family:'DM Sans',sans-serif" data-i18n="k4.nv.reset">↺ Reset</button>
+          <button onclick="nvStart()" id="nv-startbtn" class="nv-control-btn nv-active-start" style="font-size:15px;padding:6px 18px;border-radius:8px;border:none;background:#1D9E75;color:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500" data-i18n="k4.nv.start">▶ Start</button>
+          <button onclick="nvStop()" id="nv-stopbtn" class="nv-control-btn" style="font-size:14px;padding:5px 12px;border-radius:8px;border:.5px solid #555;background:transparent;color:#888;cursor:pointer;font-family:'DM Sans',sans-serif" data-i18n="k4.nv.pause">⏸ Pause</button>
+          <button onclick="nvReset()" id="nv-resetbtn" class="nv-control-btn" style="font-size:14px;padding:5px 12px;border-radius:8px;border:.5px solid #555;background:transparent;color:#888;cursor:pointer;font-family:'DM Sans',sans-serif" data-i18n="k4.nv.reset">↺ Reset</button>
         </div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <span style="font-size:12px;color:#6a89b8;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.04em" id="nv-canvaslabel">Strecke · Stufe 0</span>
@@ -1014,7 +1747,7 @@ function toggleLang(){
         <!-- Baum-Visualisierung (immer sichtbar) -->
         <div style="background:rgba(8,16,32,.6);border-radius:10px;padding:.8rem;margin-bottom:.8rem;overflow-x:auto">
           <div style="font-size:11px;color:#6a89b8;font-family:'DM Mono',monospace;letter-spacing:.05em;margin-bottom:.3rem;text-transform:uppercase" data-i18n="k5.tree.fulltree">Der ganze Baum · dein Pfad leuchtet</div>
-          <svg id="k5treeSVG" viewBox="0 0 600 280" style="display:block;width:100%;min-width:560px;height:auto" xmlns="http://www.w3.org/2000/svg"></svg>
+          <svg id="k5treeSVG" viewBox="0 0 940 460" style="display:block;width:100%;min-width:860px;height:auto" xmlns="http://www.w3.org/2000/svg"></svg>
         </div>
 
         <!-- Pfad-Anzeige (Breadcrumbs) -->
@@ -1095,7 +1828,7 @@ function toggleLang(){
   </div>
 
   <!-- Erklärung ausklappbar -->
-  <div style="margin:0 1.5rem .8rem">
+  <div style="width:calc(100% - 3rem);max-width:calc(var(--page-max) - 3rem);margin:0 auto .8rem">
     <button onclick="k5rlToggleExplain()" id="k5explainBtn" style="width:100%;text-align:left;padding:.75rem 1rem;border-radius:10px;border:.5px solid rgba(79,142,247,.4);background:rgba(79,142,247,.08);color:#a0bfff;cursor:pointer;font-size:15px;font-family:'DM Sans',sans-serif;display:flex;justify-content:space-between;align-items:center">
       <span data-i18n="k5.rl.explainbtn">💡 Wie merkt sich der Roboter den Weg? — Erklärung ausklappen</span>
       <span id="k5explainArrow">▾</span>
@@ -1118,7 +1851,7 @@ function toggleLang(){
 
   <div class="fact-box">
     <div class="fact-label" data-i18n="fact.label">Wusstest du?</div>
-    <p class="fact-text" data-i18n="k5.fact" data-i18n-html>Die KI <strong>AlphaGo</strong> von Google hat 2016 zum ersten Mal einen menschlichen Profi im Brettspiel Go besiegt — mit genau diesem Prinzip. Sie hat <strong>Millionen Partien gegen sich selbst</strong> gespielt, jeden Zug bewertet und nach und nach den besten Weg gelernt. Kein Mensch hat ihr die Strategie beigebracht.</p>
+    <p class="fact-text" data-i18n="k5.fact" data-i18n-html>AlphaGo nutzte die Grundidee, Situationen und Züge zu bewerten — <strong>ähnlich wie beim Q-Learning</strong> — und kombinierte dies mit neuronalen Netzen, Baumsuche und Reinforcement Learning durch Selbstspiel. Auch bei AlphaGo bewertete die KI Situationen und verbesserte ihre Entscheidungen über viele Partien.</p>
   </div>
 
   <!-- QUIZ -->
@@ -1271,7 +2004,7 @@ function toggleLang(){
     </div>
     <div id="k6drawResult" style="background:#0f1b3d;border-radius:10px;padding:1rem 1.2rem;color:#8fa8cc;font-size:15px;line-height:1.6" data-i18n="k6.draw.result" data-i18n-html>
       ↑ Zeichne eines der vier Schilder und klick <strong style="color:#fff">"Erkennen"</strong>.
-      <div style="margin-top:.5rem;font-size:13px;color:#6a89b8">Die KI kennt: 🛑 Stop · ⬆ Pfeil hoch · ⭕ Kreis · ✕ X-Form</div>
+      <div style="margin-top:.5rem;font-size:13px;color:#6a89b8">Die KI kennt: 🛑 Stop · ⬆ Pfeil hoch · 🔻 Vorfahrt achten · ◇ Vorfahrtsstraße</div>
     </div>
   </div>
 
@@ -1282,54 +2015,77 @@ function toggleLang(){
 
   <div class="divider"></div>
 
-  <!-- ====================== SECTION 2: BEWEGEN ====================== -->
+
+  <!-- ====================== SECTION 2: KI-AGENT STEUERT ROBOTERARM ====================== -->
   <div class="sec" id="k6sec-move">
-    <div class="sec-label" data-i18n="k6.move.label">Teil 2 · Bewegen lernen</div>
-    <div class="sec-title" data-i18n="k6.move.title">🦿 Wie Roboter durch Ausprobieren lernen</div>
-    <div class="sec-sub" data-i18n="k6.move.sub" data-i18n-html>Niemand programmiert Boston Dynamics' Spot mit "hebe jetzt das linke Bein 17.3 cm". Stattdessen: der Roboter <strong>probiert was aus</strong>, wird belohnt wenn es klappt, bestraft wenn er stolpert. Nach Tausenden Versuchen kann er laufen. Das heißt <strong>Reinforcement Learning</strong>.</div>
-  </div>
+    <div class="sec-label">Interaktiv · Prompt → Plan → Kamera → Code → Aktion</div>
+    <div class="sec-title">Wie steuert ein KI-Agent einen Roboterarm?</div>
+    <div class="sec-sub">Hier wird nicht mehr nur entschieden, <em>was</em> der Roboter greifen darf. Stattdessen sieht man den kompletten Ablauf: Ein KI-Agent liest den Auftrag, plant die Schritte, nutzt Kamera und Vision-Modell, beschreibt erkannte Objekte, schreibt Steuer-Code und bewegt damit den Roboterarm.</div>
 
-  <!-- 2: RL Demo -->
-  <div class="sec">
-    <div class="sec-label" data-i18n="k6.rl.label">Live-Demo · Belohnung &amp; Strafe</div>
-    <div class="sec-title" data-i18n="k6.rl.title">Roboter lernt das Ziel zu finden</div>
-    <div class="sec-sub" data-i18n="k6.rl.sub" data-i18n-html>Der Roboter soll zum grünen Stern — aber muss roten Hindernissen ausweichen. Zu Beginn weiß er gar nichts. Drücke <strong>"Schneller lernen"</strong> und sieh zu, wie er von Versuch zu Versuch besser wird.</div>
     <div class="dark-card">
-      <div class="canvas-header" style="display:flex;justify-content:space-between">
-        <span><span data-i18n="k6.rl.attempt">RL-Arena · Versuch</span> <span id="k6rlEpNum" style="color:#4f8ef7">0</span></span>
-        <span id="k6rlStatus" style="color:#5DCAA5">Bereit zum Training</span>
+      <div class="canvas-header" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
+        <span>Agentenlabor · Roboterarm-Workflow</span>
+        <span id="k6agentStatus" style="color:#5DCAA5">BEREIT</span>
       </div>
-      <canvas id="k6rlC" width="600" height="240" class="sim-canvas"></canvas>
+      <canvas id="k6agentC" width="1120" height="460" class="sim-canvas-tall"></canvas>
     </div>
-    <div style="display:flex;gap:8px;margin-top:.7rem;align-items:center;flex-wrap:wrap">
-      <button onclick="k6rlToggle()" id="k6rlBtn" class="btn-small" style="background:#1D9E75;color:#fff;border-color:#1D9E75;font-weight:500" data-i18n="k6.rl.btn.faster">▶ Schneller lernen</button>
-      <button onclick="k6rlReset()" class="btn-small" data-i18n="k6.rl.btn.restart">↺ Neu starten</button>
-      <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:200px">
-        <span style="font-size:13px;color:#888;white-space:nowrap" data-i18n="k6.rl.speed">Tempo:</span>
-        <input type="range" min="1" max="50" value="20" id="k6rlSpeed" style="flex:1" oninput="k6rlSpeed=parseInt(this.value);document.getElementById('k6rlSpeedLbl').textContent=this.value+'×'">
-        <span id="k6rlSpeedLbl" style="font-size:13px;color:#888;min-width:32px">20×</span>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:.7rem">
-      <div style="background:#0f1b3d;border-radius:9px;padding:.7rem;text-align:center">
-        <div style="font-size:11px;color:#6a89b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2rem;font-family:'DM Mono',monospace" data-i18n="k6.rl.stat.attempts">Versuche</div>
-        <div style="font-size:20px;font-weight:500;color:#fff;font-family:'DM Mono',monospace" id="k6rlStat1">0</div>
-      </div>
-      <div style="background:#0f1b3d;border-radius:9px;padding:.7rem;text-align:center">
-        <div style="font-size:11px;color:#6a89b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2rem;font-family:'DM Mono',monospace" data-i18n="k6.rl.stat.success">Erfolge</div>
-        <div style="font-size:20px;font-weight:500;color:#5DCAA5;font-family:'DM Mono',monospace" id="k6rlStat2">0</div>
-      </div>
-      <div style="background:#0f1b3d;border-radius:9px;padding:.7rem;text-align:center">
-        <div style="font-size:11px;color:#6a89b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2rem;font-family:'DM Mono',monospace" data-i18n="k6.rl.stat.rate">Erfolgsquote</div>
-        <div style="font-size:20px;font-weight:500;color:#4f8ef7;font-family:'DM Mono',monospace" id="k6rlStat3">—</div>
-      </div>
-    </div>
-    <div style="background:#f5f3ee;border-radius:9px;padding:.7rem 1rem;margin-top:.7rem;font-size:14px;color:#555;line-height:1.55" id="k6rlExplain" data-i18n="k6.rl.explain" data-i18n-html>💡 <strong>Was passiert hier?</strong> Der Roboter probiert zufällig Wege. Bei Hindernis → −1 Punkt. Bei Ziel → +10 Punkte. Nach jedem Versuch merkt er sich, welche Richtungen gut waren. Genau so trainiert Boston Dynamics auch Spot — nur mit Millionen Versuchen im Computer.</div>
-  </div>
 
-  <div class="fact-box">
-    <div class="fact-label" data-i18n="fact.label">Wusstest du?</div>
-    <p class="fact-text" data-i18n="k6.move.fact" data-i18n-html>Boston Dynamics trainiert Spot in einem <strong>physikalischen Simulator</strong> — kein echter Roboter wird verbraucht. Eine Trainings-Sitzung dauert <strong>Wochen</strong>, in denen Spot Milliarden Schritte probiert. Erst dann wird die fertige KI auf den echten Roboter geladen.</p>
+    <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:10px;margin-top:.8rem">
+      <div class="dark-card" style="margin:0">
+        <div class="dark-card-pad">
+          <div style="font-size:12px;color:#5DCAA5;font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:.55rem">1 · Auftrag an den KI-Agenten</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn-small btn-active" id="k6agentPrompt-grab" onclick="k6agentSetPrompt('grab')">Greife ein Objekt</button>
+            <button class="btn-small" id="k6agentPrompt-sort" onclick="k6agentSetPrompt('sort')">Sortiere nach Farben</button>
+            <button class="btn-small" id="k6agentPrompt-clean" onclick="k6agentSetPrompt('clean')">Räume den Arbeitsbereich auf</button>
+            <button class="btn-small" id="k6agentPrompt-stack" onclick="k6agentSetPrompt('stack')">Staple die Objekte übereinander</button>
+          </div>
+          <div id="k6agentPromptText" style="margin-top:.75rem;font-size:15px;color:#fff;line-height:1.6;background:rgba(255,255,255,.05);padding:.7rem .8rem;border-left:3px solid #4f8ef7">„Greife das Objekt in deinem Arbeitsbereich.“</div>
+        </div>
+      </div>
+      <div class="dark-card" style="margin:0">
+        <div class="dark-card-pad">
+          <div style="font-size:12px;color:#EF9F27;font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:.55rem">2 · Simulation steuern</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn-small btn-active" onclick="k6agentRun()">▶ Ablauf starten</button>
+            <button class="btn-small" onclick="k6agentNext()">Einzelschritt</button>
+            <button class="btn-small" onclick="k6agentReset()">↺ Reset</button>
+          </div>
+          <div style="font-size:13px;color:#8fa8cc;line-height:1.5;margin-top:.7rem">Tipp: Mit „Einzelschritt“ kann die Gruppe den Agenten wie in Zeitlupe nachvollziehen.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:.9rem">
+      <div class="dark-card" style="margin:0">
+        <div class="dark-card-pad">
+          <div style="font-size:12px;color:#5DCAA5;font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:.4rem">Systemwissen</div>
+          <div id="k6agentSystem" style="font-size:14px;color:#fff;line-height:1.55">Simulationsmodell: 2D-Roboterarm mit 2 Gelenken + Greifer<br>Realer Bezug: Industrieroboter haben oft 6 Achsen<br>Kamera: Arbeitsbereich von oben<br>Sicherheitsregeln: nur im markierten Arbeitsbereich, begrenzte Geschwindigkeit, Gelenkgrenzen einhalten<br>Greifen: über Objektmittelpunkt fahren → absenken → Greifer schließen → anheben → Ziel anfahren<br>Werkzeuge: Large Language Model, Vision Language Model, Code Interpreter, Robot Action</div>
+        </div>
+      </div>
+      <div class="dark-card" style="margin:0">
+        <div class="dark-card-pad">
+          <div style="font-size:12px;color:#EF9F27;font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:.4rem">Plan</div>
+          <div id="k6agentPlan" style="font-size:15px;color:#fff;line-height:1.5">Noch kein Plan erstellt.</div>
+        </div>
+      </div>
+      <div class="dark-card" style="margin:0">
+        <div class="dark-card-pad">
+          <div style="font-size:12px;color:#4f8ef7;font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:.4rem">Wahrnehmung</div>
+          <div id="k6agentVision" style="font-size:15px;color:#fff;line-height:1.5">Kamera noch nicht aktiviert.</div>
+        </div>
+      </div>
+      <div class="dark-card" style="margin:0">
+        <div class="dark-card-pad">
+          <div style="font-size:12px;color:#AFA9EC;font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:.4rem">Aktion</div>
+          <div id="k6agentAction" style="font-size:15px;color:#fff;line-height:1.5">Noch keine Roboterbewegung.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="k6agentExplain" style="background:#0f1b3d;border-radius:9px;padding:.8rem 1rem;margin-top:.8rem;font-size:14px;color:#8fa8cc;line-height:1.6">
+      💡 <strong style="color:#fff">Merke:</strong> Ein KI-Agent ist nicht nur ein Modell. Er verbindet mehrere Werkzeuge: Sprache verstehen, Bilder auswerten, Code erzeugen und Aktionen ausführen. Genau dadurch wird aus einem Prompt eine Roboterhandlung.
+    </div>
   </div>
 
   <div class="divider"></div>
@@ -1572,12 +2328,32 @@ function toggleLang(){
   </div>
   <div class="dark-card card-edge-margin">
     <div class="canvas-header" data-i18n="k7.timeline.cardtitle">Zeitachse · Humanoide Roboter</div>
-    <canvas id="k7timelineC" width="600" height="260" class="sim-canvas" style="cursor:pointer"></canvas>
-    <div id="k7robotDetail" style="padding:1rem;border-top:.5px solid rgba(255,255,255,.08);display:none">
-      <div style="font-size:16px;font-weight:500;color:#fff;margin-bottom:.3rem" id="k7rdTitle"></div>
-      <div style="font-size:14px;color:#8fa8cc;line-height:1.7" id="k7rdText"></div>
-      <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:.5rem" id="k7rdTags"></div>
+    <canvas id="k7timelineC" width="1120" height="280" class="sim-canvas" style="cursor:pointer"></canvas>
+  </div>
+
+  <div class="k7-humanoid-layout card-edge-margin">
+    <div class="dark-card" style="margin:0">
+      <div class="canvas-header">Ausgewählter Roboter</div>
+      <div class="k7-robot-stage"><canvas id="k7robotStageC" width="520" height="270"></canvas></div>
     </div>
+    <div class="dark-card" style="margin:0">
+      <div class="dark-card-pad">
+        <div class="k7-detail-head"><span class="k7-pill" id="k7rdBadge">Pionier</span><span class="k7-year" id="k7rdYear">1996</span></div>
+        <div class="k7-detail-title" id="k7rdTitle">Honda P2</div>
+        <div class="k7-detail-org" id="k7rdOrg">Honda</div>
+        <div class="k7-info-grid">
+          <div class="k7-info-box"><div class="k7-info-label">Warum wichtig?</div><div class="k7-info-text" id="k7rdWhy">Zeigt, dass zweibeiniges Gehen und grundlegende Interaktion funktionieren.</div></div>
+          <div class="k7-info-box"><div class="k7-info-label">Entwicklung</div><div class="k7-info-text" id="k7rdDev">Grundfunktionen</div></div>
+          <div class="k7-info-box"><div class="k7-info-label">Einsatzbild</div><div class="k7-info-text" id="k7rdUse">Forschung</div></div>
+        </div>
+        <p class="k7-desc" id="k7rdText"></p>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:.5rem" id="k7rdTags"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-edge-margin" style="margin-top:1rem">
+    <div style="font-size:13px;color:#EF9F27;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.7rem">Roboter auswählen</div>
+    <div class="k7-card-grid" id="k7robotCards"></div>
   </div>
 
   <div class="fact-box">
@@ -1610,6 +2386,7 @@ function toggleLang(){
 <div id="page-k8" class="page">
   <div class="hero">
     <div class="hero-inner">
+      <canvas class="hero-canvas" id="h8C" width="170" height="200"></canvas>
       <div class="hero-badge" data-i18n="hero.k8.badge">Robotik · Kapitel 08 · Level 2</div>
       <h1 data-i18n="hero.k8.title">Mensch &amp; Ethik</h1>
       <p class="hero-sub" data-i18n="hero.k8.sub" data-i18n-html>Roboter werden immer schlauer — aber <em>sollen</em> sie immer das tun, was sie <em>können</em>? Hier denken wir darüber nach, wie Mensch und Roboter zusammenleben sollten.</p>
@@ -3663,13 +4440,47 @@ function k3drawSim(){
 }
 const h3C=document.getElementById('h3C');const h3x=h3C?.getContext('2d');
 function drawH3(t){
+  if(!h3x)return;
   h3x.clearRect(0,0,170,200);
-  [[40,60],[120,50],[80,130],[140,130]].forEach((pos,i)=>{
-    const r=8+Math.sin(t*.6+i)*2;h3x.strokeStyle='rgba(79,142,247,0.3)';h3x.lineWidth=1;
-    for(let j=1;j<=3;j++){h3x.beginPath();h3x.arc(pos[0],pos[1],r+j*10,0,Math.PI*2);h3x.stroke();}
-    h3x.fillStyle='#4f8ef7';h3x.beginPath();h3x.arc(pos[0],pos[1],r,0,Math.PI*2);h3x.fill();
+  const sensors=[
+    {x:40,y:58,c:'#4f8ef7',type:'us'},
+    {x:122,y:52,c:'#EF9F27',type:'cam'},
+    {x:74,y:130,c:'#AFA9EC',type:'lidar'},
+    {x:136,y:126,c:'#1D9E75',type:'gps'}
+  ];
+  const hub={x:84,y:92};
+  // central hub
+  h3x.fillStyle='rgba(9,216,255,.10)'; h3x.strokeStyle='rgba(9,216,255,.65)'; h3x.lineWidth=1.6;
+  h3x.beginPath(); h3x.arc(hub.x,hub.y,14+Math.sin(t*2)*1.5,0,Math.PI*2); h3x.fill(); h3x.stroke();
+
+  sensors.forEach((s,i)=>{
+    // connecting pulse
+    const pulse=(Math.sin(t*2.2-i*.8)+1)/2;
+    h3x.strokeStyle=`rgba(79,142,247,${0.14+0.34*pulse})`;
+    h3x.lineWidth=1.3;
+    h3x.beginPath(); h3x.moveTo(hub.x,hub.y); h3x.lineTo(s.x,s.y); h3x.stroke();
+    const px=hub.x+(s.x-hub.x)*(0.28+0.52*pulse);
+    const py=hub.y+(s.y-hub.y)*(0.28+0.52*pulse);
+    h3x.fillStyle='#d4ff46'; h3x.beginPath(); h3x.arc(px,py,2.6,0,Math.PI*2); h3x.fill();
+
+    // outer sensor pulse rings
+    const r=8+Math.sin(t*1.6+i)*2.5;
+    h3x.strokeStyle='rgba(79,142,247,0.22)'; h3x.lineWidth=1;
+    for(let j=1;j<=3;j++){ h3x.beginPath(); h3x.arc(s.x,s.y,r+j*9,0,Math.PI*2); h3x.stroke(); }
+
+    // sensor body
+    h3x.fillStyle=s.c+'33'; h3x.strokeStyle=s.c; h3x.lineWidth=1.8;
+    h3x.beginPath(); h3x.arc(s.x,s.y,8.5,0,Math.PI*2); h3x.fill(); h3x.stroke();
+
+    // icon glyphs
+    h3x.fillStyle=s.c; h3x.font='700 8px DM Mono'; h3x.textAlign='center'; h3x.textBaseline='middle';
+    if(s.type==='us') h3x.fillText('US',s.x,s.y+0.5);
+    if(s.type==='cam') h3x.fillText('CAM',s.x,s.y+0.5);
+    if(s.type==='lidar') h3x.fillText('360',s.x,s.y+0.5);
+    if(s.type==='gps') h3x.fillText('GPS',s.x,s.y+0.5);
   });
 }
+
 function k3Draw(){
   k3drawSim();
   drawH3(GT);
@@ -3855,15 +4666,27 @@ function mkState(){
 }
 let nvState=mkState();
 
+function nvSetControlActive(mode){
+  const map={start:'nv-startbtn',pause:'nv-stopbtn',reset:'nv-resetbtn'};
+  Object.entries(map).forEach(([key,id])=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.classList.remove('nv-active-start','nv-active-pause','nv-active-reset');
+    if(key===mode)el.classList.add('nv-active-'+key);
+  });
+}
 function nvReset(){
   NV_LIGHT.phase='red';NV_LIGHT.timer=0;
   nvState=mkState();
+  nvSetControlActive('reset');
   setNvResult('Warte auf Start','rgba(255,255,255,.07)','#6a89b8');
+  nvUpdateData();
 }
-function nvStop(){nvState.running=false;setNvResult('Gestoppt','rgba(255,255,255,.07)','#6a89b8');}
+function nvStop(){nvState.running=false;nvSetControlActive('pause');setNvResult('Pausiert','rgba(239,159,39,.18)','#EF9F27');}
 function nvStart(){
   if(nvState.arrived||nvState.crashed)nvReset();
   nvState.running=true;nvState.car.speed=1.8;
+  nvSetControlActive('start');
   setNvResult('Fahrt läuft…','rgba(79,142,247,.2)','#a0bfff');
 }
 function setNvResult(txt,bg,col){const el=document.getElementById('nv-result');if(el){el.textContent=txt;el.style.background=bg;el.style.color=col;}}
@@ -4189,13 +5012,40 @@ function drawSlam(){
     // Range rings
     [50,110].forEach(r=>{ctx.strokeStyle='rgba(175,169,236,.07)';ctx.lineWidth=1;ctx.beginPath();ctx.arc(s.car.x,s.car.y,r,0,Math.PI*2);ctx.stroke();});
   }
-  // US
-  if(cfg.activeSensors.includes('us')&&s.running){
-    [[0,'usF'],[Math.PI/2,'usR'],[-Math.PI/2,'usL']].forEach(([rel,key])=>{
-      const d=s[key],a=s.car.angle+rel,col=d<55?'#E24B4A':d<100?'#EF9F27':'#4f8ef7';
-      [16,30,44].forEach((r,ri)=>{if(d<r+15){ctx.strokeStyle=col;ctx.lineWidth=1.2;ctx.globalAlpha=.45-ri*.12;ctx.beginPath();ctx.arc(s.car.x+Math.cos(a)*r*.3,s.car.y+Math.sin(a)*r*.3,r,a-.8,a+.8);ctx.stroke();}});
-      ctx.globalAlpha=1;
-      if(d<300){ctx.fillStyle=col;ctx.font='500 8px DM Mono,monospace';ctx.textAlign='center';ctx.fillText(Math.round(d)+'px',s.car.x+Math.cos(a)*48,s.car.y+Math.sin(a)*48+3);}
+  // Ultraschall — deutlich sichtbare Messkegel, auch wenn noch kein Hindernis nah ist
+  if(cfg.activeSensors.includes('us')){
+    [[0,'usF','V'],[Math.PI/2,'usR','R'],[-Math.PI/2,'usL','L']].forEach(([rel,key,label])=>{
+      const raw=s[key]||999;
+      const d=Math.min(raw,135);
+      const a=s.car.angle+rel;
+      const col=raw<55?'#E24B4A':raw<100?'#EF9F27':'#09d8ff';
+      ctx.save();
+      ctx.globalCompositeOperation='lighter';
+      // transparenter Kegel
+      const spread=.44;
+      const endL={x:s.car.x+Math.cos(a-spread)*d,y:s.car.y+Math.sin(a-spread)*d};
+      const endR={x:s.car.x+Math.cos(a+spread)*d,y:s.car.y+Math.sin(a+spread)*d};
+      const endC={x:s.car.x+Math.cos(a)*d,y:s.car.y+Math.sin(a)*d};
+      ctx.fillStyle=raw<55?'rgba(226,75,74,.16)':raw<100?'rgba(239,159,39,.14)':'rgba(9,216,255,.12)';
+      ctx.beginPath();ctx.moveTo(s.car.x,s.car.y);ctx.lineTo(endL.x,endL.y);ctx.lineTo(endR.x,endR.y);ctx.closePath();ctx.fill();
+      // Hauptstrahl + Randstrahlen
+      ctx.strokeStyle=col;ctx.lineWidth=1.6;ctx.globalAlpha=.9;
+      [a-spread,a,a+spread].forEach((ra,idx)=>{
+        ctx.globalAlpha=idx===1?.95:.42;
+        ctx.beginPath();ctx.moveTo(s.car.x,s.car.y);ctx.lineTo(s.car.x+Math.cos(ra)*d,s.car.y+Math.sin(ra)*d);ctx.stroke();
+      });
+      // Schallwellen-Bögen
+      [32,64,96,128].forEach((r,ri)=>{
+        if(r>d+4)return;
+        ctx.globalAlpha=.55-ri*.09;ctx.lineWidth=1.2;
+        ctx.beginPath();ctx.arc(s.car.x,s.car.y,r,a-spread,a+spread);ctx.stroke();
+      });
+      // Messpunkt / Max-Reichweite
+      ctx.globalAlpha=1;ctx.fillStyle=col;ctx.beginPath();ctx.arc(endC.x,endC.y,raw<135?3.5:2,0,Math.PI*2);ctx.fill();
+      ctx.restore();
+      const txt=raw>250?'max':Math.round(raw)+'px';
+      ctx.fillStyle=col;ctx.font='bold 9px DM Mono,monospace';ctx.textAlign='center';
+      ctx.fillText(label+' '+txt,s.car.x+Math.cos(a)*Math.min(d+14,150),s.car.y+Math.sin(a)*Math.min(d+14,150)+3);
     });
   }
   // GPS
@@ -5146,6 +5996,107 @@ function drawRoombaMiniMap(){
   mctx.fillText(pct+'% erkundet', MMW-4, 4);
 }
 
+
+
+// Chapter 4 hero (SLAM / Navigation)
+const h4C=document.getElementById('h4C');
+const h4x=h4C?h4C.getContext('2d'):null;
+function drawH4(t){
+  if(!h4x) return;
+  h4x.clearRect(0,0,170,200);
+  const cx=84, cy=102;
+
+  // soft grid/map backdrop
+  h4x.strokeStyle='rgba(79,142,247,.14)';
+  h4x.lineWidth=1;
+  for(let x=18;x<=152;x+=22){ h4x.beginPath(); h4x.moveTo(x,24); h4x.lineTo(x,180); h4x.stroke(); }
+  for(let y=28;y<=176;y+=22){ h4x.beginPath(); h4x.moveTo(12,y); h4x.lineTo(158,y); h4x.stroke(); }
+
+  // explored path / map polyline
+  const pulse=(Math.sin(t*2)+1)/2;
+  h4x.strokeStyle='rgba(9,216,255,.65)';
+  h4x.lineWidth=2;
+  h4x.beginPath();
+  h4x.moveTo(30,142);
+  h4x.lineTo(52,118);
+  h4x.lineTo(72,126);
+  h4x.lineTo(94,92);
+  h4x.lineTo(118,98);
+  h4x.lineTo(138,70);
+  h4x.stroke();
+
+  // landmarks / obstacles
+  const obstacles=[
+    {x:34,y:62,w:22,h:14,a:0.10},
+    {x:120,y:44,w:24,h:16,a:-0.12},
+    {x:50,y:152,w:18,h:14,a:-0.18},
+    {x:112,y:136,w:20,h:12,a:0.08}
+  ];
+  obstacles.forEach((o,i)=>{
+    h4x.save();
+    h4x.translate(o.x,o.y); h4x.rotate(o.a);
+    h4x.fillStyle='rgba(226,75,74,.18)';
+    h4x.strokeStyle=i%2?'#d4ff46':'#EF9F27';
+    h4x.lineWidth=1.5;
+    h4x.beginPath(); h4x.roundRect(-o.w/2,-o.h/2,o.w,o.h,4); h4x.fill(); h4x.stroke();
+    h4x.restore();
+  });
+
+  // localization rings
+  [50,36].forEach((r,i)=>{
+    h4x.strokeStyle=`rgba(212,255,70,${0.18+i*0.12})`;
+    h4x.lineWidth=1.2;
+    h4x.beginPath(); h4x.arc(cx,cy,r+Math.sin(t*1.2+i)*1.4,0,Math.PI*2); h4x.stroke();
+  });
+
+  // robot body
+  const bob=Math.sin(t*2)*1.5;
+  h4x.save();
+  h4x.translate(cx,cy+bob);
+  h4x.rotate(Math.sin(t*.9)*0.08);
+  h4x.fillStyle='rgba(79,142,247,.22)';
+  h4x.strokeStyle='#4f8ef7';
+  h4x.lineWidth=2;
+  h4x.beginPath(); h4x.roundRect(-18,-12,36,24,6); h4x.fill(); h4x.stroke();
+  h4x.fillStyle='#4f8ef7';
+  h4x.beginPath(); h4x.arc(-6,0,3.5,0,Math.PI*2); h4x.arc(6,0,3.5,0,Math.PI*2); h4x.fill();
+  h4x.restore();
+
+  // scan beam
+  const ang=-1.15 + ((Math.sin(t*1.35)+1)/2)*2.3;
+  h4x.fillStyle='rgba(9,216,255,.12)';
+  h4x.strokeStyle='rgba(9,216,255,.75)';
+  h4x.lineWidth=1.4;
+  h4x.beginPath();
+  h4x.moveTo(cx,cy+bob);
+  h4x.arc(cx,cy+bob,58,ang-0.34,ang+0.34,false);
+  h4x.closePath();
+  h4x.fill();
+  h4x.beginPath();
+  h4x.moveTo(cx,cy+bob);
+  h4x.lineTo(cx+Math.cos(ang)*58,cy+bob+Math.sin(ang)*58);
+  h4x.stroke();
+
+  // glowing discovered points
+  [[30,142],[52,118],[72,126],[94,92],[118,98],[138,70]].forEach((p,i)=>{
+    const r=2.5 + (i===Math.floor((t*2)%6)?1.5:0);
+    h4x.fillStyle=i%2?'#09d8ff':'#d4ff46';
+    h4x.globalAlpha=.7;
+    h4x.beginPath(); h4x.arc(p[0],p[1],r,0,Math.PI*2); h4x.fill();
+    h4x.globalAlpha=1;
+  });
+
+  // tiny label chips
+  const chips=[['MAP',28,24,'#09d8ff'],['LOC',114,166,'#d4ff46']];
+  chips.forEach(([txt,x,y,col])=>{
+    h4x.fillStyle='rgba(7,18,37,.88)';
+    h4x.strokeStyle=col; h4x.lineWidth=1.2;
+    h4x.beginPath(); h4x.roundRect(x,y,28,14,6); h4x.fill(); h4x.stroke();
+    h4x.fillStyle=col; h4x.font='700 8px DM Mono'; h4x.textAlign='center'; h4x.textBaseline='middle';
+    h4x.fillText(txt,x+14,y+7.5);
+  });
+}
+
 function k4Draw(){
   try{if(k4sx)drawSlam();}catch(e){}
   try{rmUpdate();}catch(e){}
@@ -5162,12 +6113,45 @@ const h5x=h5C?h5C.getContext('2d'):null;
 function drawH5(t){
   if(!h5x)return;
   h5x.clearRect(0,0,170,200);
-  const nodes=[{x:85,y:30,c:'#4f8ef7',l:'?'},{x:45,y:80,c:'#1D9E75',l:'JA'},{x:125,y:80,c:'#E24B4A',l:'NEIN'}];
-  h5x.strokeStyle='rgba(79,142,247,.4)';h5x.lineWidth=1.5;
-  [[85,42,45,68],[85,42,125,68]].forEach(([x1,y1,x2,y2])=>{h5x.beginPath();h5x.moveTo(x1,y1);h5x.lineTo(x2,y2);h5x.stroke();});
-  nodes.forEach(n=>{h5x.fillStyle=n.c+'33';h5x.strokeStyle=n.c;h5x.lineWidth=1.5;h5x.beginPath();h5x.arc(n.x,n.y,11,0,Math.PI*2);h5x.fill();h5x.stroke();h5x.fillStyle=n.c;h5x.font='bold 9px DM Sans,sans-serif';h5x.textAlign='center';h5x.fillText(n.l,n.x,n.y+3);});
-  h5x.strokeStyle='rgba(79,142,247,.2)';h5x.lineWidth=1;h5x.beginPath();h5x.arc(85,30,11+Math.sin(t*2)*4,0,Math.PI*2);h5x.stroke();
+  const top={x:85,y:34,c:'#4f8ef7',l:'?'}, left={x:45,y:88,c:'#1D9E75',l:'JA'}, right={x:125,y:88,c:'#E24B4A',l:'NEIN'};
+  const choice=(Math.sin(t*1.4)>0)?'left':'right';
+  const active=choice==='left'?left:right;
+
+  // branch lines
+  h5x.strokeStyle='rgba(79,142,247,.32)'; h5x.lineWidth=1.7;
+  [[top.x,top.y+12,left.x,left.y-12],[top.x,top.y+12,right.x,right.y-12]].forEach(([x1,y1,x2,y2])=>{h5x.beginPath();h5x.moveTo(x1,y1);h5x.lineTo(x2,y2);h5x.stroke();});
+
+  // animated pulse travelling down chosen branch
+  const pulse=(Math.sin(t*2)+1)/2;
+  const px=top.x+(active.x-top.x)*(0.15+0.75*pulse);
+  const py=(top.y+12)+(active.y-12-(top.y+12))*(0.15+0.75*pulse);
+  h5x.fillStyle='#d4ff46'; h5x.beginPath(); h5x.arc(px,py,3.2,0,Math.PI*2); h5x.fill();
+
+  // nodes
+  [top,left,right].forEach((n,i)=>{
+    const isActive=(n===active || n===top);
+    const ring=isActive?(12+Math.sin(t*3+i)*3):(11);
+    h5x.fillStyle=n.c+'33'; h5x.strokeStyle=n.c; h5x.lineWidth=1.7;
+    h5x.beginPath(); h5x.arc(n.x,n.y,11,0,Math.PI*2); h5x.fill(); h5x.stroke();
+    h5x.strokeStyle=isActive? n.c : 'rgba(255,255,255,.12)';
+    h5x.globalAlpha=isActive?0.75:0.25; h5x.beginPath(); h5x.arc(n.x,n.y,ring,0,Math.PI*2); h5x.stroke(); h5x.globalAlpha=1;
+    h5x.fillStyle=n.c; h5x.font='bold 9px DM Sans,sans-serif'; h5x.textAlign='center'; h5x.textBaseline='middle'; h5x.fillText(n.l,n.x,n.y+1);
+  });
+
+  // tiny decision boxes to make animation obvious
+  const chips=[
+    {x:23,y:132,w:44,h:15,txt:'WENN',c:'#4f8ef7'},
+    {x:75,y:132,w:32,h:15,txt:choice==='left'?'JA':'NEIN',c:choice==='left'?'#1D9E75':'#E24B4A'},
+    {x:114,y:132,w:34,h:15,txt:'DANN',c:'#d4ff46'}
+  ];
+  chips.forEach((ch,idx)=>{
+    h5x.fillStyle='rgba(7,18,37,.88)'; h5x.strokeStyle=ch.c; h5x.lineWidth=1.2;
+    h5x.beginPath(); h5x.roundRect(ch.x,ch.y,ch.w,ch.h,6); h5x.fill(); h5x.stroke();
+    h5x.fillStyle=ch.c; h5x.font='700 8px DM Mono'; h5x.fillText(ch.txt,ch.x+ch.w/2,ch.y+8);
+    if(idx<2){ h5x.strokeStyle='rgba(9,216,255,.38)'; h5x.beginPath(); h5x.moveTo(ch.x+ch.w,ch.y+7.5); h5x.lineTo(chips[idx+1].x,chips[idx+1].y+7.5); h5x.stroke(); }
+  });
 }
+
 
 // ── IF-ELSE ───────────────────────────────────────────────────────────────
 const k5ifC=document.getElementById('k5ifC');
@@ -5317,48 +6301,56 @@ function drawK5If(){
 //                 ──NEIN─> a_emergency_brake
 
 const k5TreeNodes = {
-  q_obstacle: {
-    q: 'Ist ein Hindernis direkt im Weg?',
-    options: [
-      {label:'JA',   next:'q_lane',          short:'Hindernis'},
-      {label:'NEIN', next:'q_traffic_light', short:'frei'}
-    ]
-  },
   q_traffic_light: {
     q: 'Zeigt die Ampel ROT?',
     options: [
       {label:'JA',   next:'a_stop',          short:'Ampel rot'},
-      {label:'NEIN', next:'q_swerve_room',   short:'Ampel grün'}
+      {label:'NEIN', next:'q_obstacle',      short:'Ampel nicht rot'}
+    ]
+  },
+  q_obstacle: {
+    q: 'Ist ein Hindernis auf der Spur?',
+    options: [
+      {label:'JA',   next:'q_swerve_room',   short:'Hindernis auf Spur'},
+      {label:'NEIN', next:'q_lane',          short:'Kein Hindernis'}
     ]
   },
   q_lane: {
-    q: 'Hast du Platz zum Ausweichen?',
+    q: 'Ist die Spur frei?',
     options: [
-      {label:'JA',   next:'a_swerve_left',  short:'Platz da'},
-      {label:'NEIN', next:'q_dodge_right',  short:'eng'}
+      {label:'JA',   next:'a_drive',         short:'Spur frei'},
+      {label:'NEIN', next:'a_brake',         short:'Spur nicht frei'}
     ]
   },
   q_swerve_room: {
-    q: 'Ist die Spur vor dir frei?',
+    q: 'Hast du Platz zum Ausweichen?',
     options: [
-      {label:'JA',   next:'a_drive', short:'Spur frei'},
-      {label:'NEIN', next:'a_brake', short:'Auto vor mir'}
+      {label:'JA',   next:'q_right_free',    short:'Platz da'},
+      {label:'NEIN', next:'a_emergency_brake', short:'Kein Platz'}
     ]
   },
-  q_dodge_right: {
-    q: 'Geht ausweichen nach RECHTS?',
+  q_right_free: {
+    q: 'Ist die rechte Spur frei?',
     options: [
-      {label:'JA',   next:'a_swerve_right',     short:'rechts frei'},
-      {label:'NEIN', next:'a_emergency_brake',  short:'überall eng'}
+      {label:'JA',   next:'a_swerve_right',  short:'Rechte Spur frei'},
+      {label:'NEIN', next:'q_left_free',     short:'Rechts blockiert'}
+    ]
+  },
+  q_left_free: {
+    q: 'Ist die linke Spur frei? Kein Gegenverkehr?',
+    options: [
+      {label:'JA',   next:'a_swerve_left',   short:'Links frei'},
+      {label:'NEIN', next:'a_emergency_brake2', short:'Auch links blockiert'}
     ]
   },
   // Leaf actions
-  a_drive:           {action:'🟢 Weiterfahren',       desc:'Alles frei — die Sensoren melden keine Gefahr. Der Roboter hält das Tempo.',  color:'#1D9E75'},
-  a_brake:           {action:'🟡 Bremsen',            desc:'Das Auto vor dir wird langsamer — also auch der Abstand größer halten und mitbremsen.', color:'#EF9F27'},
-  a_stop:            {action:'🛑 STOPP',              desc:'Rote Ampel — anhalten und warten, bis sie grün wird.',                          color:'#E24B4A'},
-  a_swerve_left:     {action:'↰ Links ausweichen',    desc:'Hindernis im Weg, aber links ist Platz — sicher umfahren.',                     color:'#AFA9EC'},
-  a_swerve_right:    {action:'↱ Rechts ausweichen',   desc:'Links war zu eng, rechts geht — Spurwechsel nach rechts.',                      color:'#AFA9EC'},
-  a_emergency_brake: {action:'🆘 Notbremsung!',       desc:'Hindernis im Weg und kein Platz zum Ausweichen — sofort voll bremsen.',         color:'#E24B4A'}
+  a_drive:           {action:'🟢 Weiterfahren',       desc:'Die Spur ist frei — also kann der Roboter sicher weiterfahren.', color:'#1D9E75'},
+  a_brake:           {action:'🟡 Bremsen',            desc:'Die Spur ist nicht frei — Geschwindigkeit reduzieren und Abstand halten.', color:'#EF9F27'},
+  a_stop:            {action:'🛑 STOPP',              desc:'Die Ampel ist rot — also anhalten und warten.', color:'#E24B4A'},
+  a_swerve_left:     {action:'↰ Links ausweichen',    desc:'Rechts geht es nicht, aber links ist frei und es kommt nichts entgegen — also links ausweichen.', color:'#AFA9EC'},
+  a_swerve_right:    {action:'↱ Rechts ausweichen',   desc:'Die rechte Spur ist frei — also sicher nach rechts ausweichen.', color:'#AFA9EC'},
+  a_emergency_brake: {action:'🆘 Notbremsung!',       desc:'Kein sicherer Ausweichweg verfügbar — sofort voll bremsen.', color:'#E24B4A'},
+  a_emergency_brake2:{action:'🆘 Notbremsung!',       desc:'Kein sicherer Ausweichweg verfügbar — sofort voll bremsen.', color:'#E24B4A'}
 };
 
 // Scenarios — different starting situations to demonstrate that the same
@@ -5366,38 +6358,38 @@ const k5TreeNodes = {
 const k5TreeScenarios = [
   {
     icon: '🚦',
-    text: 'Vor dir leuchtet eine rote Ampel. Kein Hindernis im Weg, freie Straße.',
+    text: 'Vor dir ist eine rote Ampel. Kein Hindernis auf der Spur.',
     name: 'Rote Ampel'
   },
   {
-    icon: '🚗',
-    text: 'Vor dir fährt ein anderes Auto, das gerade bremst. Keine Ampel, keine Hindernisse.',
-    name: 'Auto bremst'
-  },
-  {
     icon: '📦',
-    text: 'Plötzlich liegt eine Kiste auf der Straße. Die linke Spur ist frei.',
-    name: 'Kiste auf Straße'
+    text: 'Auf deiner Spur liegt eine Kiste. Du hast Platz zum Ausweichen und rechts ist frei.',
+    name: 'Ausweichen nach rechts'
   },
   {
     icon: '🚧',
-    text: 'Eine Baustelle blockiert die ganze Fahrspur. Rechts ist auch eng. Links: kein Platz.',
-    name: 'Baustelle eng'
-  },
-  {
-    icon: '🌳',
-    text: 'Freie Landstraße. Keine Ampel, kein Hindernis, keine anderen Autos.',
-    name: 'Freie Strecke'
+    text: 'Ein Hindernis blockiert die Spur. Rechts ist zu, links aber frei und ohne Gegenverkehr.',
+    name: 'Ausweichen nach links'
   },
   {
     icon: '🐕',
-    text: 'Ein Hund rennt auf die Straße! Du bist schon nah dran, links und rechts sind beide eng.',
-    name: 'Hund — Notfall'
+    text: 'Ein Hund rennt auf die Straße! Weder rechts noch links ist sicher Platz.',
+    name: 'Notbremsung'
+  },
+  {
+    icon: '🛣️',
+    text: 'Keine Ampel rot, kein Hindernis auf der Spur und die Fahrbahn ist frei.',
+    name: 'Freie Fahrt'
+  },
+  {
+    icon: '🚗',
+    text: 'Keine rote Ampel und kein direktes Hindernis, aber vor dir ist die Spur nicht frei.',
+    name: 'Bremsen'
   }
 ];
 
 let k5treeScenarioIdx = 0;
-let k5treeCurrent = 'q_obstacle';
+let k5treeCurrent = 'q_traffic_light';
 let k5treePathHistory = []; // [{nodeId, choice}]
 
 function k5treeStart(scenarioIdx){
@@ -5410,7 +6402,7 @@ function k5treeStart(scenarioIdx){
   } else {
     k5treeScenarioIdx = scenarioIdx;
   }
-  k5treeCurrent = 'q_obstacle';
+  k5treeCurrent = 'q_traffic_light';
   k5treePathHistory = [];
   k5treeRender();
 }
@@ -5497,34 +6489,38 @@ function k5treeRender(){
 }
 
 // Layout coordinates for the SVG tree visualization. Each node has fixed
-// position (in 600x280 viewBox) so the kid sees the whole structure at once.
+// position (in a widened viewBox) so the kid sees the whole structure at once.
 // Layout is bottom-up: root at top, leaf actions at bottom.
 const K5_TREE_LAYOUT = {
-  q_obstacle:       {x:300, y:25,  type:'q', label:'Hindernis?',     color:'#4f8ef7'},
-  q_traffic_light:  {x:135, y:90,  type:'q', label:'Ampel rot?',     color:'#EF9F27'},
-  q_lane:           {x:465, y:90,  type:'q', label:'Platz zum\nAusweichen?', color:'#AFA9EC'},
-  q_swerve_room:    {x:230, y:165, type:'q', label:'Spur frei?',     color:'#1D9E75'},
-  q_dodge_right:    {x:545, y:165, type:'q', label:'Rechts frei?',   color:'#AFA9EC'},
-  a_stop:           {x:55,  y:165, type:'a', label:'STOPP',          color:'#E24B4A'},
-  a_drive:          {x:155, y:245, type:'a', label:'Fahren',         color:'#1D9E75'},
-  a_brake:          {x:300, y:245, type:'a', label:'Bremsen',        color:'#EF9F27'},
-  a_swerve_left:    {x:400, y:165, type:'a', label:'Links\nausweichen', color:'#AFA9EC'},
-  a_swerve_right:   {x:475, y:245, type:'a', label:'Rechts\nausweichen', color:'#AFA9EC'},
-  a_emergency_brake:{x:570, y:245, type:'a', label:'Notbremse!',     color:'#E24B4A'}
+  q_traffic_light:   {x:470, y:30,  type:'q', label:'Ampel rot?',                             color:'#EF9F27'},
+  a_stop:            {x:260, y:112, type:'a', label:'STOPP',                                  color:'#E24B4A'},
+  q_obstacle:        {x:685, y:112, type:'q', label:'Hindernis auf\nder Spur?',             color:'#4f8ef7'},
+  q_swerve_room:     {x:470, y:200, type:'q', label:'Platz zum\nAusweichen?',               color:'#AFA9EC'},
+  q_lane:            {x:805, y:200, type:'q', label:'Spur frei?',                             color:'#1D9E75'},
+  q_right_free:      {x:350, y:288, type:'q', label:'Rechte Spur\nfrei?',                   color:'#AFA9EC'},
+  a_emergency_brake: {x:585, y:288, type:'a', label:'Notbremse!',                             color:'#E24B4A'},
+  a_drive:           {x:735, y:288, type:'a', label:'Fahren',                                 color:'#1D9E75'},
+  a_brake:           {x:875, y:288, type:'a', label:'Bremsen',                                color:'#EF9F27'},
+  a_swerve_right:    {x:225, y:378, type:'a', label:'Rechts ausweichen',                      color:'#AFA9EC'},
+  q_left_free:       {x:505, y:378, type:'q', label:'Linke Spur frei?\n(Kein Gegenverkehr!)', color:'#AFA9EC'},
+  a_swerve_left:     {x:395, y:438, type:'a', label:'Links ausweichen',                       color:'#AFA9EC'},
+  a_emergency_brake2:{x:615, y:438, type:'a', label:'Notbremse!',                             color:'#E24B4A'}
 };
 // Edges: [parent, child, edgeLabel]
 // Note: parent's first option goes to first child, second to second.
 const K5_TREE_EDGES = [
-  ['q_obstacle',      'q_lane',          'JA'],
-  ['q_obstacle',      'q_traffic_light', 'NEIN'],
-  ['q_traffic_light', 'a_stop',          'JA'],
-  ['q_traffic_light', 'q_swerve_room',   'NEIN'],
-  ['q_lane',          'a_swerve_left',   'JA'],
-  ['q_lane',          'q_dodge_right',   'NEIN'],
-  ['q_swerve_room',   'a_drive',         'JA'],
-  ['q_swerve_room',   'a_brake',         'NEIN'],
-  ['q_dodge_right',   'a_swerve_right',  'JA'],
-  ['q_dodge_right',   'a_emergency_brake','NEIN']
+  ['q_traffic_light', 'a_stop',             'JA'],
+  ['q_traffic_light', 'q_obstacle',         'NEIN'],
+  ['q_obstacle',      'q_swerve_room',      'JA'],
+  ['q_obstacle',      'q_lane',             'NEIN'],
+  ['q_swerve_room',   'q_right_free',       'JA'],
+  ['q_swerve_room',   'a_emergency_brake',  'NEIN'],
+  ['q_lane',          'a_drive',            'JA'],
+  ['q_lane',          'a_brake',            'NEIN'],
+  ['q_right_free',    'a_swerve_right',     'JA'],
+  ['q_right_free',    'q_left_free',        'NEIN'],
+  ['q_left_free',     'a_swerve_left',      'JA'],
+  ['q_left_free',     'a_emergency_brake2', 'NEIN']
 ];
 
 function k5treeRenderSVG(){
@@ -6361,7 +7357,7 @@ function k6drawClear(){
   k6drawInit();
   k6drawResultDisplay=null;
   const r=document.getElementById('k6drawResult');
-  if(r)r.innerHTML='↑ Zeichne eines der vier Schilder und klick <strong style="color:#fff">"Erkennen"</strong>.<div style="margin-top:.5rem;font-size:13px;color:#6a89b8">Die KI kennt: 🛑 Stop · ⬆ Pfeil hoch · ⭕ Kreis · ✕ X-Form</div>';
+  if(r)r.innerHTML='↑ Zeichne eines der vier Schilder und klick <strong style="color:#fff">"Erkennen"</strong>.<div style="margin-top:.5rem;font-size:13px;color:#6a89b8">Die KI kennt: 🛑 Stop · ⬆ Pfeil hoch · 🔻 Vorfahrt achten · ◇ Vorfahrtsstraße</div>';
 }
 
 // 28x28 templates — what each "class" looks like (1 = pixel filled, 0 = empty)
@@ -6378,27 +7374,29 @@ const K6_TEMPLATES=[
    grid:makeTemplate((r,c)=>{
      const dx=(c-13.5)/12, dy=(r-13.5)/12;
      const oct=Math.abs(dx)+Math.abs(dy)*.7;
-     return oct>=.55 && oct<=.95; // ring shape
+     return oct>=.55 && oct<=.95;
    })},
   {name:'Pfeil hoch',icon:'⬆',color:'#4f8ef7',
    grid:makeTemplate((r,c)=>{
-     // Vertical shaft + triangular head
      const inShaft=Math.abs(c-13.5)<=2 && r>=10 && r<=24;
-     const dy=r-10; // distance from head tip downward
      const inHead=r>=4 && r<=14 && Math.abs(c-13.5)<=(r-2)*.7;
      return inShaft || inHead;
    })},
-  {name:'Kreis (Tempo-Schild)',icon:'⭕',color:'#EF9F27',
+  {name:'Vorfahrt achten',icon:'🔻',color:'#EF9F27',
    grid:makeTemplate((r,c)=>{
-     const d=Math.hypot(c-13.5,r-13.5);
-     return d>=8 && d<=12;
+     const topY=6.5, leftX=4.5, rightX=22.5, bottomX=13.5, bottomY=22.5;
+     const nearTop = Math.abs(r-topY)<=1.5 && c>=leftX && c<=rightX;
+     const leftLineY = topY + ((bottomY-topY)/(bottomX-leftX))*(c-leftX);
+     const rightLineY = topY + ((bottomY-topY)/(rightX-bottomX))*(rightX-c);
+     const nearLeft = c>=leftX && c<=bottomX && Math.abs(r-leftLineY)<=1.5;
+     const nearRight = c>=bottomX && c<=rightX && Math.abs(r-rightLineY)<=1.5;
+     return nearTop || nearLeft || nearRight;
    })},
-  {name:'X-Form (Stop für Halt)',icon:'✕',color:'#AFA9EC',
+  {name:'Vorfahrtsstraße',icon:'◇',color:'#AFA9EC',
    grid:makeTemplate((r,c)=>{
-     // Two diagonals
-     const d1=Math.abs((c-2)-(r-2)); // top-left to bottom-right
-     const d2=Math.abs((c-2)-(25-r)); // top-right to bottom-left
-     return (d1<=1.5||d2<=1.5) && r>=3 && r<=24 && c>=3 && c<=24;
+     const dx=Math.abs(c-13.5), dy=Math.abs(r-13.5);
+     const man=dx+dy;
+     return man>=8 && man<=12;
    })}
 ];
 
@@ -6453,13 +7451,27 @@ function k6drawRecognize(){
       +`<polygon points="10,2 22,2 30,10 30,22 22,30 10,30 2,22 2,10" fill="#E24B4A" stroke="#fff" stroke-width="1.5"/>`
       +`<text x="16" y="20" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#fff">STOP</text>`
       +`</svg>`;
-    const iconFor=(name,size)=> name==='Stop-Schild' ? stopSVG(size) : `<span style="font-size:${size}px">${({
-      'Pfeil rechts':'➡️','Pfeil links':'⬅️','Ampel':'🚦'
-    }[name]||'')}</span>`;
+    const arrowSVG=(size)=>`<svg width="${size}" height="${size}" viewBox="0 0 32 32" style="display:inline-block;vertical-align:middle">`
+      +`<path d="M16 4 L26 14 H20 V28 H12 V14 H6 Z" fill="#4f8ef7" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>`
+      +`</svg>`;
+    const yieldSVG=(size)=>`<svg width="${size}" height="${size}" viewBox="0 0 32 32" style="display:inline-block;vertical-align:middle">`
+      +`<polygon points="16,28 4,6 28,6" fill="#fff" stroke="#EF9F27" stroke-width="3" stroke-linejoin="round"/>`
+      +`</svg>`;
+    const prioritySVG=(size)=>`<svg width="${size}" height="${size}" viewBox="0 0 32 32" style="display:inline-block;vertical-align:middle">`
+      +`<polygon points="16,2 30,16 16,30 2,16" fill="#fff" stroke="#fff" stroke-width="1.5"/>`
+      +`<polygon points="16,5 27,16 16,27 5,16" fill="#f2d13d" stroke="#111" stroke-width="1.2"/>`
+      +`</svg>`;
+    const iconFor=(name,size)=>{
+      if(name==='Stop-Schild') return stopSVG(size);
+      if(name==='Pfeil hoch') return arrowSVG(size);
+      if(name==='Vorfahrt achten') return yieldSVG(size);
+      if(name==='Vorfahrtsstraße') return prioritySVG(size);
+      return `<span style="font-size:${size}px">?</span>`;
+    };
     let html='';
     if(conf<0.15){
       html=`<div style="font-size:15px;color:#EF9F27;font-weight:500;margin-bottom:.4rem">🤔 Hmm — ich erkenne nichts klar</div>`+
-        `<div style="font-size:13px;color:#8fa8cc;line-height:1.5">Deine Zeichnung passt zu keinem der 4 gelernten Muster gut. Echte KIs sehen tausende Beispiele — diese hier nur eines pro Klasse. Versuch's nochmal mit klarem Strich.</div>`;
+        `<div style="font-size:13px;color:#8fa8cc;line-height:1.5">Deine Zeichnung passt zu keinem der 4 gelernten Schilder gut. Echte KIs sehen tausende Beispiele — diese hier nur eines pro Klasse. Versuch's nochmal mit klarem Strich.</div>`;
     } else {
       html=`<div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem">`+
         `<div style="line-height:0">${iconFor(top.name,32)}</div>`+
@@ -6470,7 +7482,7 @@ function k6drawRecognize(){
         const pct=Math.min(99,Math.round(s.score*250));
         html+=`<div style="display:flex;align-items:center;gap:8px;font-size:13px">`+
           `<span style="width:18px;display:inline-flex;align-items:center;justify-content:center">${iconFor(s.name,16)}</span>`+
-          `<span style="width:90px;color:#8fa8cc">${s.name}</span>`+
+          `<span style="width:150px;color:#8fa8cc">${s.name}</span>`+
           `<div style="flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:${s.color};border-radius:3px"></div></div>`+
           `<span style="width:36px;text-align:right;font-family:'DM Mono',monospace;color:#8fa8cc">${pct}%</span></div>`;
       });
@@ -6732,6 +7744,313 @@ function drawK6RL(){
   k6rc.beginPath();k6rc.arc(ax,ay,Math.min(cellW,cellH)*.12,0,Math.PI*2);k6rc.fill();
 }
 
+
+
+// ====================== SECTION 2: KI-AGENT STEUERT ROBOTERARM ======================
+const k6agentC=document.getElementById('k6agentC');
+const k6agentCtx=k6agentC?k6agentC.getContext('2d'):null;
+const K6_AGENT_PROMPTS={
+  grab:{
+    text:'„Greife das Objekt in deinem Arbeitsbereich.“',
+    target:'red',
+    plan:['Auftrag verstehen','Arbeitsbereich fotografieren','Objekte erkennen','Greifpunkt berechnen','Code ausführen'],
+    action:'Der Roboter greift das nächstliegende rote Objekt und legt es in die Ablage.'
+  },
+  sort:{
+    text:'„Sortiere die Objekte nach Farben in die Ecken deines Arbeitsbereichs.“',
+    target:'all',
+    plan:['Auftrag verstehen','Kamera-Bild aufnehmen','Objekte und Farben erkennen','Ziel-Ecken festlegen','Bewegungs-Code erzeugen','Objekte nacheinander ablegen'],
+    action:'Rot → oben rechts, Gelb → oben links, Blau → unten links, Grau → unten rechts.'
+  },
+  clean:{
+    text:'„Räume den Arbeitsbereich auf und lege alle Objekte in die Ablage.“',
+    target:'all',
+    plan:['Auftrag verstehen','Arbeitsbereich prüfen','Alle greifbaren Objekte erkennen','Kollisionen vermeiden','Objekte in Ablage legen'],
+    action:'Der Roboter räumt alle erkannten Objekte in die sichere Ablagezone.'
+  },
+  stack:{
+    text:'„Staple die Objekte übereinander.“',
+    target:'all',
+    plan:['Auftrag verstehen','Arbeitsbereich fotografieren','Alle Objekte erkennen','Stapel-Reihenfolge planen','Greifpunkte berechnen','Objekte nacheinander stapeln'],
+    action:'Der Roboter legt die Objekte nacheinander auf einen gemeinsamen Stapel in der Ablage.'
+  }
+};
+const K6_AGENT_STEPS=[
+  {key:'prompt', label:'Prompt', node:'AI Agent'},
+  {key:'plan', label:'Plan erstellen', node:'AI Agent'},
+  {key:'camera', label:'Kamera-Bild', node:'Camera Usage'},
+  {key:'vlm', label:'Objekte erkennen', node:'Vision Language Model'},
+  {key:'crop', label:'Objekte ausschneiden', node:'Vision Language Model'},
+  {key:'llm', label:'Beschreiben', node:'AI Agent'},
+  {key:'code', label:'Code schreiben', node:'Code Interpreter'},
+  {key:'robot', label:'Roboter bewegen', node:'Robot Action'},
+  {key:'done', label:'Ergebnis prüfen', node:'AI Agent'}
+];
+const K6_AGENT_OBJECTS=[
+  {id:'red', name:'rotes Objekt', color:'#b94b58', x:150, y:178, w:64, h:42, angle:-0.35, corner:'oben rechts'},
+  {id:'yellow', name:'gelbes Objekt', color:'#d4b65a', x:332, y:132, w:62, h:42, angle:0.18, corner:'oben links'},
+  {id:'blue', name:'blaues Objekt', color:'#79d9e8', x:220, y:285, w:62, h:42, angle:0.42, corner:'unten links'},
+  {id:'red2', name:'zweites rotes Objekt', color:'#b94b58', x:380, y:255, w:62, h:42, angle:-0.22, corner:'oben rechts'}
+];
+let k6agentPrompt='grab';
+let k6agentCustomText=null;
+const K6_AGENT_BUILDER_DEFAULT={action:'grab',scope:'one',goal:'workspace'};
+let k6agentBuilder={...K6_AGENT_BUILDER_DEFAULT};
+let k6agentStep=0;
+let k6agentRunning=false;
+let k6agentTimer=null;
+let k6agentTick=0;
+function k6agentGetPromptText(){
+  return k6agentCustomText || K6_AGENT_PROMPTS[k6agentPrompt].text;
+}
+function k6agentUpdateBuilderPreview(){
+  const actionMap={grab:'Greife',sort:'Sortiere',clean:'Räume'};
+  const scopeMap={one:'ein Objekt',all:'alle Objekte'};
+  const goalMap={workspace:'in deinem Arbeitsbereich',corners:'nach Farben in die Ecken deines Arbeitsbereichs',tray:'in die Ablage',traySeq:'nacheinander in die Ablage'};
+  let sentence='';
+  if(k6agentBuilder.action==='grab'){
+    sentence=`„${actionMap.grab} ${scopeMap[k6agentBuilder.scope]} ${goalMap[k6agentBuilder.goal]}.“`;
+  } else if(k6agentBuilder.action==='sort'){
+    sentence=`„${actionMap.sort} ${scopeMap[k6agentBuilder.scope]} ${goalMap[k6agentBuilder.goal]}.“`;
+  } else {
+    sentence=`„${actionMap.clean} den Arbeitsbereich auf und lege ${scopeMap[k6agentBuilder.scope]} ${goalMap[k6agentBuilder.goal]}.“`;
+  }
+  const preview=document.getElementById('k6agentBuilderPreview');
+  if(preview)preview.textContent=sentence;
+  return sentence;
+}
+function k6agentUpdateBuilderButtons(){
+  ['grab','sort','clean'].forEach(v=>{const b=document.getElementById('k6agentBuild-action-'+v);if(b)b.classList.toggle('btn-active',k6agentBuilder.action===v);});
+  ['one','all'].forEach(v=>{const b=document.getElementById('k6agentBuild-scope-'+v);if(b)b.classList.toggle('btn-active',k6agentBuilder.scope===v);});
+  ['workspace','corners','tray','traySeq'].forEach(v=>{const b=document.getElementById('k6agentBuild-goal-'+v);if(b)b.classList.toggle('btn-active',k6agentBuilder.goal===v);});
+}
+function k6agentSelectBlock(type,value){
+  k6agentBuilder[type]=value;
+  if(type==='action' && value==='sort'){
+    k6agentBuilder.scope='all';
+    if(k6agentBuilder.goal==='workspace' || k6agentBuilder.goal==='tray')k6agentBuilder.goal='corners';
+  }
+  if(type==='action' && value==='clean'){
+    k6agentBuilder.scope='all';
+    if(k6agentBuilder.goal==='workspace')k6agentBuilder.goal='traySeq';
+  }
+  if(type==='goal' && value==='corners'){
+    k6agentBuilder.action='sort';
+    k6agentBuilder.scope='all';
+  }
+  if(type==='goal' && value==='traySeq'){
+    k6agentBuilder.action='clean';
+    k6agentBuilder.scope='all';
+  }
+  k6agentUpdateBuilderButtons();
+  k6agentUpdateBuilderPreview();
+}
+function k6agentApplyBuilder(){
+  const sentence=k6agentUpdateBuilderPreview();
+  let preset='grab';
+  if(k6agentBuilder.action==='sort' || k6agentBuilder.goal==='corners')preset='sort';
+  else if(k6agentBuilder.action==='clean' || k6agentBuilder.scope==='all' || k6agentBuilder.goal==='traySeq')preset='clean';
+  k6agentSetPrompt(preset,sentence);
+}
+function k6agentBuilderReset(){
+  k6agentBuilder={...K6_AGENT_BUILDER_DEFAULT};
+  k6agentUpdateBuilderButtons();
+  k6agentUpdateBuilderPreview();
+}
+function k6agentSetPrompt(key,customText=null){
+  k6agentPrompt=key;
+  k6agentCustomText=customText;
+  ['grab','sort','clean','stack'].forEach(k=>{const b=document.getElementById('k6agentPrompt-'+k);if(b)b.classList.toggle('btn-active',k===key);});
+  const p=document.getElementById('k6agentPromptText');
+  if(p)p.textContent=k6agentGetPromptText();
+  k6agentReset(false);
+}
+function k6agentReset(stop=true){
+  if(stop&&k6agentTimer){clearInterval(k6agentTimer);k6agentTimer=null;k6agentRunning=false;}
+  k6agentStep=0;k6agentTick=0;k6agentUpdateText();k6agentDraw();
+}
+function k6agentRun(){
+  if(k6agentTimer){clearInterval(k6agentTimer);k6agentTimer=null;}
+  k6agentRunning=true;
+  k6agentStep=0;k6agentTick=0;k6agentUpdateText();k6agentDraw();
+  k6agentTimer=setInterval(()=>{
+    k6agentStep++;
+    if(k6agentStep>=K6_AGENT_STEPS.length){k6agentStep=K6_AGENT_STEPS.length-1;clearInterval(k6agentTimer);k6agentTimer=null;k6agentRunning=false;}
+    k6agentTick=0;k6agentUpdateText();k6agentDraw();
+  },1450);
+}
+function k6agentNext(){
+  if(k6agentTimer){clearInterval(k6agentTimer);k6agentTimer=null;k6agentRunning=false;}
+  k6agentStep=Math.min(K6_AGENT_STEPS.length-1,k6agentStep+1);
+  k6agentTick=0;k6agentUpdateText();k6agentDraw();
+}
+function k6agentUpdateText(){
+  const cfg=K6_AGENT_PROMPTS[k6agentPrompt];
+  const step=K6_AGENT_STEPS[k6agentStep];
+  const status=document.getElementById('k6agentStatus');
+  if(status)status.textContent=(step?step.label:'BEREIT').toUpperCase();
+  const plan=document.getElementById('k6agentPlan');
+  if(plan){
+    if(k6agentStep<1)plan.innerHTML='Noch kein Plan erstellt.';
+    else plan.innerHTML=cfg.plan.map((x,i)=>`${i+1}. ${x}`).join('<br>');
+  }
+  const vision=document.getElementById('k6agentVision');
+  if(vision){
+    if(k6agentStep<2)vision.innerHTML='Kamera noch nicht aktiviert.';
+    else if(k6agentStep<3)vision.innerHTML='Kamera nimmt ein Bild des Arbeitsbereichs auf.';
+    else if(k6agentStep<5)vision.innerHTML='VLM erkennt 4 Objekte: 2× rot, gelb, blau. Positionen werden als Koordinaten gespeichert.';
+    else vision.innerHTML='LLM beschreibt die Ausschnitte: „kleine farbige Objekte auf der Arbeitsfläche“.';
+  }
+  const action=document.getElementById('k6agentAction');
+  if(action){
+    if(k6agentStep<6)action.innerHTML='Noch keine Roboterbewegung.';
+    else if(k6agentStep<7)action.innerHTML='Code wird erzeugt:<br><span style="color:#8fa8cc;font-family:DM Mono,monospace">check_workspace() → move_above(center) → lower() → close_gripper() → lift() → place()</span>';
+    else if(k6agentPrompt==='clean' && k6agentStep<8)action.innerHTML='Der Roboter räumt die Objekte nacheinander auf: greifen → ablegen → zurückfahren → nächstes Objekt.';
+    else if(k6agentPrompt==='sort' && k6agentStep<8)action.innerHTML='Der Roboter sortiert die Objekte nacheinander in die passenden Ecken. Zwei rote Objekte kommen gemeinsam in dieselbe Ecke.';
+    else if(k6agentPrompt==='stack' && k6agentStep<8)action.innerHTML='Der Roboter stapelt die Objekte nacheinander übereinander.';
+    else action.innerHTML=cfg.action;
+  }
+  const ex=document.getElementById('k6agentExplain');
+  if(ex){
+    const explain={
+      prompt:'Der Agent liest den Auftrag. Wichtig: Er kennt zusätzlich seinen Systemkontext — Roboterarm, Kamera, Koordinaten und erlaubte Werkzeuge.',
+      plan:'Der Agent zerlegt das Ziel in kleine Schritte. Das ist der Unterschied zu einer einfachen Wenn-Dann-Regel.',
+      camera:'Der Agent nutzt ein Werkzeug: Die Kamera liefert ein aktuelles Bild des Arbeitsbereichs.',
+      vlm:'Das Vision-Language-Model erkennt Objekte und ungefähre Positionen im Bild.',
+      crop:'Die erkannten Bildbereiche werden ausgeschnitten, damit jedes Objekt einzeln beschrieben werden kann.',
+      llm:'Aus Bildausschnitten und Auftrag entsteht eine Beschreibung: Was ist da? Wo liegt es? Was soll damit passieren?',
+      code:'Der Code Interpreter übersetzt den Plan in sichere Roboterbefehle: Arbeitsbereich prüfen, Gelenkgrenzen einhalten, Geschwindigkeit begrenzen, Greifpunkt anfahren.',
+      robot:'Die Robot Action führt Bewegungen aus: fahren, greifen, ablegen, zurückziehen.',
+      done:'Am Ende prüft der Agent, ob der Auftrag erfüllt wurde — und könnte bei Fehlern neu planen.'
+    }[step.key];
+    ex.innerHTML=`💡 <strong style="color:#fff">Schritt ${k6agentStep+1}/${K6_AGENT_STEPS.length} · ${step.label}:</strong> ${explain}`;
+  }
+}
+function k6agentRoundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
+}
+function k6agentDrawLabel(ctx,text,x,y,w,color){
+  ctx.fillStyle=color||'#9ab0c8';ctx.font='12px DM Mono, monospace';ctx.textAlign='center';ctx.fillText(text,x+w/2,y);
+}
+function k6agentGetMovedCount(){
+  if(k6agentPrompt==='grab')return k6agentStep>=7?1:0;
+  const base=k6agentRunning?0:1;
+  if(k6agentStep<7)return 0;
+  if(k6agentStep===7)return Math.min(4,base+Math.floor(k6agentTick/4));
+  return 4;
+}
+function k6agentGetObjectPose(o){
+  let ox=o.x, oy=o.y;
+  const movedCount=k6agentGetMovedCount();
+  const seqOrder=['yellow','red','blue','red2'];
+  const seqIndex=seqOrder.indexOf(o.id);
+  if(k6agentPrompt==='grab' && movedCount>=1 && o.id==='red'){
+    ox=388;oy=318;
+  }
+  if(k6agentPrompt==='sort' && seqIndex>-1 && seqIndex<movedCount){
+    const map={yellow:[106,126],red:[390,126],blue:[106,318],red2:[426,126]};
+    [ox,oy]=map[o.id];
+  }
+  if(k6agentPrompt==='clean' && seqIndex>-1 && seqIndex<movedCount){
+    const trayMap={yellow:[382,304],red:[396,320],blue:[410,308],red2:[424,334]};
+    [ox,oy]=trayMap[o.id];
+  }
+  if(k6agentPrompt==='stack' && seqIndex>-1 && seqIndex<movedCount){
+    const stackMap={yellow:[396,334],red:[396,312],blue:[396,290],red2:[396,268]};
+    [ox,oy]=stackMap[o.id];
+  }
+  return {x:ox,y:oy};
+}
+function k6agentGetHandTarget(){
+  const seqOrder=['yellow','red','blue','red2'];
+  const movedCount=k6agentGetMovedCount();
+  if(k6agentPrompt==='grab'){
+    return k6agentStep>=7 ? {x:388,y:318} : {x:150,y:178};
+  }
+  if(k6agentPrompt==='sort' || k6agentPrompt==='clean' || k6agentPrompt==='stack'){
+    if(k6agentStep<7)return {x:245,y:235};
+    const nextId=seqOrder[Math.min(movedCount,seqOrder.length-1)];
+    const nextObj=K6_AGENT_OBJECTS.find(o=>o.id===nextId) || K6_AGENT_OBJECTS[0];
+    const pose=(movedCount>=4)?k6agentGetObjectPose(nextObj):{x:nextObj.x,y:nextObj.y};
+    return {x:pose.x,y:pose.y};
+  }
+  return {x:245,y:235};
+}
+function k6agentDraw(){
+  if(!k6agentCtx||!k6agentC)return;
+  const ctx=k6agentCtx,W=k6agentC.width,H=k6agentC.height;ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#061223';ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='rgba(9,216,255,.10)';ctx.lineWidth=1;
+  for(let x=0;x<W;x+=35){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+    for(let y=0;y<H;y+=35){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+  const step=K6_AGENT_STEPS[k6agentStep];
+  const cfg=K6_AGENT_PROMPTS[k6agentPrompt];
+  // left workspace
+  ctx.strokeStyle='rgba(9,216,255,.45)';ctx.lineWidth=1.4;ctx.strokeRect(34,56,430,320);
+  ctx.fillStyle='rgba(9,216,255,.06)';ctx.fillRect(34,56,430,320);
+  ctx.fillStyle='#dffbff';ctx.font='13px DM Mono, monospace';ctx.textAlign='left';ctx.fillText('ARBEITSBEREICH / KAMERA-BILD',50,82);
+  const corners=[['oben links',62,104],['oben rechts',350,104],['unten links',62,340],['unten rechts',340,340]];
+  corners.forEach(([t,x,y])=>{ctx.fillStyle='rgba(255,255,255,.04)';ctx.fillRect(x-12,y-25,98,28);ctx.fillStyle='#5DCAA5';ctx.font='10px DM Mono';ctx.fillText(t,x,y-7);});
+
+  K6_AGENT_OBJECTS.forEach(o=>{
+    const pose=k6agentGetObjectPose(o);
+    const ox=pose.x, oy=pose.y;
+    ctx.save();ctx.translate(ox,oy);ctx.rotate(o.angle);ctx.fillStyle=o.color;k6agentRoundRect(ctx,-o.w/2,-o.h/2,o.w,o.h,8);ctx.fill();ctx.strokeStyle='rgba(255,255,255,.65)';ctx.stroke();ctx.fillStyle='#061223';ctx.font='10px DM Mono';ctx.textAlign='center';ctx.fillText(o.id.toUpperCase(),0,4);ctx.restore();
+    if(k6agentStep>=3){ctx.strokeStyle=o.id===cfg.target||cfg.target==='all'?'#d4ff46':'rgba(9,216,255,.55)';ctx.setLineDash([4,3]);ctx.strokeRect(ox-o.w/2-6,oy-o.h/2-6,o.w+12,o.h+12);ctx.setLineDash([]);}
+  });
+
+  const baseX=246,baseY=420;
+  let handX=246, handY=250;
+  if(k6agentStep>=7){const hand=k6agentGetHandTarget();handX=hand.x;handY=hand.y;}
+  else if(k6agentStep>=6){handX=150;handY=178;} else if(k6agentStep>=2){handX=245;handY=235;}
+  ctx.strokeStyle='#09d8ff';ctx.lineWidth=12;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(baseX,baseY);ctx.lineTo((baseX+handX)/2,baseY-90);ctx.lineTo(handX,handY);ctx.stroke();
+  ctx.fillStyle='#071225';ctx.strokeStyle='#09d8ff';ctx.lineWidth=2;ctx.beginPath();ctx.arc(baseX,baseY,28,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.beginPath();ctx.arc((baseX+handX)/2,baseY-90,16,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillRect(handX-16,handY-8,32,16);ctx.strokeRect(handX-16,handY-8,32,16);
+
+  const nodes=[
+    ['AI Agent',620,64,'prompt'],
+    ['Large Language Model',610,152,'llm'],
+    ['Vision Language Model',610,240,'vlm'],
+    ['Camera Usage',610,328,'camera'],
+    ['Robot Action',610,408,'robot'],
+    ['Code Interpreter',900,152,'code']
+  ];
+  ctx.strokeStyle='rgba(255,255,255,.20)';ctx.lineWidth=5;
+  ctx.beginPath();ctx.moveTo(575,64);ctx.lineTo(540,64);ctx.lineTo(540,408);ctx.lineTo(575,408);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(650,64);ctx.lineTo(760,64);ctx.lineTo(760,408);ctx.lineTo(650,408);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(650,152);ctx.lineTo(870,152);ctx.stroke();
+  nodes.forEach(([name,x,y,key])=>{
+    const active=(step.node===name)||(step.key==='crop'&&name==='Vision Language Model')||(step.key==='llm'&&name==='Large Language Model')||(step.key==='llm'&&name==='AI Agent')||(step.key==='done'&&name==='AI Agent');
+    ctx.fillStyle=active?'#09d8ff':'rgba(255,255,255,.16)';ctx.strokeStyle=active?'#d4ff46':'rgba(255,255,255,.25)';ctx.lineWidth=active?3:1;
+    ctx.beginPath();ctx.arc(x,y,28,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.fillStyle=active?'#061223':'rgba(255,255,255,.75)';ctx.font='18px DM Sans';ctx.textAlign='center';
+    const icon=name==='AI Agent'?'✦':name==='Large Language Model'?'LLM':name==='Vision Language Model'?'◉':name==='Camera Usage'?'▣':name==='Robot Action'?'⌁':'⌘';
+    ctx.font=name==='Large Language Model'?'10px DM Mono':'18px DM Sans';ctx.fillText(icon,x,y+5);
+    const labelW=name==='Code Interpreter'?174:(name==='Vision Language Model'?190:(name==='Large Language Model'?190:142));
+    ctx.fillStyle=active?'#09d8ff':'rgba(255,255,255,.22)';k6agentRoundRect(ctx,x+38,y-15,labelW,30,2);ctx.fill();
+    ctx.fillStyle=active?'#061223':'rgba(255,255,255,.70)';ctx.font='13px DM Mono';ctx.textAlign='left';ctx.fillText(name,x+48,y+5);
+  });
+
+  const logX=815, logY=284, logW=270, logH=164;
+  ctx.strokeStyle='rgba(9,216,255,.42)';ctx.strokeRect(logX,logY,logW,logH);ctx.fillStyle='rgba(0,0,0,.24)';ctx.fillRect(logX,logY,logW,logH);
+  ctx.fillStyle='#dffbff';ctx.font='12px DM Mono';ctx.textAlign='left';ctx.fillText('AGENT LOG',logX+16,322);
+  const lines=[];
+  const k6agentClip=(txt,max=36)=>txt.length>max?txt.slice(0,max-1)+'…':txt;
+  if(k6agentStep>=0)lines.push('> prompt: '+k6agentClip(k6agentGetPromptText().replace(/[„“]/g,''),26));
+  if(k6agentStep>=1)lines.push('> plan: '+k6agentClip(cfg.plan.slice(0,3).join(' → '),30));
+  if(k6agentStep>=2)lines.push('> camera.capture_workspace()');
+  if(k6agentStep>=3)lines.push('> vlm.detect_objects(): 4 objects');
+  if(k6agentStep>=5)lines.push('> llm.describe(): colors + positions');
+  if(k6agentStep>=6)lines.push('> code: safe_pick_place(center,target)');
+  if(k6agentStep>=7)lines.push(k6agentPrompt==='clean'?'> robot_action: tidy sequence':(k6agentPrompt==='stack'?'> robot_action: stack objects':'> robot_action: executed'));
+  if(k6agentStep>=8)lines.push('> result: true');
+  const shown=lines.slice(-7);
+  shown.forEach((l,i)=>{ctx.fillStyle=i===shown.length-1?'#d4ff46':'#9ab0c8';ctx.font='11px DM Mono';ctx.fillText(k6agentClip(l,38),logX+16,346+i*14);});
+
+  K6_AGENT_STEPS.forEach((s,i)=>{const x=42+i*46,y=28;ctx.fillStyle=i<=k6agentStep?'#09d8ff':'rgba(255,255,255,.14)';ctx.fillRect(x,y,36,6);});
+  ctx.fillStyle='#d4ff46';ctx.font='12px DM Mono';ctx.textAlign='left';ctx.fillText(`SCHRITT ${k6agentStep+1}/${K6_AGENT_STEPS.length}: ${step.label}`,42,44);
+}
+if(k6agentC){const p=document.getElementById('k6agentPromptText');if(p)p.textContent=k6agentGetPromptText();k6agentReset(false);setInterval(()=>{k6agentTick++;if(k6agentRunning)k6agentDraw();},80);}
+
 // ====================== SECTION 3: REAGIEREN (NLP) ======================
 //
 // Tiny rule-based "language parser": extracts ACTION + COLOR + OBJECT from
@@ -6953,27 +8272,49 @@ const h7x=h7C?h7C.getContext('2d'):null;
 function drawH7(t){
   if(!h7x)return;
   h7x.clearRect(0,0,170,200);
+  const roverX=85+Math.sin(t*.9)*16;
+  const roverY=112+Math.sin(t*1.8)*1.5;
+  // sky gradient glow
+  const g=h7x.createLinearGradient(0,0,0,200); g.addColorStop(0,'rgba(79,142,247,.10)'); g.addColorStop(1,'rgba(58,26,10,0)');
+  h7x.fillStyle=g; h7x.fillRect(0,0,170,200);
+  // stars twinkle
+  [[20,20],[140,15],[160,40],[10,60],[122,28]].forEach(([sx,sy],i)=>{const br=Math.sin(t*2+sx+i)*.4+.55;h7x.fillStyle=`rgba(255,255,255,${br})`;h7x.fillRect(sx,sy,2,2);});
+  // signal satellite arc
+  h7x.strokeStyle='rgba(79,142,247,.18)'; h7x.lineWidth=1; h7x.beginPath(); h7x.arc(110,30,22,0,Math.PI*2); h7x.stroke();
+  h7x.fillStyle='#4f8ef7'; h7x.beginPath(); h7x.arc(110+Math.cos(t*.8)*22,30+Math.sin(t*.8)*8,3,0,Math.PI*2); h7x.fill();
   // Mars surface
-  h7x.fillStyle='#3a1a0a';h7x.fillRect(0,130,170,70);
-  // Rover body
-  h7x.fillStyle='#c4a35a';h7x.strokeStyle='#EF9F27';h7x.lineWidth=1.5;
-  h7x.beginPath();h7x.roundRect(55,100,60,28,4);h7x.fill();h7x.stroke();
-  // Solar panels
-  h7x.fillStyle='#1a2d5a';h7x.strokeStyle='#4f8ef7';h7x.lineWidth=1;
-  h7x.fillRect(20,104,32,12);h7x.stroke();h7x.strokeRect(20,104,32,12);
-  h7x.fillRect(118,104,32,12);h7x.strokeRect(118,104,32,12);
-  // Wheels (6)
-  [30,65,100].forEach(wx=>{[120,138].forEach(wy=>{h7x.fillStyle='#555';h7x.beginPath();h7x.arc(wx,wy,6,0,Math.PI*2);h7x.fill();});});
-  // Mast + camera
-  h7x.strokeStyle='#aaa';h7x.lineWidth=2;h7x.beginPath();h7x.moveTo(85,100);h7x.lineTo(85,78);h7x.stroke();
-  h7x.fillStyle='#4f8ef7';h7x.beginPath();h7x.arc(85,75,5,0,Math.PI*2);h7x.fill();
-  // Signal beam
-  const beam=Math.sin(t*1.5)*.5+.5;
-  h7x.strokeStyle=`rgba(79,142,247,${beam*.5})`;h7x.lineWidth=1;h7x.setLineDash([4,4]);
-  h7x.beginPath();h7x.moveTo(85,70);h7x.lineTo(85+Math.sin(t)*20,30);h7x.stroke();h7x.setLineDash([]);
-  // Stars
-  [[20,20],[140,15],[160,40],[10,60]].forEach(([sx,sy])=>{const br=Math.sin(t*2+sx)*.4+.6;h7x.fillStyle=`rgba(255,255,255,${br})`;h7x.fillRect(sx,sy,2,2);});
+  h7x.fillStyle='#3a1a0a'; h7x.fillRect(0,132,170,68);
+  h7x.fillStyle='rgba(239,159,39,.18)'; h7x.beginPath(); h7x.arc(50,156,26,0,Math.PI*2); h7x.arc(126,150,20,0,Math.PI*2); h7x.fill();
+  // tracks
+  h7x.strokeStyle='rgba(239,159,39,.3)'; h7x.lineWidth=1.4;
+  h7x.beginPath(); h7x.moveTo(roverX-28,145); h7x.lineTo(roverX+30,145); h7x.stroke();
+  h7x.beginPath(); h7x.moveTo(roverX-28,150); h7x.lineTo(roverX+30,150); h7x.stroke();
+  // solar panels
+  h7x.fillStyle='#1a2d5a'; h7x.strokeStyle='#4f8ef7'; h7x.lineWidth=1;
+  h7x.fillRect(roverX-52,105,28,12); h7x.strokeRect(roverX-52,105,28,12);
+  h7x.fillRect(roverX+24,105,28,12); h7x.strokeRect(roverX+24,105,28,12);
+  // rover body
+  h7x.fillStyle='#c4a35a'; h7x.strokeStyle='#EF9F27'; h7x.lineWidth=1.5;
+  h7x.beginPath(); h7x.roundRect(roverX-28,102,56,26,5); h7x.fill(); h7x.stroke();
+  // wheels with visible rotation spokes
+  [-22,-8,8,22].forEach((dx,i)=>{
+    const wx=roverX+dx, wy=(i%2===0)?132:144;
+    h7x.fillStyle='#555'; h7x.beginPath(); h7x.arc(wx,wy,6.5,0,Math.PI*2); h7x.fill();
+    h7x.strokeStyle='#9aa5b6'; h7x.lineWidth=1;
+    for(let k=0;k<3;k++){
+      const a=t*4 + k*Math.PI*2/3 + i*.3;
+      h7x.beginPath(); h7x.moveTo(wx,wy); h7x.lineTo(wx+Math.cos(a)*4.5,wy+Math.sin(a)*4.5); h7x.stroke();
+    }
+  });
+  // mast + camera
+  h7x.strokeStyle='#aaa'; h7x.lineWidth=2; h7x.beginPath(); h7x.moveTo(roverX,102); h7x.lineTo(roverX,80); h7x.stroke();
+  h7x.fillStyle='#4f8ef7'; h7x.beginPath(); h7x.arc(roverX,76,5,0,Math.PI*2); h7x.fill();
+  // scanning signal beam
+  const beamAng=-1.2+Math.sin(t*1.8)*.55;
+  h7x.fillStyle='rgba(79,142,247,.10)'; h7x.beginPath(); h7x.moveTo(roverX,76); h7x.arc(roverX,76,42,beamAng-.22,beamAng+.22,false); h7x.closePath(); h7x.fill();
+  h7x.strokeStyle='rgba(79,142,247,.55)'; h7x.lineWidth=1.2; h7x.setLineDash([4,4]); h7x.beginPath(); h7x.moveTo(roverX,76); h7x.lineTo(roverX+Math.cos(beamAng)*42,76+Math.sin(beamAng)*42); h7x.stroke(); h7x.setLineDash([]);
 }
+
 
 // ── MARS ROVER — Multi-Sensor View ──────────────────────────────────────
 const k7marsC=document.getElementById('k7marsC');
@@ -7507,7 +8848,9 @@ function drawK7Drone(){
 // ── HUMANOIDE ZEITACHSE ───────────────────────────────────────────────────
 const k7timelineC=document.getElementById('k7timelineC');
 const k7tlx=k7timelineC?k7timelineC.getContext('2d'):null;
-let k7tlSelected=null;
+let k7tlSelected=0;
+const k7stageC=document.getElementById('k7robotStageC');
+const k7stageCtx=k7stageC?k7stageC.getContext('2d'):null;
 
 const K7_ROBOTS=[
   {year:1996,name:'Honda P2',org:'Honda',color:'#4f8ef7',capability:0.15,
@@ -7545,9 +8888,9 @@ const K7_ROBOTS=[
    tags:['ChatGPT','Manipulation','PPO','Sprache'],
    drawRobot:function(ctx,cx,cy,lf,t){drawFigure(ctx,cx,cy,t);}},
 
-  {year:2026,name:'AEON (BMW Leipzig)',org:'Figure AI / BMW',color:'#1D9E75',capability:0.96,
-   desc:'März 2026: Erster humanoider Roboter in Deutschland im echten Einsatz. Im BMW-Werk Leipzig montiert AEON selbstständig Batteriemodule — eine Weltpremiere für die Automobilfertigung.',
-   tags:['BMW Leipzig','Batteriemontage','Weltpremiere','2026'],
+  {year:2026,name:'AEON',org:'Figure AI',color:'#1D9E75',capability:0.96,
+   desc:'März 2026: Erster humanoider Roboter in Deutschland im echten Einsatz: Im BMW-Werk Leipzig montiert AEON selbstständig Batteriemodule — eine Weltpremiere für die Automobilfertigung.',
+   tags:['Batteriemontage','Weltpremiere','Industrie','2026'],
    drawRobot:function(ctx,cx,cy,lf,t){drawAeon(ctx,cx,cy,t);}},
 
   {year:2024,name:'Atlas (Elektro)',org:'Boston Dynamics',color:'#AFA9EC',capability:0.94,
@@ -7555,6 +8898,15 @@ const K7_ROBOTS=[
    tags:['Elektrisch','Fließend','Hyundai','2024'],
    drawRobot:function(ctx,cx,cy,lf,t){drawAtlasElectric(ctx,cx,cy,t);}},
 ];
+K7_ROBOTS.sort((a,b)=>a.year-b.year);
+
+function k7robotMeta(r){
+  const early=r.year<=2004, dyn=r.name.includes('Atlas')||r.name.includes('Unitree'), praxis=r.year>=2022;
+  if(early)return {badge:'Pionier',why:'Zeigt, dass zweibeiniges Gehen und einfache Interaktion möglich sind.',dev:'Grundfunktionen',use:'Forschung'};
+  if(dyn)return {badge:'Dynamik',why:'Zeigt, dass humanoide Roboter robust und sportlich reagieren können.',dev:'Bewegung & Balance',use:'Forschung / Industrie'};
+  if(praxis)return {badge:'Praxis',why:'Bringt humanoide Roboter näher an reale Einsätze in Fabrik und Haushalt.',dev:'Manipulation & Sprache',use:'Realer Einsatz'};
+  return {badge:'Meilenstein',why:'Verbindet Forschung mit praktischen Aufgaben.',dev:'Integration',use:'Forschung'};
+}
 
 // ── Individual robot pixel-art drawers ──────────────────────────────────
 // Helper: draw a filled pixel block
@@ -7889,9 +9241,9 @@ function drawAeon(ctx,cx,cy,t){
 
 function k7tlDraw(){
   if(!k7tlx||!k7timelineC)return;
-  const W=k7timelineC.width,H=260;
+  const W=k7timelineC.width,H=k7timelineC.height;
   k7tlx.clearRect(0,0,W,H);k7tlx.fillStyle='#060e1f';k7tlx.fillRect(0,0,W,H);
-  const padL=30,padR=20,timelineY=H-55,minY=1994,maxY=2027;
+  const padL=55,padR=55,timelineY=H-58,minY=1994,maxY=2027;
   const toX=y=>padL+(y-minY)/(maxY-minY)*(W-padL-padR);
   // Axis
   k7tlx.strokeStyle='rgba(255,255,255,.15)';k7tlx.lineWidth=1.5;
@@ -7912,7 +9264,7 @@ function k7tlDraw(){
   k7tlx.beginPath();k7tlx.moveTo(toX(2026.3),20);k7tlx.lineTo(toX(2026.3),timelineY);k7tlx.stroke();k7tlx.setLineDash([]);
   // Capability trend
   k7tlx.strokeStyle='rgba(255,255,255,.06)';k7tlx.lineWidth=1;k7tlx.beginPath();
-  K7_ROBOTS.forEach((r,i)=>{const x=toX(r.year),y=timelineY-20-r.capability*(timelineY-60);i===0?k7tlx.moveTo(x,y):k7tlx.lineTo(x,y);});k7tlx.stroke();
+  K7_ROBOTS.forEach((r,i)=>{const x=toX(r.year),y=timelineY-26-r.capability*(timelineY-74);i===0?k7tlx.moveTo(x,y):k7tlx.lineTo(x,y);});k7tlx.stroke();
   // Nodes — detect dense years and offset year labels alternately to avoid overlap
   const sortedByX=K7_ROBOTS.map((r,i)=>({r,i,x:toX(r.year)})).sort((a,b)=>a.x-b.x);
   const yearOffset=new Map(); // map index -> extra y-offset for year label
@@ -7925,7 +9277,7 @@ function k7tlDraw(){
     }
   }
   K7_ROBOTS.forEach((r,i)=>{
-    const x=toX(r.year),nodeY=timelineY-20-r.capability*(timelineY-60);
+    const x=toX(r.year),nodeY=timelineY-26-r.capability*(timelineY-74);
     const isSel=k7tlSelected===i;
     // Connector
     k7tlx.strokeStyle=r.color+'44';k7tlx.lineWidth=1;
@@ -7949,50 +9301,77 @@ function k7tlDraw(){
   k7tlx.restore();
 }
 
+// Humanoid robot selection + detail rendering
+function k7selectRobot(i){
+  k7tlSelected=i;
+  k7renderHumanoidUI();
+  k7tlDraw();
+  k7drawSelectedRobot();
+}
+function k7renderRobotCards(){
+  const wrap=document.getElementById('k7robotCards');
+  if(!wrap)return;
+  wrap.innerHTML=K7_ROBOTS.map((r,i)=>{
+    const m=k7robotMeta(r);
+    const short=L(r,'desc').replace(/<[^>]+>/g,'').split('.')[0]+'.';
+    return `<div class="k7-robot-card ${i===k7tlSelected?'active':''}" onclick="k7selectRobot(${i})">
+      <div class="k7-card-year" style="color:${r.color}">${r.year}</div>
+      <div class="k7-card-badge">${m.badge}</div>
+      <div class="k7-card-title">${L(r,'name')}</div>
+      <div class="k7-card-org">${r.org}</div>
+      <div class="k7-card-desc">${short}</div>
+    </div>`;
+  }).join('');
+}
+function k7renderHumanoidUI(){
+  const r=K7_ROBOTS[k7tlSelected]||K7_ROBOTS[0]; if(!r)return;
+  const m=k7robotMeta(r);
+  const set=(id,txt)=>{const el=document.getElementById(id);if(el)el.textContent=txt;};
+  set('k7rdBadge',m.badge); set('k7rdYear',r.year); set('k7rdTitle',L(r,'name')); set('k7rdOrg',r.org);
+  set('k7rdWhy',m.why); set('k7rdDev',m.dev); set('k7rdUse',m.use); set('k7rdText',L(r,'desc'));
+  const tags=document.getElementById('k7rdTags');
+  if(tags){const tarr=L(r,'tags')||r.tags;tags.innerHTML=tarr.map(t=>`<span style="font-size:12px;font-weight:500;padding:3px 9px;border-radius:10px;background:${r.color}22;color:${r.color}">${t}</span>`).join('');}
+  k7renderRobotCards();
+}
+function k7drawSelectedRobot(){
+  if(!k7stageCtx||!k7stageC)return;
+  const ctx=k7stageCtx,W=k7stageC.width,H=k7stageC.height,r=K7_ROBOTS[k7tlSelected]||K7_ROBOTS[0];
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='rgba(6,14,31,.92)';ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='rgba(9,216,255,.10)';ctx.lineWidth=1;
+  for(let x=0;x<W;x+=28){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=0;y<H;y+=28){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+  ctx.strokeStyle='rgba(9,216,255,.22)';ctx.strokeRect(24,26,W-48,H-62);
+  ctx.fillStyle='rgba(9,216,255,.12)';ctx.beginPath();ctx.ellipse(W/2,H-72,108,28,0,0,Math.PI*2);ctx.fill();
+  try{r.drawRobot(ctx,W/2,H/2+18,r.capability,GT);}catch(e){}
+  // selected robot is scaled in-place: draw function pixel art is small, so redraw with canvas scaling
+  ctx.save();ctx.translate(W/2,H/2+20);ctx.scale(3.3,3.3);ctx.translate(-W/2,-H/2-18);try{r.drawRobot(ctx,W/2,H/2+18,r.capability,GT);}catch(e){}ctx.restore();
+  ctx.fillStyle=r.color;ctx.font='700 14px DM Mono';ctx.textAlign='left';ctx.fillText(k7robotMeta(r).badge.toUpperCase(),46,58);
+  ctx.fillStyle='#f4f8ff';ctx.font='800 24px DM Sans';ctx.fillText(L(r,'name'),46,86);
+  ctx.fillStyle='#9ab0c8';ctx.font='600 16px DM Sans';ctx.fillText(r.org,46,110);
+  ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='700 13px DM Mono';ctx.fillText('ENTWICKLUNGSSTAND',46,H-44);
+  ctx.strokeStyle='rgba(255,255,255,.14)';ctx.strokeRect(46,H-30,W-92,10);ctx.fillStyle=r.color;ctx.fillRect(46,H-30,(W-92)*r.capability,10);
+  ctx.fillStyle='#f4f8ff';ctx.textAlign='right';ctx.fillText(Math.round(r.capability*100)+'%',W-46,H-35);
+}
 // Click to select robot
 if(k7timelineC)k7timelineC.addEventListener('click',e=>{
   const rect=k7timelineC.getBoundingClientRect();
   const mx=(e.clientX-rect.left)/rect.width*k7timelineC.width;
-  const my=(e.clientY-rect.top)/rect.height*260;
-  const padL=30,padR=20,timelineY=260-55,minY=1994,maxY=2027;
+  const my=(e.clientY-rect.top)/rect.height*k7timelineC.height;
+  const padL=55,padR=55,timelineY=k7timelineC.height-58,minY=1994,maxY=2027;
   const toX=y=>padL+(y-minY)/(maxY-minY)*(k7timelineC.width-padL-padR);
   let hit=null;
   K7_ROBOTS.forEach((r,i)=>{
-    const x=toX(r.year),ny=timelineY-20-r.capability*(timelineY-60);
-    if(Math.hypot(mx-x,my-ny)<18)hit=i;
+    const x=toX(r.year),ny=timelineY-26-r.capability*(timelineY-74);
+    if(Math.hypot(mx-x,my-ny)<24)hit=i;
   });
-  if(hit!==null){
-    k7tlSelected=k7tlSelected===hit?null:hit;
-    const r=K7_ROBOTS[hit];
-    const detail=document.getElementById('k7robotDetail');
-    const title=document.getElementById('k7rdTitle');
-    const text=document.getElementById('k7rdText');
-    const tags=document.getElementById('k7rdTags');
-    if(k7tlSelected!==null){
-      if(detail)detail.style.display='block';
-      if(title)title.textContent=r.year+' · '+L(r,'name')+' ('+r.org+')';
-      if(text)text.textContent=L(r,'desc');
-      if(tags)tags.innerHTML=(L(r,'tags')||r.tags).map(t=>`<span style="font-size:12px;font-weight:500;padding:2px 9px;border-radius:10px;background:${r.color}22;color:${r.color}">${t}</span>`).join('');
-    } else {
-      if(detail)detail.style.display='none';
-    }
-  }
+  if(hit!==null)k7selectRobot(hit);
 });
 
 // Re-render selected timeline detail on language change
 document.addEventListener('langchange', ()=>{
-  if(k7tlSelected===null || k7tlSelected===undefined) return;
-  const r=K7_ROBOTS[k7tlSelected]; if(!r) return;
-  const title=document.getElementById('k7rdTitle');
-  const text=document.getElementById('k7rdText');
-  const tags=document.getElementById('k7rdTags');
-  if(title)title.textContent=r.year+' · '+L(r,'name')+' ('+r.org+')';
-  if(text)text.textContent=L(r,'desc');
-  if(tags){
-    const tarr=L(r,'tags')||r.tags;
-    tags.innerHTML=tarr.map(t=>`<span style="font-size:12px;font-weight:500;padding:2px 9px;border-radius:10px;background:${r.color}22;color:${r.color}">${t}</span>`).join('');
-  }
+  k7renderHumanoidUI();
 });
+k7renderHumanoidUI();
 
 // ── DRAW ──
 function k7Draw(){
@@ -8000,6 +9379,7 @@ function k7Draw(){
   try{drawK7Mars();}catch(e){}
   try{drawK7Drone();}catch(e){}
   try{k7tlDraw();}catch(e){}
+  try{k7drawSelectedRobot();}catch(e){}
 }
 // k7Draw is registered with the master scheduler
 
@@ -8457,8 +9837,56 @@ document.addEventListener('langchange', ()=>{
   try { k8AlltagRender(); } catch(e){}
 });
 
+// ── HERO ──
+const h8C=document.getElementById('h8C');
+const h8x=h8C?h8C.getContext('2d'):null;
+function drawH8(t){
+  if(!h8x)return;
+  h8x.clearRect(0,0,170,200);
+  const cx=85, cy=95;
+  // human + robot silhouettes
+  h8x.strokeStyle='rgba(9,216,255,.32)';h8x.lineWidth=1.4;
+  h8x.beginPath();h8x.arc(cx,cy+4,54,0,Math.PI*2);h8x.stroke();
+  h8x.beginPath();h8x.arc(cx,cy+4,34,0,Math.PI*2);h8x.stroke();
+
+  // human node
+  const hx=54+Math.sin(t*.8)*3, hy=96;
+  h8x.fillStyle='rgba(255,86,216,.22)';h8x.strokeStyle='#ff56d8';h8x.lineWidth=2;
+  h8x.beginPath();h8x.arc(hx,hy-18,11,0,Math.PI*2);h8x.fill();h8x.stroke();
+  h8x.beginPath();h8x.roundRect(hx-13,hy-5,26,34,6);h8x.fill();h8x.stroke();
+
+  // robot node
+  const rx=116-Math.sin(t*.8)*3, ry=96;
+  h8x.fillStyle='rgba(9,216,255,.20)';h8x.strokeStyle='#09d8ff';h8x.lineWidth=2;
+  h8x.beginPath();h8x.roundRect(rx-14,ry-30,28,24,5);h8x.fill();h8x.stroke();
+  h8x.fillStyle='#d4ff46';h8x.beginPath();h8x.arc(rx-6,ry-18,3,0,Math.PI*2);h8x.arc(rx+6,ry-18,3,0,Math.PI*2);h8x.fill();
+  h8x.fillStyle='rgba(9,216,255,.20)';h8x.strokeStyle='#09d8ff';
+  h8x.beginPath();h8x.roundRect(rx-16,ry-2,32,32,6);h8x.fill();h8x.stroke();
+
+  // responsibility connection
+  const pulse=(Math.sin(t*2)+1)/2;
+  h8x.strokeStyle=`rgba(212,255,70,${0.25+0.55*pulse})`;h8x.lineWidth=3;h8x.setLineDash([6,5]);
+  h8x.beginPath();h8x.moveTo(hx+18,hy+4);h8x.bezierCurveTo(70,72,100,72,rx-18,ry+4);h8x.stroke();h8x.setLineDash([]);
+
+  // ethical question mark / alert chips
+  [['?',85,48,'#d4ff46'],['!',85,150,'#ff56d8']].forEach(([txt,x,y,col],i)=>{
+    const r=12+Math.sin(t*2+i)*2;
+    h8x.fillStyle='rgba(7,18,37,.88)';h8x.strokeStyle=col;h8x.lineWidth=2;
+    h8x.beginPath();h8x.arc(x,y,r,0,Math.PI*2);h8x.fill();h8x.stroke();
+    h8x.fillStyle=col;h8x.font='900 15px DM Mono';h8x.textAlign='center';h8x.textBaseline='middle';h8x.fillText(txt,x,y+1);
+  });
+
+  // orbiting trust dots
+  for(let i=0;i<5;i++){
+    const a=t*.9+i*Math.PI*2/5;
+    const x=cx+Math.cos(a)*58, y=cy+4+Math.sin(a)*58;
+    h8x.fillStyle=i%2?'#09d8ff':'#d4ff46';
+    h8x.globalAlpha=.55;h8x.beginPath();h8x.arc(x,y,2.6,0,Math.PI*2);h8x.fill();h8x.globalAlpha=1;
+  }
+}
+
 function k8Draw(){
-  // K8 has no continuous animations — it's all input-driven UI.
+  try{drawH8(GT);}catch(e){}
 }
 
 // Patch goTo to update the active drawer. We wrap the original navigation
@@ -8645,7 +10073,7 @@ document.addEventListener('keyup',()=>{
 //   k8.alltag.* — Robots-in-everyday-life cards
 Object.assign(TRANSLATIONS.de, {
   // --- nav
-  'nav.brand':       'Kids Universität · Robotik',
+  'nav.brand':       'LAB//<br>Robotik – Kids Universität',
   'nav.start':       'Start',
   'nav.k1':          '01 · Was ist ein Roboter?',
   'nav.k2':          '02 · Bewegung',
@@ -8911,7 +10339,7 @@ Object.assign(TRANSLATIONS.de, {
   'k5.rl.auto':         '▶ Auto',
   'k5.rl.explainbtn':   '💡 Wie merkt sich der Roboter den Weg? — Erklärung ausklappen',
   'k5.rl.explainbox':   '<div><span style="color:#EF9F27;font-weight:500">1 — Der Roboter probiert eine Richtung aus.</span><br>Führt diese Richtung zu mehr Belohnung (z.B. näher zum Ziel)? Dann steigt der gespeicherte <strong style="color:#fff">Q-Wert</strong> für diese Richtung. Führt sie ins Nichts oder gegen eine Wand? Dann sinkt er. So sammelt der Roboter Erfahrung — Schritt für Schritt.</div><div><span style="color:#4f8ef7;font-weight:500">2 — Am Anfang ist die Richtung 100% zufällig.</span><br>Der Zufalls-Schalter <strong style="color:#fff">ε (Epsilon)</strong> steuert das — 1.0 = immer zufällig, 0 = immer schlau. Nach jedem Ziel wird er etwas kleiner (× 0.96). Bei Episode 20: noch 44% Zufall. Bei Episode 80: fast nie mehr zufällig.</div><div><span style="color:#1D9E75;font-weight:500">3 — Ab wann folgt er dem gelernten Weg?</span><br>Wenn ε klein ist, wählt er die Richtung mit dem <strong style="color:#fff">höchsten Q-Wert</strong> — die gelben Pfeile im Grid. 5% Zufall bleibt immer.</div><div style="background:rgba(255,255,255,.05);border-radius:8px;padding:.7rem .9rem;border-left:3px solid #AFA9EC"><span style="color:#AFA9EC;font-weight:500">Exploration vs. Exploitation</span><br><strong style="color:#fff">Exploration</strong> = zufällig erkunden · <strong style="color:#fff">Exploitation</strong> = besten Weg nutzen.<br>Zu viel Zufall = lernt nie. Zu wenig = verpasst bessere Wege.</div><div style="font-size:14px;color:#6a89b8">→ Das ist bereits echte KI! Q-Learning steckt in Spielerobotern, Lagerverwaltung und autonomen Fahrzeugen.</div>',
-  'k5.fact':            'Die KI <strong>AlphaGo</strong> von Google hat 2016 zum ersten Mal einen menschlichen Profi im Brettspiel Go besiegt — mit genau diesem Prinzip. Sie hat <strong>Millionen Partien gegen sich selbst</strong> gespielt, jeden Zug bewertet und nach und nach den besten Weg gelernt. Kein Mensch hat ihr die Strategie beigebracht.',
+  'k5.fact':            'AlphaGo nutzte die Grundidee, Situationen und Züge zu bewerten — <strong>ähnlich wie beim Q-Learning</strong> — und kombinierte dies mit neuronalen Netzen, Baumsuche und Reinforcement Learning durch Selbstspiel. Auch bei AlphaGo bewertete die KI Situationen und verbesserte ihre Entscheidungen über viele Partien.',
   'k5.next':            'KI im Roboter',
 
   // --- K6 — KI im Roboter
@@ -8959,7 +10387,7 @@ Object.assign(TRANSLATIONS.de, {
   'k6.draw.btn.clear':      '↺ Löschen',
   'k6.draw.btn.recognize':  '🔍 Erkennen',
   'k6.draw.btn.show':       '👁 Beispiele zeigen',
-  'k6.draw.result':         '↑ Zeichne eines der vier Schilder und klick <strong style="color:#fff">"Erkennen"</strong>.<div style="margin-top:.5rem;font-size:13px;color:#6a89b8">Die KI kennt: 🛑 Stop · ⬆ Pfeil hoch · ⭕ Kreis · ✕ X-Form</div>',
+  'k6.draw.result':         '↑ Zeichne eines der vier Schilder und klick <strong style="color:#fff">"Erkennen"</strong>.<div style="margin-top:.5rem;font-size:13px;color:#6a89b8">Die KI kennt: 🛑 Stop · ⬆ Pfeil hoch · 🔻 Vorfahrt achten · ◇ Vorfahrtsstraße</div>',
   'k6.see.fact':            'Echte Verkehrsschild-Erkennung wird mit <strong>~50.000 Beispielbildern</strong> trainiert — bei verschiedenem Licht, Wetter, Winkel. Hier hat unsere Mini-KI nur 4 Beispiele gesehen — deswegen erkennt sie nur klare Formen.',
   'k6.move.label':          'Teil 2 · Bewegen lernen',
   'k6.move.title':          '🦿 Wie Roboter durch Ausprobieren lernen',
@@ -9132,16 +10560,16 @@ Object.assign(TRANSLATIONS.de, {
 
 Object.assign(TRANSLATIONS.en, {
   // --- nav
-  'nav.brand':       'Kids University · Robotics',
+  'nav.brand':       'LAB//<br>Robotics – Kids University',
   'nav.start':       'Start',
   'nav.k1':          '01 · What is a robot?',
   'nav.k2':          '02 · Movement',
   'nav.k3':          '03 · Sensors',
-  'nav.k4':          '04 · Navigation & maps',
+  'nav.k4':          '04 · Navigation & Maps',
   'nav.k5':          '05 · Decisions',
   'nav.k6':          '06 · AI in robots',
   'nav.k7':          '07 · Real robots',
-  'nav.k8':          '08 · Humans & ethics',
+  'nav.k8':          '08 · Humans & Ethics',
 
   // --- start page
   'start.title':     'Robots — how they see, think and act',
@@ -9398,7 +10826,7 @@ Object.assign(TRANSLATIONS.en, {
   'k5.rl.auto':         '▶ Auto',
   'k5.rl.explainbtn':   '💡 How does the robot remember the path? — Expand explanation',
   'k5.rl.explainbox':   '<div><span style="color:#EF9F27;font-weight:500">1 — The robot tries a direction.</span><br>Does that direction lead to more reward (e.g. closer to the goal)? Then the stored <strong style="color:#fff">Q-value</strong> for that direction goes up. Does it lead nowhere or into a wall? Then it drops. That\'s how the robot builds up experience — step by step.</div><div><span style="color:#4f8ef7;font-weight:500">2 — At first, the direction is 100% random.</span><br>The randomness switch <strong style="color:#fff">ε (Epsilon)</strong> controls this — 1.0 = always random, 0 = always smart. After each goal it shrinks a bit (× 0.96). At episode 20: still 44% random. At episode 80: barely any randomness left.</div><div><span style="color:#1D9E75;font-weight:500">3 — When does it follow the learned path?</span><br>When ε is small, it picks the direction with the <strong style="color:#fff">highest Q-value</strong> — the yellow arrows on the grid. 5% randomness always stays.</div><div style="background:rgba(255,255,255,.05);border-radius:8px;padding:.7rem .9rem;border-left:3px solid #AFA9EC"><span style="color:#AFA9EC;font-weight:500">Exploration vs. Exploitation</span><br><strong style="color:#fff">Exploration</strong> = explore randomly · <strong style="color:#fff">Exploitation</strong> = use the best path.<br>Too much randomness = never learns. Too little = misses better paths.</div><div style="font-size:14px;color:#6a89b8">→ This is already real AI! Q-Learning is in game-playing robots, warehouse logistics and autonomous vehicles.</div>',
-  'k5.fact':            "Google's <strong>AlphaGo</strong> beat a human professional at Go for the first time in 2016 — using exactly this principle. It played <strong>millions of games against itself</strong>, evaluated every move, and gradually learned the best path. No human taught it the strategy.",
+  'k5.fact':            "AlphaGo used the basic idea of evaluating situations and moves — <strong>similar to Q-learning</strong> — and combined this with neural networks, tree search, and reinforcement learning from self-play. AlphaGo also evaluated situations and improved its decisions over many games.",
   'k5.next':            'AI in robots',
 
   // --- K6 — AI in robots
