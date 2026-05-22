@@ -1008,6 +1008,83 @@ nav *{pointer-events:auto!important}
 #page-k8 .hero-inner::before{content:"08"!important}
 #page-start .start-hero-inner::before{content:"00"!important}
 
+
+
+/* ============================================================
+   v11 PERFORMANCE + TOUCHSCREEN STABILISIERUNG
+   Ziel: weniger Speicher/CPU, bessere Tablet-Nutzung für Kinder.
+   ============================================================ */
+:root{--touch-min:44px}
+button,.nav-ch,.tab,.btn-small,.btn-outline-mini,.btn-outline-sm,.slam-btn,.ch-nav-btn,.start-btn,.btn-primary,.dpad-btn{min-height:var(--touch-min);touch-action:manipulation}
+.nav-ch,.btn-small,.tab,.slam-btn{padding:.65rem .9rem!important}
+canvas[style*="cursor"],.sim-canvas,.sim-canvas-sm,.sim-canvas-tall,.sim-canvas-square{touch-action:none}
+@media (pointer:coarse){
+  .nav-chapters{gap:10px!important}.btn-small,.tab,.slam-btn{font-size:15px!important}
+  .grid-3,.grid-2,.sensor-grid{gap:16px!important}
+  input[type="range"]{min-height:42px}
+}
+
+
+
+/* ============================================================
+   NAV ROW FIX v11.1 — keep all chapter buttons in one horizontal row
+   ============================================================ */
+body{padding-top:78px!important}
+nav{
+  display:grid!important;
+  grid-template-columns:210px minmax(0,1fr) 54px!important;
+  gap:10px!important;
+  align-items:center!important;
+  min-height:78px!important;
+  max-height:78px!important;
+  overflow:hidden!important;
+  padding:.55rem .9rem!important;
+}
+.nav-brand{grid-column:1!important;min-width:0!important;max-width:210px!important;overflow:hidden!important;align-self:center!important}
+.nav-brand span{white-space:normal!important;line-height:1.05!important;font-size:12px!important}
+.nav-brand span::before{content:none!important}
+.nav-dot{width:28px!important;height:28px!important;flex:0 0 28px!important}
+.nav-dot::before{font-size:13px!important}
+.nav-chapters{
+  grid-column:2!important;
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  justify-content:flex-start!important;
+  align-items:center!important;
+  gap:8px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  white-space:nowrap!important;
+  min-width:0!important;
+  padding:0 2px 4px 2px!important;
+  max-height:52px!important;
+  scrollbar-width:thin;
+}
+.nav-ch{
+  flex:0 0 auto!important;
+  white-space:nowrap!important;
+  font-size:clamp(10px,.66vw,12px)!important;
+  padding:7px 10px!important;
+  min-height:34px!important;
+  line-height:1!important;
+}
+.nav-lang{grid-column:3!important;justify-self:end!important;align-self:center!important;width:43px!important;min-width:43px!important;height:52px!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important}
+@media (max-width:1280px){
+  body{padding-top:92px!important}
+  nav{grid-template-columns:180px minmax(0,1fr) 48px!important;min-height:92px!important;max-height:92px!important;align-items:center!important}
+  .nav-brand{max-width:180px!important}
+  .nav-chapters{max-height:62px!important}
+  .nav-ch{font-size:10px!important;padding:7px 8px!important}
+}
+@media (max-width:760px){
+  body{padding-top:128px!important}
+  nav{grid-template-columns:1fr 48px!important;grid-template-rows:auto auto!important;min-height:128px!important;max-height:128px!important;gap:8px!important;align-items:center!important}
+  .nav-brand{grid-column:1!important;grid-row:1!important;max-width:calc(100vw - 80px)!important}
+  .nav-lang{grid-column:2!important;grid-row:1!important;height:42px!important}
+  .nav-chapters{grid-column:1 / -1!important;grid-row:2!important;width:100%!important;overflow-x:auto!important;overflow-y:hidden!important;flex-wrap:nowrap!important;max-height:50px!important}
+  .nav-ch{font-size:10px!important;padding:6px 8px!important}
+}
+
 </style>
 <script>
 // Early stub — defers to real k3selSensor once the main script has loaded
@@ -2762,7 +2839,7 @@ function toggleLang(){
       <div class="card-body" style="font-size:15px;line-height:1.7;color:#333">
         <h3 style="margin-bottom:0.5rem;font-weight:500;color:#111">Allgemeiner Hinweis</h3>
         <p style="margin-bottom:1rem">
-          Der Schutz der Daten von Kindern und Besuchern ist uns ein großes Anliegen. Diese Webseite erfasst, speichert oder überträgt zu keinem Zeitpunkt personenbezogene Daten. Die gesamte Webseite wird lokal in Ihrem Browser ausgeführt und kann komplett offline genutzt werden.
+          Der Schutz der Daten von Kindern und Besuchern ist uns ein großes Anliegen. Diese Webseite erfasst, speichert oder übertränt zu keinem Zeitpunkt personenbezogene Daten. Die gesamte Webseite wird lokal in Ihrem Browser ausgeführt und kann komplett offline genutzt werden.
         </p>
         <h3 style="margin-bottom:0.5rem;font-weight:500;color:#111">Erhebung von Daten</h3>
         <p style="margin-bottom:1rem">
@@ -2795,6 +2872,8 @@ if(!CanvasRenderingContext2D.prototype.roundRect){
 }
 // ===================== NAVIGATION =====================
 function goTo(id){
+  const previous = (window.PerformanceManager && PerformanceManager.currentPage) || Scheduler.active || 'start';
+  if(window.PerformanceManager) PerformanceManager.beforePageChange(previous, id);
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-ch').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
@@ -2802,6 +2881,8 @@ function goTo(id){
   const map={start:0,k1:1,k2:2,k3:3,k4:4,k5:5,k6:6,k7:7,k8:8};
   if(map[id]!==undefined) btns[map[id]].classList.add('active');
   window.scrollTo(0,0);
+  if(window.Scheduler) Scheduler.setActive(id);
+  if(window.PerformanceManager) PerformanceManager.afterPageChange(id);
   if(id==='k4'){setTimeout(()=>{nvResizeCanvas();nvBuildScene();nvReset();},60);}
   if(id==='k8'){setTimeout(()=>{try{updateCertificate();}catch(e){}},60);}
 }
@@ -3213,30 +3294,71 @@ if(document.readyState==='loading'){
 }
 
 // ===================== GLOBAL ANIM TIMER + MASTER SCHEDULER =====================
-// Single requestAnimationFrame loop. GT advances every frame. Only the draw
-// function for the currently visible page is invoked, so chapters that are
-// not on screen consume no CPU. Earlier versions ran 9 parallel RAF loops.
+// v11: one hidden-aware requestAnimationFrame loop. It draws ONLY the active page
+// and pauses completely when the browser tab is hidden.
 let GT=0;
-
-// Registry: page-id → draw function. New chapters just register here.
-// Functions registered later (after their definition) via Scheduler.register().
 const Scheduler={
   drawers:{},
   active:'start',
+  paused:false,
   register(id,fn){this.drawers[id]=fn;},
-  setActive(id){this.active=id;}
+  setActive(id){this.active=id;},
+  setPaused(v){this.paused=!!v;}
 };
+window.Scheduler=Scheduler;
 
 function masterLoop(){
-  GT+=0.04;
-  const fn=Scheduler.drawers[Scheduler.active];
-  if(fn){try{fn(GT);}catch(e){console.warn('[draw '+Scheduler.active+']',e);}}
+  if(!document.hidden && !Scheduler.paused){
+    GT+=0.04;
+    const fn=Scheduler.drawers[Scheduler.active];
+    if(fn){try{fn(GT);}catch(e){console.warn('[draw '+Scheduler.active+']',e);}}
+  }
   requestAnimationFrame(masterLoop);
 }
+document.addEventListener('visibilitychange',()=>{
+  Scheduler.setPaused(document.hidden);
+  if(document.hidden && window.PerformanceManager) PerformanceManager.pauseVolatileTimers();
+});
 masterLoop();
 
 // Backwards-compat alias — some early code still calls tick()
 function tick(){}
+
+
+// ===================== v11 PERFORMANCE MANAGER =====================
+const PerformanceManager={
+  currentPage:'start',
+  dprCap:1.5,
+  beforePageChange(from,to){
+    this.pauseVolatileTimers();
+    this.trimMemory();
+  },
+  afterPageChange(id){
+    this.currentPage=id;
+    if(window.Scheduler) Scheduler.setActive(id);
+  },
+  pauseVolatileTimers(){
+    try{ if(typeof k1loopAutoTimer!=='undefined' && k1loopAutoTimer){clearInterval(k1loopAutoTimer);k1loopAutoTimer=null;} }catch(e){}
+    try{ if(typeof k1moveInt!=='undefined' && k1moveInt){clearInterval(k1moveInt);k1moveInt=null;} }catch(e){}
+    try{ if(window.k1si){clearInterval(window.k1si);window.k1si=null;} }catch(e){}
+    try{ if(typeof k2timerInt!=='undefined' && k2timerInt){clearInterval(k2timerInt);k2timerInt=null;} }catch(e){}
+    try{ if(typeof k5rlTimer2!=='undefined' && k5rlTimer2){clearInterval(k5rlTimer2);k5rlTimer2=null;} }catch(e){}
+    try{ if(typeof k6rlTimer!=='undefined' && k6rlTimer){clearInterval(k6rlTimer);k6rlTimer=null;} }catch(e){}
+    try{ if(typeof k6agentTimer!=='undefined' && k6agentTimer){clearInterval(k6agentTimer);k6agentTimer=null;k6agentRunning=false;} }catch(e){}
+  },
+  trimArray(name,max){
+    try{ if(window[name] && Array.isArray(window[name]) && window[name].length>max) window[name].splice(0, window[name].length-max); }catch(e){}
+  },
+  trimMemory(){
+    try{ if(typeof k2trail!=='undefined' && k2trail.length>300) k2trail.splice(0,k2trail.length-300); }catch(e){}
+    try{ if(typeof k3lidarPts!=='undefined' && k3lidarPts.length>900) k3lidarPts.splice(0,k3lidarPts.length-900); }catch(e){}
+    try{ if(typeof rmTrail!=='undefined' && rmTrail.length>900) rmTrail.splice(0,rmTrail.length-900); }catch(e){}
+    try{ if(typeof NV_STATE!=='undefined' && NV_STATE && NV_STATE.slamMap && NV_STATE.slamMap.length>450) NV_STATE.slamMap.splice(0,NV_STATE.slamMap.length-450); }catch(e){}
+    try{ if(typeof k7world!=='undefined' && k7world.mapPoints && k7world.mapPoints.length>140) k7world.mapPoints.splice(0,k7world.mapPoints.length-140); }catch(e){}
+  }
+};
+window.PerformanceManager=PerformanceManager;
+const DPR_CAP=PerformanceManager.dprCap;
 
 // ===================== ABSCHLUSS-ZERTIFIKAT =====================
 const CERT_CHAPTERS=[
@@ -3301,7 +3423,7 @@ function drawCertificate(){
   const ctx=canvas.getContext('2d');
   if(!ctx)return;  // bail out if context unavailable (e.g. JSDOM, headless test envs)
   // HiDPI
-  const dpr=window.devicePixelRatio||1;
+  const dpr=Math.min(window.devicePixelRatio||1,DPR_CAP);
   const W=800,H=560;
   if(canvas.width!==Math.round(W*dpr)){
     canvas.width=Math.round(W*dpr);
@@ -3514,7 +3636,7 @@ function k1loopResize(){
   if(!k1loopC)return;
   const r=k1loopC.getBoundingClientRect();
   if(r.width<10)return;
-  const dpr=window.devicePixelRatio||1;
+  const dpr=Math.min(window.devicePixelRatio||1,DPR_CAP);
   k1loopW=Math.round(r.width);
   k1loopH=170;
   k1loopC.width=Math.round(k1loopW*dpr);
@@ -4139,7 +4261,7 @@ function drawK2Kin(){
     const L=28,dt=0.12,vl=k2lSpeed*1.8,vr=k2rSpeed*1.8,v=(vl+vr)/2,w=(vl-vr)/L;
     k2bot.x+=v*Math.cos(k2bot.angle)*dt;k2bot.y+=v*Math.sin(k2bot.angle)*dt;k2bot.angle+=w*dt;
     k2bot.x=Math.max(26,Math.min(CW-26,k2bot.x));k2bot.y=Math.max(26,Math.min(CH-26,k2bot.y));
-    if(k2trailOn){k2trail.push({x:k2bot.x,y:k2bot.y});if(k2trail.length>600)k2trail.shift();}
+    if(k2trailOn){k2trail.push({x:k2bot.x,y:k2bot.y});if(k2trail.length>300)k2trail.splice(0,k2trail.length-300);}
   }
   if(k2trailOn&&k2trail.length>1){k2kx.strokeStyle='rgba(79,142,247,.35)';k2kx.lineWidth=1.5;k2kx.beginPath();k2trail.forEach((p,i)=>i===0?k2kx.moveTo(p.x,p.y):k2kx.lineTo(p.x,p.y));k2kx.stroke();}
   drawDiffBot(k2kx,k2bot.x,k2bot.y,k2bot.angle,k2lSpeed,k2rSpeed,k2running);
@@ -4466,6 +4588,7 @@ function k3drawSim(){
     k3lidarPts.forEach(p=>p.age++);
     k3lidarPts=k3lidarPts.filter(p=>p.age<30);
     k3lidarPts.push(...newPts);
+    if(k3lidarPts.length>900)k3lidarPts.splice(0,k3lidarPts.length-900);
 
     // Abstandsringe (Referenz) — zuerst zeichnen, damit Strahlen darüber liegen
     [60,120,180,240].forEach((r,ri)=>{
@@ -4894,6 +5017,7 @@ function nvUpdate(){
     s.leftLaneFree=leftCheck>50; // true if no obstacle within 60px to the left
     // SLAM map
     s.lidarPts.forEach(p=>{if(!s.slamMap.some(m=>Math.abs(m.x-p.x)<5&&Math.abs(m.y-p.y)<5))s.slamMap.push(p);});
+    if(s.slamMap.length>450)s.slamMap.splice(0,s.slamMap.length-450);
     s.mapPct=Math.min(100,s.slamMap.length/2);
   }
   // C2X
@@ -5485,7 +5609,7 @@ function rmUpdate(){
       rmBot.x=target.x; rmBot.y=target.y;
     }
     rmTrail.push({x:rmBot.x,y:rmBot.y,returning:true});
-    if(rmTrail.length>4000)rmTrail.shift();
+    if(rmTrail.length>900)rmTrail.splice(0,rmTrail.length-900);
     rmDist+=rmBot.speed;
     rmDiscoverAround(rmBot.x,rmBot.y);
     rmUpdateStats(); return;
@@ -5625,7 +5749,7 @@ function rmUpdate(){
           rmBot.x=nx; rmBot.y=ny;
           rmDist+=rmBot.speed;
           rmTrail.push({x:rmBot.x,y:rmBot.y,returning:false});
-          if(rmTrail.length>4000)rmTrail.shift();
+          if(rmTrail.length>900)rmTrail.splice(0,rmTrail.length-900);
           rmDiscoverAround(rmBot.x,rmBot.y);
         }
       }
@@ -5717,7 +5841,7 @@ function rmUpdate(){
     rmBot.x=nx; rmBot.y=ny;
     rmDist+=rmBot.speed;
     rmTrail.push({x:rmBot.x,y:rmBot.y,returning:false});
-    if(rmTrail.length>4000)rmTrail.shift();
+    if(rmTrail.length>900)rmTrail.splice(0,rmTrail.length-900);
     rmDiscoverAround(rmBot.x,rmBot.y);
 
     // Every ~250 successful steps, occasionally trigger a spiral for
@@ -5871,7 +5995,7 @@ function k4roomReset(){
 let _rmCanvasReady=false;
 function rmSetupCanvas(){
   if(!k4pathC||_rmCanvasReady)return;
-  const dpr=window.devicePixelRatio||1;
+  const dpr=Math.min(window.devicePixelRatio||1,DPR_CAP);
   k4pathC.width=Math.round(RMW*dpr);
   k4pathC.height=Math.round(RMH*dpr);
   k4pathC.style.width='100%';
@@ -7143,7 +7267,7 @@ function drawK6Pix(){
 }
 
 if(k6pixC){
-  k6pixC.addEventListener('mousemove',e=>{
+  k6pixC.addEventListener('pointermove',e=>{
     const rect=k6pixC.getBoundingClientRect();
     const x=(e.clientX-rect.left)/rect.width*k6pixC.width;
     const y=(e.clientY-rect.top)/rect.height*k6pixC.height;
@@ -7167,7 +7291,7 @@ if(k6pixC){
     }
     k6pixHover=hit;
   });
-  k6pixC.addEventListener('mouseleave',()=>{k6pixHover=null;});
+  k6pixC.addEventListener('pointerleave',()=>{k6pixHover=null;});
 }
 
 //
@@ -8172,7 +8296,7 @@ function k6agentDraw(){
   K6_AGENT_STEPS.forEach((s,i)=>{const x=42+i*46,y=28;ctx.fillStyle=i<=k6agentStep?'#09d8ff':'rgba(255,255,255,.14)';ctx.fillRect(x,y,36,6);});
   ctx.fillStyle='#d4ff46';ctx.font='12px DM Mono';ctx.textAlign='left';ctx.fillText(`SCHRITT ${k6agentStep+1}/${K6_AGENT_STEPS.length}: ${step.label}`,42,44);
 }
-if(k6agentC){const p=document.getElementById('k6agentPromptText');if(p)p.textContent=k6agentGetPromptText();k6agentReset(false);setInterval(()=>{k6agentTick++;if(k6agentRunning)k6agentDraw();},80);}
+if(k6agentC){const p=document.getElementById('k6agentPromptText');if(p)p.textContent=k6agentGetPromptText();k6agentReset(false);}
 
 // ====================== SECTION 3: REAGIEREN (NLP) ======================
 //
@@ -8376,6 +8500,7 @@ setTimeout(()=>{
 
 // ====================== MASTER DRAW ======================
 function k6Draw(){
+  try{if(k6agentRunning){k6agentTick++;k6agentDraw();}}catch(e){}
   try{drawH6(GT);}catch(e){}
   try{drawK6Pix();}catch(e){}
   try{drawK6ConvInput();}catch(e){}
@@ -8541,7 +8666,7 @@ function k7marsUpdate(){
     // Add to map
     if(Math.floor(k7world.distTravelled*10)%3===0)
       k7world.mapPoints.push({x:k7world.roverX,y:k7world.roverY,t:Date.now()});
-    if(k7world.mapPoints.length>200)k7world.mapPoints.shift();
+    if(k7world.mapPoints.length>140)k7world.mapPoints.splice(0,k7world.mapPoints.length-140);
     // Check next segment
     const next=k7marsNextSeg();
     if(next&&(next.x-k7world.roverX)<1.5&&next.uncertain){
