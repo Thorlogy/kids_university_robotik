@@ -18,12 +18,12 @@ An interactive, single-file bilingual (German/English) web application designed 
 - **Self-Contained & Offline-Ready**: No bundlers, compilers, or external npm dependencies. Run it offline by simply opening the HTML file in any modern web browser.
 
 ## 📁 Repository Structure
-* `robotik-kids-universitaet.html`: The complete application, styling, and logic in a single file.
+* `index.html`: The complete application, styling, and logic in a single file.
 * `DOKUMENTATION.md`: Technical documentation of the application architecture, design system, and interactive simulations (in German).
 * `LICENSE`: Creative Commons Attribution-ShareAlike 2.0 Generic (CC-BY-SA-2.0).
 
 ## 🚀 Getting Started
-Simply double-click the `robotik-kids-universitaet.html` file to open it in your browser, or host it on GitHub Pages.
+Simply double-click the `index.html` file to open it in your browser, or host it on GitHub Pages.
 
 ## 📄 License
 This project is licensed under the Creative Commons Attribution-ShareAlike 2.0 Generic License (CC-BY-SA-2.0). See the [LICENSE](LICENSE) file for details.

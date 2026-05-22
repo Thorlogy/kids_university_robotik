@@ -10,7 +10,7 @@ Eine interaktive Lern-Webseite für Kinder und Jugendliche (8–15 Jahre) über 
 
 | Datei | Zeilen | Größe | Beschreibung |
 |---|---|---|---|
-| `robotik-kids-universitaet.html` | ~9.800 | ~580 KB | Komplette Anwendung in einer Datei |
+| `index.html` | ~9.800 | ~580 KB | Komplette Anwendung in einer Datei |
 | `DOKUMENTATION.md` | dieses File | — | Diese Doku |
 
 Keine externen Abhängigkeiten außer zwei Google Fonts (DM Sans, DM Mono) — die Seite läuft komplett offline, sobald sie geladen wurde.
@@ -49,7 +49,7 @@ Die Seite kann **vollständig** zwischen Deutsch und Englisch umgeschaltet werde
 ### Single-File-Struktur
 
 ```
-robotik-kids-universitaet.html
+index.html
 ├── <head> mit Inline-CSS (~1.500 Zeilen)
 ├── <body>
 │   ├── <nav> + Sprach-Toggle
@@ -276,7 +276,7 @@ K8 hat 5 dynamische Komponenten, die erst initialisiert werden, wenn der Nutzer 
 ```bash
 node -e "
 const fs=require('fs');
-const html=fs.readFileSync('robotik-kids-universitaet.html','utf8');
+const html=fs.readFileSync('index.html','utf8');
 const re=/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/g;
 let m,i=0,fail=0;
 while((m=re.exec(html))!==null){i++;if(!m[1].trim())continue;try{new Function(m[1]);}catch(e){fail++;}}
