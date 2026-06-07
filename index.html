@@ -7208,9 +7208,9 @@ function generateMPCRollouts() {
       
       if (dObs < minDist) {
         cost += wObsVal * 100000; // massive penalty for crash
-      } else if (dObs < minDist + 50) {
-        const pen = (minDist + 50) - dObs;
-        cost += wObsVal * pen * pen * 8; // proximity penalty
+      } else if (dObs < minDist + 22) {
+        const pen = (minDist + 22) - dObs;
+        cost += wObsVal * pen * pen * 6; // proximity penalty
       }
     }
     
