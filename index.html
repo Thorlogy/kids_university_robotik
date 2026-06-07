@@ -1996,6 +1996,111 @@ function toggleLang(){
     <p class="fact-text" data-i18n="k5.fact" data-i18n-html>AlphaGo nutzte die Grundidee, Situationen und Züge zu bewerten — <strong>ähnlich wie beim Q-Learning</strong> — und kombinierte dies mit neuronalen Netzen, Baumsuche und Reinforcement Learning durch Selbstspiel. Auch bei AlphaGo bewertete die KI Situationen und verbesserte ihre Entscheidungen über viele Partien.</p>
   </div>
 
+  <div class="divider"></div>
+
+  <!-- SECTION 3: MPC -->
+  <div class="sec">
+    <div class="sec-label" data-i18n="k5.s3.label">Stufe 3 · In die Zukunft planen</div>
+    <div class="sec-title" data-i18n="k5.s3.title">Vorausschauendes Fahren (MPC)</div>
+    <div class="sec-sub" data-i18n="k5.s3.sub">Modellprädiktive Regelung: Wie ein Roboter die Zukunft simuliert und Hindernissen geschickt ausweicht.</div>
+    
+    <div class="white-card card-edge-margin">
+      <div class="card-header">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        <span class="card-title" data-i18n="k5.mpc.cardtitle">MPC-Simulator · Spur halten & Hindernisse umfahren</span>
+      </div>
+      <div class="card-body" style="padding:.8rem">
+        <div style="display:grid;grid-template-columns:1.2fr 0.8fr;gap:12px">
+          <!-- Canvas with draggable obstacle overlay clue -->
+          <div style="position:relative">
+            <canvas id="k5mpcC" width="400" height="280" class="sim-canvas" style="display:block;border-radius:8px;background:#060e1f;width:100%"></canvas>
+            <div style="position:absolute;top:10px;left:10px;background:rgba(6,14,31,0.85);padding:5px 10px;border-radius:6px;font-size:11px;font-family:'DM Mono',monospace;color:#fff;border:.5px solid rgba(255,255,255,0.1)">
+              Status: <span id="k5mpcModeText" style="color:#4f8ef7;font-weight:bold">MPC (Vorausschauend)</span>
+            </div>
+            <div style="position:absolute;bottom:10px;right:10px;background:rgba(226,75,74,0.15);padding:4px 8px;border-radius:6px;font-size:10px;color:#F09595;pointer-events:none;border:.5px solid rgba(226,75,74,0.3)">
+              🔴 Hindernis verschiebbar!
+            </div>
+          </div>
+          
+          <!-- Control Panel -->
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:12px;font-weight:500;color:#888;font-family:'DM Mono',monospace;text-transform:uppercase" data-i18n="k5.mpc.controlpanel">Steuerung & Gewichte</div>
+            
+            <!-- Method selector -->
+            <div style="background:#0f1b3d;border-radius:8px;padding:.6rem;display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:12px;color:#a0bfff" data-i18n="k5.mpc.selectcontroller">Regelungsmethode:</span>
+              <div style="display:flex;gap:4px">
+                <button onclick="k5mpcSetMethod('reactive')" id="k5mpcBtnReactive" class="slam-btn" style="flex:1;font-size:12px;padding:5px 6px">Reaktiv (If-Else)</button>
+                <button onclick="k5mpcSetMethod('mpc')" id="k5mpcBtnMpc" class="slam-btn active" style="flex:1;font-size:12px;padding:5px 6px">Prädiktiv (MPC)</button>
+              </div>
+            </div>
+            
+            <!-- MPC Weights Sliders -->
+            <div id="k5mpcWeightsBox" style="background:#0f1b3d;border-radius:8px;padding:.6rem;display:flex;flex-direction:column;gap:8px;transition:opacity 0.2s">
+              <span style="font-size:12px;color:#a0bfff" data-i18n="k5.mpc.weights">Gewichtung der Kosten:</span>
+              
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:#8fa8cc;margin-bottom:2px">
+                  <span data-i18n="k5.mpc.wtrack">Spur halten</span>
+                  <span id="k5mpcWTrackVal" style="font-family:'DM Mono',monospace;color:#4f8ef7;font-weight:bold">1.0</span>
+                </div>
+                <input type="range" min="0.1" max="3.0" step="0.1" value="1.0" id="k5mpcWTrack" style="width:100%" oninput="k5mpcUpdateParams()">
+              </div>
+              
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:#8fa8cc;margin-bottom:2px">
+                  <span data-i18n="k5.mpc.wobs">Hindernis ausweichen</span>
+                  <span id="k5mpcWObsVal" style="font-family:'DM Mono',monospace;color:#EF9F27;font-weight:bold">2.0</span>
+                </div>
+                <input type="range" min="0.1" max="5.0" step="0.1" value="2.0" id="k5mpcWObs" style="width:100%" oninput="k5mpcUpdateParams()">
+              </div>
+
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:#8fa8cc;margin-bottom:2px">
+                  <span data-i18n="k5.mpc.wsmooth">Komfort (sanftes Lenken)</span>
+                  <span id="k5mpcWSmoothVal" style="font-family:'DM Mono',monospace;color:#5DCAA5;font-weight:bold">0.5</span>
+                </div>
+                <input type="range" min="0.0" max="2.0" step="0.1" value="0.5" id="k5mpcWSmooth" style="width:100%" oninput="k5mpcUpdateParams()">
+              </div>
+            </div>
+            
+            <!-- Controls Buttons -->
+            <div style="display:flex;gap:4px">
+              <button onclick="k5mpcStart()" id="k5mpcStartBtn" class="slam-btn" style="flex:1" data-i18n="k5.mpc.start">▶ Start</button>
+              <button onclick="k5mpcPause()" id="k5mpcPauseBtn" class="slam-btn active" style="flex:1" data-i18n="k5.mpc.pause">⏸ Pause</button>
+              <button onclick="k5mpcReset()" id="k5mpcResetBtn" class="slam-btn" style="flex:1" data-i18n="k5.mpc.reset">↺ Reset</button>
+            </div>
+            
+            <!-- Live stats info -->
+            <div style="background:#060e1f;border-radius:8px;padding:.5rem .7rem;font-size:12px;color:#8fa8cc;line-height:1.5">
+              <span style="font-weight:bold;color:#fff;display:block;margin-bottom:3px;font-family:'DM Mono',monospace;text-transform:uppercase;font-size:10px" data-i18n="k5.mpc.status">Status:</span>
+              <div style="display:flex;justify-content:space-between;margin-bottom:2px">
+                <span data-i18n="k5.mpc.collisions">Kollisionen:</span>
+                <span id="k5mpcCollisions" style="color:#E24B4A;font-weight:bold">0</span>
+              </div>
+              <div style="display:flex;justify-content:space-between">
+                <span data-i18n="k5.mpc.offtrack">Abweichung:</span>
+                <span id="k5mpcOfftrack" style="font-family:'DM Mono',monospace;color:#fff">0.0px</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Detailed Bilingual Explanation Box -->
+    <div style="width:calc(100% - 2rem);max-width:calc(var(--page-max) - 2rem);margin:.8rem auto 0">
+      <div style="background:#0f1b3d;border-radius:12px;border:.5px solid rgba(255,255,255,.08);overflow:hidden">
+        <div style="padding:.6rem 1rem;background:rgba(255,255,255,.05);border-bottom:.5px solid rgba(255,255,255,.08)">
+          <span style="font-size:14px;font-weight:bold;color:#fff" data-i18n="k5.mpc.explanation.title">Wie funktioniert prädiktive Regelung (MPC)?</span>
+        </div>
+        <div style="padding:1rem;font-size:14px;color:#8fa8cc;line-height:1.7" data-i18n="k5.mpc.explanation.desc" data-i18n-html>
+          Im Gegensatz zur reaktiven If-Else Regel blickt MPC in die Zukunft. Der Roboter nutzt ein <strong>physikalisches Modell</strong> und simuliert mehrere Pfade (Zukunftshorizont) mit unterschiedlichen Lenkwinkeln. Jeder Pfad wird bewertet: Kostet es Punkte, von der Linie abzuweichen? Droht eine Kollision? Lenke ich zu ruckartig? Der Pfad mit den geringsten "Kosten" gewinnt, und der Roboter macht den ersten Schritt dieses Plans. Im nächsten Zeitschritt wiederholt sich das Ganze.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- QUIZ -->
   <div data-quiz="k5fb"></div>
 
@@ -7017,9 +7122,631 @@ function k5rlToggleExplain(){
   box.style.display=open?'none':'block';
   if(arr)arr.textContent=open?'▾':'▴';
 }
+// ── MODEL PREDICTIVE CONTROL (MPC) ─────────────────────────────────────────
+let k5mpcState = {
+  x: 10,
+  y: 140,
+  theta: 0,
+  speed: 1.6,
+  collisions: 0,
+  offtrack: 0,
+  running: false,
+  method: 'mpc', // 'reactive' or 'mpc'
+  obsX: 200,
+  obsY: 130,
+  obsRadius: 18,
+  isDraggingObs: false,
+  trail: [],
+  currentPredictions: null,
+  bestPrediction: null,
+  collisionFlash: 0  // countdown for collision flash effect
+};
+let k5mpcLastSteer = 0;
+
+function simulateCarStep(state, delta, dt = 1.0) {
+  const L = 16; // wheelbase length
+  const nextX = state.x + state.speed * Math.cos(state.theta) * dt;
+  const nextY = state.y + state.speed * Math.sin(state.theta) * dt;
+  const nextTheta = state.theta + (state.speed / L) * Math.tan(delta) * dt;
+  return { x: nextX, y: nextY, theta: nextTheta, speed: state.speed };
+}
+
+// Compute the road tangent angle at a given x position
+function k5mpcRoadTangent(x) {
+  // Road: y = 140 + sin(x * 0.022) * 40
+  // dy/dx = cos(x * 0.022) * 40 * 0.022 = 0.88 * cos(x * 0.022)
+  const dydx = 0.88 * Math.cos(x * 0.022);
+  return Math.atan2(dydx, 1.0);
+}
+
+function generateMPCRollouts() {
+  const rollouts = [];
+  const H_steps = 25;       // prediction steps
+  const dtPred = 2.0;        // time step multiplier for prediction
+  
+  // Sample 21 steering offsets from -25° to +25° around road tangent
+  const steerOffsets = [];
+  for (let i = -10; i <= 10; i++) {
+    steerOffsets.push(i * 2.5 * Math.PI / 180);
+  }
+  
+  const wTrackVal = parseFloat(document.getElementById('k5mpcWTrack')?.value || 1.0);
+  const wObsVal = parseFloat(document.getElementById('k5mpcWObs')?.value || 2.0);
+  const wSmoothVal = parseFloat(document.getElementById('k5mpcWSmooth')?.value || 0.5);
+  
+  const maxSteer = 35 * Math.PI / 180;
+  
+  for (const offset of steerOffsets) {
+    let cost = 0;
+    const path = [];
+    let tempState = { x: k5mpcState.x, y: k5mpcState.y, theta: k5mpcState.theta, speed: k5mpcState.speed };
+    
+    for (let h = 1; h <= H_steps; h++) {
+      // Base direction = road tangent at current predicted position
+      const tangentAngle = k5mpcRoadTangent(tempState.x);
+      
+      // Desired heading = tangent + offset
+      let targetAngle = tangentAngle + offset;
+      // Steering command = difference between desired heading and current heading
+      let steer = targetAngle - tempState.theta;
+      steer = Math.atan2(Math.sin(steer), Math.cos(steer)); // normalize to [-π, π]
+      steer = Math.max(-maxSteer, Math.min(maxSteer, steer));
+      
+      tempState = simulateCarStep(tempState, steer, dtPred);
+      path.push({ x: tempState.x, y: tempState.y });
+      
+      // 1. Tracking cost (distance to center of road)
+      const roadY = 140 + Math.sin(tempState.x * 0.022) * 40;
+      const cTrack = Math.abs(tempState.y - roadY);
+      cost += wTrackVal * cTrack * cTrack * 0.12;
+      
+      // 2. Obstacle avoidance cost
+      const dx = tempState.x - k5mpcState.obsX;
+      const dy = tempState.y - k5mpcState.obsY;
+      const dObs = Math.hypot(dx, dy);
+      const minDist = k5mpcState.obsRadius + 8; // car radius ~8 for margin
+      
+      if (dObs < minDist) {
+        cost += wObsVal * 100000; // massive penalty for crash
+      } else if (dObs < minDist + 50) {
+        const pen = (minDist + 50) - dObs;
+        cost += wObsVal * pen * pen * 8; // proximity penalty
+      }
+    }
+    
+    // 3. Smoothness: penalize large offsets (prefer staying near road center)
+    cost += wSmoothVal * offset * offset * 600;
+    
+    rollouts.push({ steer: offset, path: path, cost: cost });
+  }
+  
+  return rollouts;
+}
+
+function k5mpcRecalc() {
+  if (k5mpcState.method === 'mpc') {
+    const rollouts = generateMPCRollouts();
+    if (rollouts.length > 0) {
+      let minCost = Infinity;
+      let bestRollout = null;
+      for (const r of rollouts) {
+        if (r.cost < minCost) {
+          minCost = r.cost;
+          bestRollout = r;
+        }
+      }
+      k5mpcState.currentPredictions = rollouts;
+      k5mpcState.bestPrediction = bestRollout;
+    } else {
+      k5mpcState.currentPredictions = null;
+      k5mpcState.bestPrediction = null;
+    }
+  } else {
+    k5mpcState.currentPredictions = null;
+    k5mpcState.bestPrediction = null;
+  }
+}
+
+function updateMPCPhysics() {
+  let steer = 0;
+  
+  if (k5mpcState.method === 'reactive') {
+    // Follow road with short lookahead
+    const lookaheadX = k5mpcState.x + 22;
+    const targetY = 140 + Math.sin(lookaheadX * 0.022) * 40;
+    const roadAngle = Math.atan2(targetY - k5mpcState.y, lookaheadX - k5mpcState.x);
+    let steerRoad = roadAngle - k5mpcState.theta;
+    steerRoad = Math.atan2(Math.sin(steerRoad), Math.cos(steerRoad));
+    
+    // Check if obstacle is directly in front
+    const dx = k5mpcState.obsX - k5mpcState.x;
+    const dy = k5mpcState.obsY - k5mpcState.y;
+    const distToObs = Math.hypot(dx, dy);
+    
+    if (distToObs < 55 && dx > 0) {
+      const angleToObs = Math.atan2(dy, dx) - k5mpcState.theta;
+      const normalizedAngle = Math.atan2(Math.sin(angleToObs), Math.cos(angleToObs));
+      steer = (normalizedAngle > 0) ? -32 * Math.PI / 180 : 32 * Math.PI / 180;
+    } else {
+      steer = steerRoad;
+    }
+  } else {
+    // MPC Planning: select minimum cost path
+    k5mpcRecalc();
+    if (k5mpcState.bestPrediction) {
+      // Apply road tangent + best offset for actual driving step
+      const tangentAngle = k5mpcRoadTangent(k5mpcState.x);
+      let targetAngle = tangentAngle + k5mpcState.bestPrediction.steer;
+      steer = targetAngle - k5mpcState.theta;
+      steer = Math.atan2(Math.sin(steer), Math.cos(steer));
+    }
+  }
+  
+  const maxSteer = 35 * Math.PI / 180;
+  steer = Math.max(-maxSteer, Math.min(maxSteer, steer));
+  k5mpcLastSteer = steer;
+  
+  // Simulate step (actual driving uses dt=1.0 default)
+  const next = simulateCarStep(k5mpcState, steer);
+  k5mpcState.x = next.x;
+  k5mpcState.y = next.y;
+  k5mpcState.theta = next.theta;
+  
+  // Update trail
+  k5mpcState.trail.push({ x: k5mpcState.x, y: k5mpcState.y });
+  if (k5mpcState.trail.length > 30) {
+    k5mpcState.trail.shift();
+  }
+  
+  // Wrap around
+  if (k5mpcState.x > 395) {
+    k5mpcState.x = 10;
+    k5mpcState.y = 140 + Math.sin(10 * 0.022) * 40;
+    k5mpcState.theta = 0;
+    k5mpcState.trail = [];
+  }
+  
+  // Collision check
+  const dx = k5mpcState.x - k5mpcState.obsX;
+  const dy = k5mpcState.y - k5mpcState.obsY;
+  const dist = Math.hypot(dx, dy);
+  if (dist < k5mpcState.obsRadius + 6) {
+    k5mpcState.collisions++;
+    k5mpcState.collisionFlash = 30; // 30 frames of flash
+    const colEl = document.getElementById('k5mpcCollisions');
+    if (colEl) colEl.textContent = k5mpcState.collisions;
+    k5mpcState.x = 10;
+    k5mpcState.y = 140 + Math.sin(10 * 0.022) * 40;
+    k5mpcState.theta = 0;
+    k5mpcState.trail = [];
+  }
+  
+  // Update stats
+  const roadY = 140 + Math.sin(k5mpcState.x * 0.022) * 40;
+  k5mpcState.offtrack = Math.abs(k5mpcState.y - roadY);
+  const offEl = document.getElementById('k5mpcOfftrack');
+  if (offEl) offEl.textContent = k5mpcState.offtrack.toFixed(1) + 'px';
+}
+
+function drawRoad(ctx) {
+  // Asphalt
+  ctx.beginPath();
+  ctx.strokeStyle = '#1b2a47';
+  ctx.lineWidth = 36;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  for (let x = 0; x < 400; x += 5) {
+    const y = 140 + Math.sin(x * 0.022) * 40;
+    if (x === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // Curbs/Borders
+  ctx.beginPath();
+  ctx.strokeStyle = '#2d4470';
+  ctx.lineWidth = 40;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.globalCompositeOperation = 'destination-over';
+  for (let x = 0; x < 400; x += 5) {
+    const y = 140 + Math.sin(x * 0.022) * 40;
+    if (x === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+  ctx.globalCompositeOperation = 'source-over';
+
+  // Dashed lane marking
+  ctx.beginPath();
+  ctx.strokeStyle = '#4f8ef7';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([8, 6]);
+  for (let x = 0; x < 400; x += 5) {
+    const y = 140 + Math.sin(x * 0.022) * 40;
+    if (x === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function drawCar(ctx, x, y, theta) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(theta);
+
+  // Glow chassis
+  ctx.shadowColor = '#5DCAA5';
+  ctx.shadowBlur = 8;
+  ctx.fillStyle = '#5DCAA5';
+  ctx.beginPath();
+  ctx.moveTo(8, 0);
+  ctx.lineTo(-6, -5);
+  ctx.lineTo(-4, 0);
+  ctx.lineTo(-6, 5);
+  ctx.closePath();
+  ctx.fill();
+  
+  // Headlights
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = '#fff';
+  ctx.beginPath();
+  ctx.arc(8, -2.2, 1.2, 0, Math.PI * 2);
+  ctx.arc(8, 2.2, 1.2, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawObstacle(ctx, x, y, r) {
+  ctx.save();
+  ctx.shadowColor = '#E24B4A';
+  ctx.shadowBlur = k5mpcState.isDraggingObs ? 12 : 6;
+
+  ctx.strokeStyle = '#E24B4A';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.fillStyle = 'rgba(226, 75, 74, 0.25)';
+  ctx.beginPath();
+  ctx.arc(x, y, r - 3, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = '#E24B4A';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(x - r/2, y - r/2);
+  ctx.lineTo(x + r/2, y + r/2);
+  ctx.moveTo(x + r/2, y - r/2);
+  ctx.lineTo(x - r/2, y + r/2);
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+function drawMPCPredictions(ctx) {
+  if (!k5mpcState.currentPredictions) return;
+  
+  ctx.save();
+  
+  // Draw candidate rollouts — semi-transparent blue "corridor" around road
+  for (const r of k5mpcState.currentPredictions) {
+    if (k5mpcState.bestPrediction && r.steer === k5mpcState.bestPrediction.steer) continue;
+    // Stronger blue for extreme offsets to show the planning space
+    const intensity = Math.abs(r.steer) / (7 * 2.5 * Math.PI / 180);
+    ctx.lineWidth = 1 + intensity * 0.5;
+    ctx.strokeStyle = `rgba(79, 142, 247, ${0.12 + intensity * 0.18})`;
+    ctx.beginPath();
+    ctx.moveTo(k5mpcState.x, k5mpcState.y);
+    for (const pt of r.path) {
+      ctx.lineTo(pt.x, pt.y);
+    }
+    ctx.stroke();
+  }
+  
+  // Draw selected best path as a bright yellow-green neon line
+  if (k5mpcState.bestPrediction) {
+    ctx.shadowColor = '#d4ff46';
+    ctx.shadowBlur = 6;
+    ctx.strokeStyle = '#d4ff46';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(k5mpcState.x, k5mpcState.y);
+    for (const pt of k5mpcState.bestPrediction.path) {
+      ctx.lineTo(pt.x, pt.y);
+    }
+    ctx.stroke();
+    
+    // Draw prediction waypoints (every 3rd point to avoid clutter)
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = '#d4ff46';
+    for (let i = 2; i < k5mpcState.bestPrediction.path.length; i += 3) {
+      const pt = k5mpcState.bestPrediction.path[i];
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    // Always draw the endpoint
+    const last = k5mpcState.bestPrediction.path[k5mpcState.bestPrediction.path.length - 1];
+    if (last) {
+      ctx.beginPath();
+      ctx.arc(last.x, last.y, 3.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  
+  ctx.restore();
+}
+
+function drawReactiveTarget(ctx) {
+  if (k5mpcState.method !== 'reactive') return;
+  // Follow road with short lookahead
+  const lookaheadX = k5mpcState.x + 22;
+  const targetY = 140 + Math.sin(lookaheadX * 0.022) * 40;
+  
+  ctx.save();
+  // Draw lookahead target point
+  ctx.beginPath();
+  ctx.arc(lookaheadX, targetY, 4, 0, Math.PI * 2);
+  ctx.fillStyle = '#EF9F27';
+  ctx.shadowColor = '#EF9F27';
+  ctx.shadowBlur = 6;
+  ctx.fill();
+  
+  // Draw a dotted line from the car to the target point
+  ctx.beginPath();
+  ctx.moveTo(k5mpcState.x, k5mpcState.y);
+  ctx.lineTo(lookaheadX, targetY);
+  ctx.strokeStyle = 'rgba(239, 159, 39, 0.6)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([3, 3]);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawK5MPC() {
+  const canv = document.getElementById('k5mpcC');
+  if (!canv) return;
+  const ctx = canv.getContext('2d');
+  if (!ctx) return;
+  
+  ctx.clearRect(0, 0, canv.width, canv.height);
+  
+  // Cybergrid background
+  ctx.strokeStyle = 'rgba(79, 142, 247, 0.04)';
+  ctx.lineWidth = 1;
+  const gs = 20;
+  for (let x = 0; x < canv.width; x += gs) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canv.height); ctx.stroke();
+  }
+  for (let y = 0; y < canv.height; y += gs) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canv.width, y); ctx.stroke();
+  }
+
+  // Draw simulation layers
+  drawRoad(ctx);
+  drawObstacle(ctx, k5mpcState.obsX, k5mpcState.obsY, k5mpcState.obsRadius);
+  
+  if (k5mpcState.running) {
+    updateMPCPhysics();
+  }
+  
+  // Draw trail
+  if (k5mpcState.trail && k5mpcState.trail.length > 1) {
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(93, 202, 165, 0.25)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([2, 2]);
+    ctx.moveTo(k5mpcState.trail[0].x, k5mpcState.trail[0].y);
+    for (let i = 1; i < k5mpcState.trail.length; i++) {
+      ctx.lineTo(k5mpcState.trail[i].x, k5mpcState.trail[i].y);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  if (k5mpcState.method === 'mpc') {
+    drawMPCPredictions(ctx);
+  } else {
+    drawReactiveTarget(ctx);
+  }
+  
+  drawCar(ctx, k5mpcState.x, k5mpcState.y, k5mpcState.theta);
+  
+  // Collision flash overlay
+  if (k5mpcState.collisionFlash > 0) {
+    const alpha = k5mpcState.collisionFlash / 30 * 0.4;
+    ctx.fillStyle = `rgba(226, 75, 74, ${alpha})`;
+    ctx.fillRect(0, 0, canv.width, canv.height);
+    
+    if (k5mpcState.collisionFlash > 15) {
+      ctx.save();
+      ctx.font = 'bold 18px "DM Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillStyle = `rgba(255, 255, 255, ${(k5mpcState.collisionFlash - 15) / 15})`;
+      ctx.shadowColor = '#E24B4A';
+      ctx.shadowBlur = 10;
+      ctx.fillText('💥 Kollision!', canv.width / 2, canv.height / 2);
+      ctx.restore();
+    }
+    
+    k5mpcState.collisionFlash--;
+  }
+}
+
+function k5mpcStart() {
+  k5mpcState.running = true;
+  k5mpcState.trail = [];
+  k5mpcSetControlActive('start');
+}
+
+function k5mpcPause() {
+  k5mpcState.running = false;
+  k5mpcSetControlActive('pause');
+}
+
+function k5mpcReset() {
+  k5mpcState.x = 10;
+  k5mpcState.y = 140 + Math.sin(10 * 0.022) * 40;
+  k5mpcState.theta = 0;
+  k5mpcState.collisions = 0;
+  k5mpcState.trail = [];
+  k5mpcLastSteer = 0;
+  
+  k5mpcRecalc();
+  
+  const colEl = document.getElementById('k5mpcCollisions');
+  if (colEl) colEl.textContent = '0';
+  const offEl = document.getElementById('k5mpcOfftrack');
+  if (offEl) offEl.textContent = '0.0px';
+  
+  k5mpcSetControlActive('reset');
+  if (!k5mpcState.running) {
+    drawK5MPC();
+  }
+}
+
+function k5mpcSetControlActive(mode) {
+  const btnStart = document.getElementById('k5mpcStartBtn');
+  const btnPause = document.getElementById('k5mpcPauseBtn');
+  const btnReset = document.getElementById('k5mpcResetBtn');
+  
+  if (btnStart) btnStart.classList.toggle('active', mode === 'start');
+  if (btnPause) btnPause.classList.toggle('active', mode === 'pause');
+  if (btnReset) btnReset.classList.toggle('active', mode === 'reset');
+}
+
+function k5mpcSetMethod(method) {
+  k5mpcState.method = method;
+  const btnReactive = document.getElementById('k5mpcBtnReactive');
+  const btnMpc = document.getElementById('k5mpcBtnMpc');
+  const weightsBox = document.getElementById('k5mpcWeightsBox');
+  const modeText = document.getElementById('k5mpcModeText');
+  
+  if (method === 'reactive') {
+    if (btnReactive) btnReactive.classList.add('active');
+    if (btnMpc) btnMpc.classList.remove('active');
+    if (weightsBox) {
+      weightsBox.style.opacity = '0.4';
+      weightsBox.querySelectorAll('input[type="range"]').forEach(s => s.disabled = true);
+    }
+    if (modeText) {
+      modeText.textContent = LANG === 'de' ? 'Reaktiv (If-Else)' : 'Reactive (If-Else)';
+      modeText.style.color = '#EF9F27';
+    }
+  } else {
+    if (btnReactive) btnReactive.classList.remove('active');
+    if (btnMpc) btnMpc.classList.add('active');
+    if (weightsBox) {
+      weightsBox.style.opacity = '1.0';
+      weightsBox.querySelectorAll('input[type="range"]').forEach(s => s.disabled = false);
+    }
+    if (modeText) {
+      modeText.textContent = LANG === 'de' ? 'MPC (Vorausschauend)' : 'MPC (Predictive)';
+      modeText.style.color = '#4f8ef7';
+    }
+  }
+  
+  k5mpcReset();
+}
+
+function k5mpcUpdateParams() {
+  const wTrack = parseFloat(document.getElementById('k5mpcWTrack')?.value || 1.0);
+  const wObs = parseFloat(document.getElementById('k5mpcWObs')?.value || 2.0);
+  const wSmooth = parseFloat(document.getElementById('k5mpcWSmooth')?.value || 0.5);
+  
+  const wTrackVal = document.getElementById('k5mpcWTrackVal');
+  const wObsVal = document.getElementById('k5mpcWObsVal');
+  const wSmoothVal = document.getElementById('k5mpcWSmoothVal');
+  
+  if (wTrackVal) wTrackVal.textContent = wTrack.toFixed(1);
+  if (wObsVal) wObsVal.textContent = wObs.toFixed(1);
+  if (wSmoothVal) wSmoothVal.textContent = wSmooth.toFixed(1);
+  
+  k5mpcRecalc();
+  if (!k5mpcState.running) {
+    drawK5MPC();
+  }
+}
+
+function k5mpcInit() {
+  const canv = document.getElementById('k5mpcC');
+  if (!canv) return;
+  
+  canv.addEventListener('mousedown', e => {
+    const rect = canv.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) / rect.width * canv.width;
+    const my = (e.clientY - rect.top) / rect.height * canv.height;
+    const dx = mx - k5mpcState.obsX;
+    const dy = my - k5mpcState.obsY;
+    if (dx*dx + dy*dy < k5mpcState.obsRadius * k5mpcState.obsRadius * 1.5) {
+      k5mpcState.isDraggingObs = true;
+    }
+  });
+  
+  canv.addEventListener('mousemove', e => {
+    if (k5mpcState.isDraggingObs) {
+      const rect = canv.getBoundingClientRect();
+      const mx = (e.clientX - rect.left) / rect.width * canv.width;
+      const my = (e.clientY - rect.top) / rect.height * canv.height;
+      k5mpcState.obsX = Math.max(k5mpcState.obsRadius, Math.min(canv.width - k5mpcState.obsRadius, mx));
+      k5mpcState.obsY = Math.max(k5mpcState.obsRadius, Math.min(canv.height - k5mpcState.obsRadius, my));
+      if (!k5mpcState.running) {
+        k5mpcRecalc();
+        drawK5MPC();
+      }
+    }
+  });
+  
+  canv.addEventListener('mouseup', () => { k5mpcState.isDraggingObs = false; });
+  canv.addEventListener('mouseleave', () => { k5mpcState.isDraggingObs = false; });
+  
+  canv.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      const rect = canv.getBoundingClientRect();
+      const mx = (touch.clientX - rect.left) / rect.width * canv.width;
+      const my = (touch.clientY - rect.top) / rect.height * canv.height;
+      const dx = mx - k5mpcState.obsX;
+      const dy = my - k5mpcState.obsY;
+      if (dx*dx + dy*dy < k5mpcState.obsRadius * k5mpcState.obsRadius * 2.0) {
+        k5mpcState.isDraggingObs = true;
+        e.preventDefault();
+      }
+    }
+  }, { passive: false });
+  
+  canv.addEventListener('touchmove', e => {
+    if (k5mpcState.isDraggingObs && e.touches.length === 1) {
+      const touch = e.touches[0];
+      const rect = canv.getBoundingClientRect();
+      const mx = (touch.clientX - rect.left) / rect.width * canv.width;
+      const my = (touch.clientY - rect.top) / rect.height * canv.height;
+      k5mpcState.obsX = Math.max(k5mpcState.obsRadius, Math.min(canv.width - k5mpcState.obsRadius, mx));
+      k5mpcState.obsY = Math.max(k5mpcState.obsRadius, Math.min(canv.height - k5mpcState.obsRadius, my));
+      if (!k5mpcState.running) {
+        k5mpcRecalc();
+        drawK5MPC();
+      }
+      e.preventDefault();
+    }
+  }, { passive: false });
+  
+  canv.addEventListener('touchend', () => { k5mpcState.isDraggingObs = false; });
+  
+  k5mpcReset();
+}
+
+// Run init immediately
+k5mpcInit();
+
 function k5Draw(){
   try{drawK5If();}catch(e){}
   try{drawK5RL();}catch(e){}
+  try{drawK5MPC();}catch(e){}
   try{drawH5(GT);}catch(e){}
 }
 // k5Draw is registered with the master scheduler
@@ -10589,6 +11316,24 @@ Object.assign(TRANSLATIONS.de, {
   'k5.rl.explainbtn':   '💡 Wie merkt sich der Roboter den Weg? — Erklärung ausklappen',
   'k5.rl.explainbox':   '<div><span style="color:#EF9F27;font-weight:500">1 — Der Roboter probiert eine Richtung aus.</span><br>Führt diese Richtung zu mehr Belohnung (z.B. näher zum Ziel)? Dann steigt der gespeicherte <strong style="color:#fff">Q-Wert</strong> für diese Richtung. Führt sie ins Nichts oder gegen eine Wand? Dann sinkt er. So sammelt der Roboter Erfahrung — Schritt für Schritt.</div><div><span style="color:#4f8ef7;font-weight:500">2 — Am Anfang ist die Richtung 100% zufällig.</span><br>Der Zufalls-Schalter <strong style="color:#fff">ε (Epsilon)</strong> steuert das — 1.0 = immer zufällig, 0 = immer schlau. Nach jedem Ziel wird er etwas kleiner (× 0.96). Bei Episode 20: noch 44% Zufall. Bei Episode 80: fast nie mehr zufällig.</div><div><span style="color:#1D9E75;font-weight:500">3 — Ab wann folgt er dem gelernten Weg?</span><br>Wenn ε klein ist, wählt er die Richtung mit dem <strong style="color:#fff">höchsten Q-Wert</strong> — die gelben Pfeile im Grid. 5% Zufall bleibt immer.</div><div style="background:rgba(255,255,255,.05);border-radius:8px;padding:.7rem .9rem;border-left:3px solid #AFA9EC"><span style="color:#AFA9EC;font-weight:500">Exploration vs. Exploitation</span><br><strong style="color:#fff">Exploration</strong> = zufällig erkunden · <strong style="color:#fff">Exploitation</strong> = besten Weg nutzen.<br>Zu viel Zufall = lernt nie. Zu wenig = verpasst bessere Wege.</div><div style="font-size:14px;color:#6a89b8">→ Das ist bereits echte KI! Q-Learning steckt in Spielerobotern, Lagerverwaltung und autonomen Fahrzeugen.</div>',
   'k5.fact':            'AlphaGo nutzte die Grundidee, Situationen und Züge zu bewerten — <strong>ähnlich wie beim Q-Learning</strong> — und kombinierte dies mit neuronalen Netzen, Baumsuche und Reinforcement Learning durch Selbstspiel. Auch bei AlphaGo bewertete die KI Situationen und verbesserte ihre Entscheidungen über viele Partien.',
+  'k5.s3.label':              'Stufe 3 · In die Zukunft planen',
+  'k5.s3.title':              'Vorausschauendes Fahren (MPC)',
+  'k5.s3.sub':                'Modellprädiktive Regelung: Wie ein Roboter die Zukunft simuliert und Hindernissen geschickt ausweicht.',
+  'k5.mpc.cardtitle':         'MPC-Simulator · Spur halten & Hindernisse umfahren',
+  'k5.mpc.controlpanel':      'Steuerung & Gewichte',
+  'k5.mpc.selectcontroller':  'Regelungsmethode:',
+  'k5.mpc.weights':           'Gewichtung der Kosten:',
+  'k5.mpc.wtrack':            'Spur halten',
+  'k5.mpc.wobs':              'Hindernis ausweichen',
+  'k5.mpc.wsmooth':           'Komfort (sanftes Lenken)',
+  'k5.mpc.start':             '▶ Start',
+  'k5.mpc.pause':             '⏸ Pause',
+  'k5.mpc.reset':             '↺ Reset',
+  'k5.mpc.status':            'Status:',
+  'k5.mpc.collisions':        'Kollisionen:',
+  'k5.mpc.offtrack':          'Abweichung:',
+  'k5.mpc.explanation.title': 'Wie funktioniert prädiktive Regelung (MPC)?',
+  'k5.mpc.explanation.desc':  'Im Gegensatz zur reaktiven If-Else Regel blickt MPC in die Zukunft. Der Roboter nutzt ein <strong>physikalisches Modell</strong> und simuliert mehrere Pfade (Zukunftshorizont) mit unterschiedlichen Lenkwinkeln. Bei der Bewertung der Pfade findet ein <strong>Tauziehen zwischen drei Wünschen</strong> statt:<br>• 🟦 <strong>Spur halten</strong>: Zieht das Auto zur Straßenmitte.<br>• 🟧 <strong>Hindernis ausweichen</strong>: Drückt das Auto vom roten Hindernis weg.<br>• 🟩 <strong>Komfort (sanftes Lenken)</strong>: Bremst zu hastige Lenkbewegungen aus.<br>Der Pfad, bei dem dieses Tauziehen das beste Gleichgewicht (die geringsten Gesamtkosten) findet, gewinnt und wird gefahren.',
   'k5.next':            'KI im Roboter',
 
   // --- K6 — KI im Roboter
@@ -11083,6 +11828,24 @@ Object.assign(TRANSLATIONS.en, {
   'k5.rl.explainbtn':   '💡 How does the robot remember the path? — Expand explanation',
   'k5.rl.explainbox':   '<div><span style="color:#EF9F27;font-weight:500">1 — The robot tries a direction.</span><br>Does that direction lead to more reward (e.g. closer to the goal)? Then the stored <strong style="color:#fff">Q-value</strong> for that direction goes up. Does it lead nowhere or into a wall? Then it drops. That\'s how the robot builds up experience — step by step.</div><div><span style="color:#4f8ef7;font-weight:500">2 — At first, the direction is 100% random.</span><br>The randomness switch <strong style="color:#fff">ε (Epsilon)</strong> controls this — 1.0 = always random, 0 = always smart. After each goal it shrinks a bit (× 0.96). At episode 20: still 44% random. At episode 80: barely any randomness left.</div><div><span style="color:#1D9E75;font-weight:500">3 — When does it follow the learned path?</span><br>When ε is small, it picks the direction with the <strong style="color:#fff">highest Q-value</strong> — the yellow arrows on the grid. 5% randomness always stays.</div><div style="background:rgba(255,255,255,.05);border-radius:8px;padding:.7rem .9rem;border-left:3px solid #AFA9EC"><span style="color:#AFA9EC;font-weight:500">Exploration vs. Exploitation</span><br><strong style="color:#fff">Exploration</strong> = explore randomly · <strong style="color:#fff">Exploitation</strong> = use the best path.<br>Too much randomness = never learns. Too little = misses better paths.</div><div style="font-size:14px;color:#6a89b8">→ This is already real AI! Q-Learning is in game-playing robots, warehouse logistics and autonomous vehicles.</div>',
   'k5.fact':            "AlphaGo used the basic idea of evaluating situations and moves — <strong>similar to Q-learning</strong> — and combined this with neural networks, tree search, and reinforcement learning from self-play. AlphaGo also evaluated situations and improved its decisions over many games.",
+  'k5.s3.label':              'Stage 3 · Planning ahead',
+  'k5.s3.title':              'Predictive Driving (MPC)',
+  'k5.s3.sub':                'Model Predictive Control: How a robot simulates the future to smoothly avoid obstacles.',
+  'k5.mpc.cardtitle':         'MPC Simulator · Path Tracking & Obstacle Avoidance',
+  'k5.mpc.controlpanel':      'Controls & Weights',
+  'k5.mpc.selectcontroller':  'Control Method:',
+  'k5.mpc.weights':           'Cost Function Weights:',
+  'k5.mpc.wtrack':            'Track Following',
+  'k5.mpc.wobs':              'Obstacle Avoidance',
+  'k5.mpc.wsmooth':           'Comfort (Smooth Steering)',
+  'k5.mpc.start':             '▶ Start',
+  'k5.mpc.pause':             '⏸ Pause',
+  'k5.mpc.reset':             '↺ Reset',
+  'k5.mpc.status':            'Status:',
+  'k5.mpc.collisions':        'Collisions:',
+  'k5.mpc.offtrack':          'Deviation:',
+  'k5.mpc.explanation.title': 'How does predictive control (MPC) work?',
+  'k5.mpc.explanation.desc':  'Unlike reactive If-Else rules, MPC looks into the future. The robot uses a <strong>physics model</strong> to simulate multiple candidate paths (prediction horizon) with different steering angles. When evaluating the paths, a <strong>tug-of-war between three goals</strong> takes place:<br>• 🟦 <strong>Track Following</strong>: Pulls the car to the center of the road.<br>• 🟧 <strong>Obstacle Avoidance</strong>: Pushes the car away from the red obstacle.<br>• 🟩 <strong>Comfort (Smooth Steering)</strong>: Penalizes hasty steering adjustments.<br>The path where this tug-of-war achieves the best balance (the lowest total cost) wins and is executed.',
   'k5.next':            'AI in robots',
 
   // --- K6 — AI in robots
