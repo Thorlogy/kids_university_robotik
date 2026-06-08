@@ -1496,6 +1496,18 @@ function toggleLang(){
     </div>
   </div>
 
+  <!-- Detailed Bilingual Explanation Box for Differential Drive -->
+  <div style="width:calc(100% - 2rem);max-width:calc(var(--page-max) - 2rem);margin:.8rem auto 0">
+    <div style="background:#0f1b3d;border-radius:12px;border:.5px solid rgba(255,255,255,.08);overflow:hidden">
+      <div style="padding:.6rem 1rem;background:rgba(255,255,255,.05);border-bottom:.5px solid rgba(255,255,255,.08)">
+        <span style="font-size:14px;font-weight:bold;color:#fff" data-i18n="k2.kin.explanation.title">Wie funktioniert ein Differential-Antrieb?</span>
+      </div>
+      <div style="padding:1rem;font-size:14px;color:#8fa8cc;line-height:1.7" data-i18n="k2.kin.explanation.desc" data-i18n-html>
+        Ein <strong>Differential-Antrieb</strong> besteht aus zwei unabhängig voneinander angetriebenen Rädern (links und rechts). Kurven werden ganz einfach durch <strong>unterschiedliche Geschwindigkeiten</strong> gesteuert:<br>• 🟦 <strong>Beide Räder gleich schnell:</strong> Der Roboter fährt geradeaus.<br>• 🟧 <strong>Ein Rad schneller als das andere:</strong> Der Roboter dreht sich im Bogen zur langsameren Seite.<br>• 🟩 <strong>Räder drehen entgegengesetzt:</strong> Der Roboter dreht sich auf der Stelle (Kurvenradius = 0).<br>Dieser Antrieb ist extrem wendig und steckt in fast allen Saugrobotern und Transportfahrzeugen.
+      </div>
+    </div>
+  </div>
+
   <div class="divider"></div>
 
   <div class="sec">
@@ -11197,6 +11209,8 @@ Object.assign(TRANSLATIONS.de, {
   'k2.kin.reset':       '↺ Zurücksetzen',
   'k2.kin.trailon':     'Spur: AN ✓',
   'k2.kin.trailoff':    'Spur: AUS',
+  'k2.kin.explanation.title': 'Wie funktioniert ein Differential-Antrieb?',
+  'k2.kin.explanation.desc':  'Ein <strong>Differential-Antrieb</strong> besteht aus zwei unabhängig voneinander angetriebenen Rädern (links und rechts). Kurven werden ganz einfach durch <strong>unterschiedliche Geschwindigkeiten</strong> gesteuert:<br>• 🟦 <strong>Beide Räder gleich schnell:</strong> Der Roboter fährt geradeaus.<br>• 🟧 <strong>Ein Rad schneller als das andere:</strong> Der Roboter dreht sich im Bogen zur langsameren Seite.<br>• 🟩 <strong>Räder drehen entgegengesetzt:</strong> Der Roboter dreht sich auf der Stelle (Kurvenradius = 0).<br>Dieser Antrieb ist extrem wendig und steckt in fast allen Saugrobotern und Transportfahrzeugen.',
   'k2.s3.label':        'Parcours · Differential-Antrieb',
   'k2.s3.title':        'Programmiere den Parcours!',
   'k2.s3.sub':          'Stell die Radgeschwindigkeiten und Distanz ein — dann klick Start. Der Roboter fährt genau so, wie du es eingestellt hast. Kannst du alle 5 Checkpoints erreichen?',
@@ -11709,6 +11723,8 @@ Object.assign(TRANSLATIONS.en, {
   'k2.kin.reset':       '↺ Reset',
   'k2.kin.trailon':     'Trail: ON ✓',
   'k2.kin.trailoff':    'Trail: OFF',
+  'k2.kin.explanation.title': 'How does a differential drive work?',
+  'k2.kin.explanation.desc':  'A <strong>differential drive</strong> consists of two independently driven wheels (left and right). Steering is controlled simply by changing the <strong>speeds of the two wheels</strong>:<br>• 🟦 <strong>Both wheels at the same speed:</strong> The robot drives straight ahead.<br>• 🟧 <strong>One wheel faster than the other:</strong> The robot curves towards the slower side.<br>• 🟩 <strong>Wheels rotating in opposite directions:</strong> The robot spins on the spot (turning radius = 0).<br>This drive type is highly maneuverable and is used in almost all robotic vacuums and warehouse AGVs.',
   'k2.s3.label':        'Course · Differential drive',
   'k2.s3.title':        'Program the course!',
   'k2.s3.sub':          'Set the wheel speeds and distance — then hit Start. The robot drives exactly the way you set it. Can you reach all 5 checkpoints?',
